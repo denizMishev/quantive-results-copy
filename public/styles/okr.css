@@ -1,0 +1,17 @@
+.okr-card {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    border: 1px gray solid;
+}
+
+.okr-header {
+    height: 15%;
+    background: gray;
+    color: white;
+    text-align: center;
+}
+
+.okr-container {
+    padding: 2px 16px;
+}
