@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -6,6 +6,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import { Navbar } from './components/Navbar';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
+import Logout from './components/Logout';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Navbar></Navbar>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </div>
