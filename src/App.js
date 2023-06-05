@@ -6,6 +6,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import { Navbar } from './components/Navbar';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
+import { CreateGame } from './components/CreateOkr';
 import Logout from './components/Logout';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <div className="App">
         <Navbar></Navbar>
         <Routes>
+          <Route path="/create" element={<CreateGame/>}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Register />} />

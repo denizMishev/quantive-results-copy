@@ -17,7 +17,7 @@ export function Navbar() {
             <li><Link className="main-nav-links" to="/register">Register</Link></li>
             <li><Link className="main-nav-links" to="/login">Login</Link></li>
             <li><Link className="main-nav-links" to="/logout">Logout</Link></li>
-            <li><Link className="main-nav-links" to="">CPUs</Link></li>
+            <li><Link className="main-nav-links" to="/create">Create OKR</Link></li>
         </nav>
     )
 }
