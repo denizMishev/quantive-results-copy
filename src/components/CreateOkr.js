@@ -1,7 +1,27 @@
+import { useContext } from "react";
+
+import { OkrContext } from "../contexts/OkrContext";
+import * as okrService from '../services/okrService';
+
 export function CreateGame() {
+
+    const { okrAdd } = useContext(OkrContext);
+    
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const okrData = Object.fromEntries(new FormData(e.target));
+        console.log(okrData)
+
+        okrService.create(okrData)
+            .then(result => {
+                okrAdd(result)
+            });
+    };
+
     return (
         <section>
-            <form id="createForm">
+            <form id="createForm" onSubmit={onSubmit}>
                 <div>
                     <h1>Create OKR</h1>
                 </div>
@@ -15,5 +35,5 @@ export function CreateGame() {
                 </div>
             </form>
         </section>
-    )
-}
+    );
+};
