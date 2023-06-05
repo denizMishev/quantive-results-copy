@@ -1,0 +1,22 @@
+#homeSection {
+    width: auto;
+    margin-left: 180px;
+    /* display: inline-block; */
+    padding-right: 15px;
+    padding-top: 7em;
+    justify-content: right;
+    padding-left: 15px;
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#home-page {
+    background-color: transparent;
+    box-shadow: 0px 0px 40px 0px;
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 55px;
+    height: auto;
+    width: auto;
+}

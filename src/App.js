@@ -1,6 +1,7 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import * as okrService from './services/okrService'
 import { AuthContext } from './contexts/AuthContext';
 import { OkrContext } from './contexts/OkrContext';
 
@@ -10,6 +11,7 @@ import { Navbar } from './components/Navbar';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
 import { CreateGame } from './components/CreateOkr';
+import { Home } from './components/Home';
 import Logout from './components/Logout';
 
 function App() {
@@ -35,12 +37,20 @@ function App() {
     navigate('/');
   };
 
+  useEffect(() => {
+    okrService.getAll()
+      .then(result => {
+        setOkrs(result)
+      });
+  }, []);
+
   return (
     <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
       <div className="App">
         <Navbar></Navbar>
         <OkrContext.Provider value={{okrs, okrAdd}}>
         <Routes>
+            <Route path="/" element={<Home okrs={okrs}/>}></Route>
             <Route path="/create" element={<CreateGame/>}></Route>
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
