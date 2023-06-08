@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { OkrContext } from "../contexts/OkrContext";
 import * as okrService from '../services/okrService';
 
-export function CreateGame() {
+export function CreateOkr() {
 
     const { okrAdd } = useContext(OkrContext);
     
@@ -11,7 +11,6 @@ export function CreateGame() {
         e.preventDefault();
 
         const okrData = Object.fromEntries(new FormData(e.target));
-        console.log(okrData)
 
         okrService.create(okrData)
             .then(result => {

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export function Okr({ okr }) {
     return (
         <div class="okr-card">
@@ -8,6 +10,7 @@ export function Okr({ okr }) {
                 <p>Some random texts</p>
                 <button>click here</button>
             </div>
+            <Link to={`/okrs/${okr._id}/edit`}>Edit OKR</Link>
         </div>
     );
 };
