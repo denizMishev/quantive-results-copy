@@ -17,7 +17,8 @@ export function EditOkr() {
             .then(okrData => {
                 setCurrentOkr(okrData);
             })
-    }, [])
+            // eslint-disable-next-line
+    }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();

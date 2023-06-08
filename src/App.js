@@ -2,10 +2,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import * as okrService from './services/okrService'
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { OkrContext } from './contexts/OkrContext';
-
-import { useLocalStorage } from './hooks/useLocalStorage';
 
 import { Navbar } from './components/Navbar';
 import { Login } from './components/Login';
@@ -18,16 +16,9 @@ import Logout from './components/Logout';
 function App() {
 
   const [okrs, setOkrs] = useState([]);
-  const [auth, setAuth] = useLocalStorage('auth', {});
+  
   const navigate = useNavigate();
 
-  const userLogin = (authData) => {
-    setAuth(authData);
-  };
-
-  const userLogout = () => {
-    setAuth({});
-  };
 
   const okrAdd = (okrData) => {
     setOkrs(state => [
@@ -55,7 +46,7 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
+    <AuthProvider>
       <div className="App">
         <Navbar></Navbar>
         <OkrContext.Provider value={{ okrs, okrAdd, okrEdit }}>
@@ -69,7 +60,7 @@ function App() {
           </Routes>
         </OkrContext.Provider>
       </div>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 
