@@ -2,15 +2,14 @@ import { Link } from 'react-router-dom';
 
 export function Okr({ okr }) {
     return (
-        <div class="okr-card">
-            <div class="okr-header">
+        <div className="okr-card">
+            <div className="okr-header">
                 <p>{okr.okrTitle}</p>
             </div>
-            <div class="okr-container">
+            <div className="okr-container">
                 <p>Some random texts</p>
-                <button>click here</button>
+                <Link to={`/okrs/${okr._id}`}>Details</Link>
             </div>
-            <Link to={`/okrs/${okr._id}/edit`}>Edit OKR</Link>
         </div>
     );
 };

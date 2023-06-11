@@ -34,17 +34,17 @@ export function Login() {
                     <h1>Login</h1>
                 </div>
                 <div>
-                    <i class="fa-solid fa-envelope"></i>
+                    <i className="fa-solid fa-envelope"></i>
                     <label htmlFor="email">Email</label>
                     <input name="email" type="email" placeholder="Enter your email here"/>
                 </div>
                 <div>
-                    <i class="fa-solid fa-lock"></i>
+                    <i className="fa-solid fa-lock"></i>
                     <label htmlFor="password">Password</label>
                     <input name="password" type="password" placeholder="Enter your password here"/>
                 </div>
                 <div>
-                    <button class="loginRegisterBtn">Press Enter to submit</button>
+                    <button className="loginRegisterBtn">Press Enter to submit</button>
                 </div>
             </form>
         </section>

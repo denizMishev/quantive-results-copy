@@ -11,7 +11,6 @@ export function EditOkr() {
     const { okrId } = useParams();
     const navigate = useNavigate();
 
-
     useEffect(() => {
         okrService.getOne(okrId)
             .then(okrData => {
@@ -39,12 +38,12 @@ export function EditOkr() {
                     <h1>Edit OKR</h1>
                 </div>
                 <div>
-                    <i class="fa-solid fa-pencil"></i>
+                    <i className="fa-solid fa-pencil"></i>
                     <label htmlFor="okrTitle">Edit OKR Title</label>
                     <input name="okrTitle" type="okrTitle" defaultValue={currentOkr.okrTitle} />
                 </div>
                 <div>
-                    <button class="createBtn">Press Enter to submit editing</button>
+                    <button className="createBtn">Press Enter to submit editing</button>
                 </div>
             </form>
         </section>

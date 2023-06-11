@@ -37,28 +37,28 @@ export function Register() {
                 </div>
 
                 <div>
-                    <i class="fa-solid fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                     <label htmlFor="username">Username</label>
                     <input name="username" type="text" placeholder="Enter your username here"/>
                 </div>
                 <div>
-                    <i class="fa-solid fa-envelope"></i>
+                    <i className="fa-solid fa-envelope"></i>
                     <label htmlFor="email">Email</label>
                     <input name="email" type="email" placeholder="Enter your email here"/>
                 </div>
                 <div>
-                    <i class="fa-solid fa-lock"></i>
+                    <i className="fa-solid fa-lock"></i>
                     <label htmlFor="password">Password</label>
                     <input name="password" type="password" placeholder="Enter your password here"/>
                 </div>
                 <div>
-                    <i class="fa-solid fa-lock"></i>
+                    <i className="fa-solid fa-lock"></i>
                     <label htmlFor="rePassword">Repeat password</label>
                     <input name="confirm-password" type="password" placeholder="Repeat your password here"/>
                 </div>
 
                 <div>
-                    <button class="loginRegisterBtn">Press Enter to submit</button>
+                    <button className="loginRegisterBtn">Press Enter to submit</button>
                 </div>
             </form>
 
