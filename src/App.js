@@ -1,19 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from './contexts/AuthContext';
-import { OkrProvider } from './contexts/OkrContext';
+import { AuthProvider } from "./contexts/AuthContext";
+import { OkrProvider } from "./contexts/OkrContext";
 
-import { Navbar } from './components/Navbar';
-import { Login } from './components/Login';
-import { Register } from './components/Register';
-import { CreateOkr } from './components/CreateOkr';
-import { EditOkr } from './components/EditOkr';
-import { Home } from './components/Home';
-import { OkrDetails } from './components/OkrDetails';
-import Logout from './components/Logout';
+import { Navbar } from "./components/Navbar";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
+import { CreateOkr } from "./components/CreateOkr";
+import { EditOkr } from "./components/EditOkr";
+import { Home } from "./components/Home";
+import { OkrDetails } from "./components/OkrDetails";
+import Logout from "./components/Logout";
 
 function App() {
-
   return (
     <AuthProvider>
       <div className="App">

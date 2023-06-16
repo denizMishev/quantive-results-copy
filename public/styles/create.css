@@ -1,43 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");
 
 #createForm {
-    width: 25%;
-    height: 25%;
-    background-color: white;
-    margin: auto;
-    border: 5px solid lightgray;
-    font-family: 'IBM Plex Mono', monospace;
+  width: 25%;
+  height: 25%;
+  background-color: white;
+  margin: auto;
+  border: 5px solid lightgray;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .selectorTest {
-    border: 0px;
+  border: 0px;
 }
 
 #createForm input {
-    width: 80%;
-    margin-top: 20px;
-    margin-left: 25px;
-    margin-bottom: 20px;
-    padding-left: 35px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 2px solid gray;
+  width: 80%;
+  margin-top: 20px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  padding-left: 35px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 2px solid gray;
 }
 
 #createForm i {
-    color: black;
-    position: relative;
-    top: 49px;
-    left: 43px
+  color: black;
+  position: relative;
+  top: 49px;
+  left: 43px;
 }
 
 #createForm label,
 h1 {
-    margin-left: 38%;
+  margin-left: 38%;
 }
 
 .createBtn {
-    margin: 5% 38%;
-    background-color: lightgray;
-    border: 10px ridge lightgray;
+  margin: 5% 38%;
+  background-color: lightgray;
+  border: 10px ridge lightgray;
 }
