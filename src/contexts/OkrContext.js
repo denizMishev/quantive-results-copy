@@ -42,6 +42,10 @@ export function OkrProvider({
             });
     }, []);
 
+    const selectOkr = (okrId) => {
+        return okrs.find(x => x._id === okrId) || {};
+    };
+
     const okrAdd = (okrData) => {
         dispatch({
             type: okrStateManagementCommands.add,
@@ -62,7 +66,8 @@ export function OkrProvider({
         <OkrContext.Provider value={{
             okrs,
             okrAdd,
-            okrEdit
+            okrEdit,
+            selectOkr
         }}>
             {children}
         </OkrContext.Provider>

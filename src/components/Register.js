@@ -5,6 +5,7 @@ import * as authService from '../services/authService';
 import { addNewUser } from "../services/userService";
 import { AuthContext } from "../contexts/AuthContext";
 
+
 export function Register() {
 
     const { userLogin } = useContext(AuthContext);
@@ -16,6 +17,7 @@ export function Register() {
         const formData = new FormData(e.target);
 
         const email = formData.get('email');
+        const username = formData.get('username');
         const password = formData.get('password');
         const confirmPassword = formData.get('confirm-password');
 
@@ -26,7 +28,7 @@ export function Register() {
         authService.register(email, password)
             .then(authData => {
                 userLogin(authData);
-                addNewUser(email, password)
+                addNewUser(email, username)           
                 navigate('/');
             });
     }
@@ -41,22 +43,22 @@ export function Register() {
                 <div>
                     <i className="fa-solid fa-user"></i>
                     <label htmlFor="username">Username</label>
-                    <input name="username" type="text" placeholder="Enter your username here"/>
+                    <input name="username" type="text" placeholder="Enter your username here" />
                 </div>
                 <div>
                     <i className="fa-solid fa-envelope"></i>
                     <label htmlFor="email">Email</label>
-                    <input name="email" type="email" placeholder="Enter your email here"/>
+                    <input name="email" type="email" placeholder="Enter your email here" />
                 </div>
                 <div>
                     <i className="fa-solid fa-lock"></i>
                     <label htmlFor="password">Password</label>
-                    <input name="password" type="password" placeholder="Enter your password here"/>
+                    <input name="password" type="password" placeholder="Enter your password here" />
                 </div>
                 <div>
                     <i className="fa-solid fa-lock"></i>
                     <label htmlFor="rePassword">Repeat password</label>
-                    <input name="confirm-password" type="password" placeholder="Repeat your password here"/>
+                    <input name="confirm-password" type="password" placeholder="Repeat your password here" />
                 </div>
 
                 <div>

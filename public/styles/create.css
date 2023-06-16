@@ -9,6 +9,10 @@
     font-family: 'IBM Plex Mono', monospace;
 }
 
+.selectorTest {
+    border: 0px;
+}
+
 #createForm input {
     width: 80%;
     margin-top: 20px;
