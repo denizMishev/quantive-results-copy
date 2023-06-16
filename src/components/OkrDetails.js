@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 
 import { OkrContext } from "../contexts/OkrContext";
 
-import * as okrService from '../services/okrService';
-
 export function OkrDetails() {
     
     const { okrId } = useParams();
