@@ -14,6 +14,8 @@ const okrReducer = (state, action) => {
       return [...state, action.payload];
     case okrStateManagementCommands.edit:
       return state.map((x) => (x._id === action.okrId ? action.payload : x));
+    case okrStateManagementCommands.remove:
+      return state.filter((x) => x._id !== action.okrId);
     default:
       return state;
   }
@@ -58,6 +60,14 @@ export function OkrProvider({ children }) {
       okrId,
     });
   };
+
+  const okrRemove = (okrId) => {
+    dispatch({
+      type: okrStateManagementCommands.remove,
+      okrId,
+    });
+  };
+
   return (
     <OkrContext.Provider
       value={{
@@ -65,6 +75,7 @@ export function OkrProvider({ children }) {
         okrAdd,
         okrEdit,
         selectOkr,
+        okrRemove,
       }}
     >
       {children}
