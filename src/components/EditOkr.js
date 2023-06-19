@@ -9,11 +9,10 @@ import { OkrContext } from "../contexts/OkrContext";
 
 export function EditOkr() {
   const [dropdownUsers, setDropdownUsers] = useState([]);
-  const { okrEdit, selectOkr } = useContext(OkrContext);
+  const { okrEdit } = useContext(OkrContext);
   const { okrId } = useParams();
   const navigate = useNavigate();
   let owners = "";
-  const okr = selectOkr(okrId);
 
   useEffect(() => {
     userService.getAllUsers().then((result) => {
@@ -28,9 +27,21 @@ export function EditOkr() {
     });
   }, []);
 
+  const [okr, setOkr] = useState({});
+  useEffect(() => {
+    okrService.getOne(okrId).then((result) => {
+      setOkr(result);
+    });
+    // eslint-disable-next-line
+  }, []);
+
+  let owners2 = "";
+  if (okr.okrOwners) {
+    owners2 = okr.okrOwners.join(", ");
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
-
     const okrData = Object.fromEntries(new FormData(e.target));
     const ownersArray = owners.map((x) => x.label);
     okrData.okrOwners = ownersArray;
@@ -57,7 +68,7 @@ export function EditOkr() {
           <Dropdown
             isSearchable
             isMulti
-            placeHolder={okr.okrOwners.join(", ")}
+            placeHolder={owners2}
             options={dropdownUsers}
             onChange={(value) => (owners = value)}
           ></Dropdown>
