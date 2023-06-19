@@ -20,6 +20,7 @@ export function AuthProvider({ children }) {
         user: auth,
         userLogin,
         userLogout,
+        isAuthenticated: !!auth.accessToken,
       }}
     >
       {children}

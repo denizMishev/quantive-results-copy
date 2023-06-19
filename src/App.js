@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import { OkrProvider } from "./contexts/OkrContext";
+import { PrivateGuard } from "./components/common/PrivateGuard";
 
 import { Navbar } from "./components/Navbar";
 import { Login } from "./components/Login";
@@ -19,12 +20,14 @@ function App() {
         <Navbar></Navbar>
         <OkrProvider>
           <Routes>
+            <Route element={<PrivateGuard />}>
+              <Route path="/create" element={<CreateOkr />}></Route>
+              <Route path="/okrs/:okrId/edit" element={<EditOkr />}></Route>
+              <Route path="/logout" element={<Logout />} />
+            </Route>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/create" element={<CreateOkr />}></Route>
             <Route path="/okrs/:okrId" element={<OkrDetails />}></Route>
-            <Route path="/okrs/:okrId/edit" element={<EditOkr />}></Route>
             <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
           </Routes>
         </OkrProvider>
