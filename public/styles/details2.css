@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+#details-modal {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  #details-modal > div {
+    margin-bottom: 10px;
+  }
+  
+  #details-modal input[type="text"] {
+    width: 10%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  #details-modal a {
+    display: block;
+    margin-bottom: 10px;
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  #details-modal button {
+    padding: 8px 12px;
+    margin-right: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #details-modal #details-comments {
+    margin-top: 20px;
+  }
+  
+  #details-modal #details-comments h2#details-comments-header {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  #details-modal #details-comments ul#details-comments-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #details-modal #details-comments ul#details-comments-list li {
+    margin-bottom: 10px;
+  }
+  
+  #details-modal #details-comments ul#details-comments-list li button {
+    margin-left: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #details-modal #details-comments p {
+    font-style: italic;
+    color: #999;
+  }
+  
+  #details-modal article#details-create-comment {
+    margin-top: 20px;
+  }
+  
+  #details-modal label#details-create-comment-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #333;
+    width: 120px;
+  }
+  
+  #details-modal form#details-create-comment-form {
+    margin-top: 10px;
+  }
+  
+  #details-modal textarea#details-create-comment-input-comment {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  #details-modal input[type="submit"].btn.submit {
+    padding: 8px 12px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #details-modal form#details-create-comment-form > input {
+    padding: 8px 12px;
+    margin-right: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }

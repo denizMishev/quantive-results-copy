@@ -23,7 +23,7 @@ export function Register() {
       return;
     }
 
-    authService.register(email, password).then((authData) => {
+    authService.register(email, username, password).then((authData) => {
       userLogin(authData);
       addNewUser(email, username);
       navigate("/");

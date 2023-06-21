@@ -6,3 +6,11 @@
     border: 5px solid lightgray;
     font-family: 'IBM Plex Mono', monospace;
 }
+
+#details-comments {
+    border: 5px solid lightgray;
+}
+
+#details-create-comment {
+    border: 5px solid lightgray;
+}
