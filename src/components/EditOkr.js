@@ -35,16 +35,21 @@ export function EditOkr() {
     // eslint-disable-next-line
   }, []);
 
-  let owners2 = "";
+  let printCurrentOwners = "";
   if (okr.okrOwners) {
-    owners2 = okr.okrOwners.join(", ");
+    printCurrentOwners = okr.okrOwners.join(", ");
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
     const okrData = Object.fromEntries(new FormData(e.target));
-    const ownersArray = owners.map((x) => x.label);
-    okrData.okrOwners = ownersArray;
+    const newOwnersArray = owners.map((x) => x.label);
+    if (newOwnersArray.length === 0) {
+      const previousOwnersArr = [printCurrentOwners];
+      okrData.okrOwners = previousOwnersArr;
+    } else {
+      okrData.okrOwners = newOwnersArray;
+    }
 
     okrService.edit(okrId, okrData).then((result) => {
       okrEdit(okrId, result);
@@ -68,7 +73,7 @@ export function EditOkr() {
           <Dropdown
             isSearchable
             isMulti
-            placeHolder={owners2}
+            placeHolder={printCurrentOwners}
             options={dropdownUsers}
             onChange={(value) => (owners = value)}
           ></Dropdown>
