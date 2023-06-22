@@ -53,7 +53,7 @@ export function EditOkr() {
 
     okrService.edit(okrId, okrData).then((result) => {
       okrEdit(okrId, result);
-      navigate(`/`);
+      navigate(`/okrs/${okrId}`);
     });
   };
 

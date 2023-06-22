@@ -4,7 +4,7 @@ import { OkrContext } from "../contexts/OkrContext";
 
 import * as okrService from "../services/okrService";
 
-export function Modal(props) {
+export function DeleteModal(props) {
   const okrId = props.id;
   const { okrRemove } = useContext(OkrContext);
   const navigate = useNavigate();

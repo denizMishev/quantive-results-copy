@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-import { Modal } from "./Modal";
+import { DeleteModal } from "./DeleteModal";
+import { EditCommentModal } from "./EditCommentModal";
 
 import * as okrService from "../services/okrService";
 import * as commentService from "../services/commentService";
 
 export function OkrDetails() {
-  const [show, setShow] = useState(false);
+  // const [render, setRender] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [commentForEditing, setCommentForEditing] = useState({});
   const { okrId } = useParams();
 
   const [okr, setOkr] = useState({});
@@ -47,10 +51,28 @@ export function OkrDetails() {
     }, 1);
   };
 
+  const editCommentHandler = (e, commentId) => {
+    e.stopPropagation();
+    commentService.getOne(commentId).then((result) => {
+      setCommentForEditing(result);
+    });
+    setShowEditModal(true);
+    setCommentForEditing({});
+  };
+
   let owners = "";
   if (okr.okrOwners) {
     owners = okr.okrOwners.join(", ");
   }
+
+  const renderHandler = () => {
+    commentService.getByOkrId(okrId).then((result) => {
+      setComments(result);
+    });
+    // setRender(1);
+  };
+
+  console.log("rendering");
 
   return (
     <div id="details-modal" action="">
@@ -59,13 +81,13 @@ export function OkrDetails() {
       <div>Owner</div>
       <input type="text" defaultValue={owners} />
       <Link to={`/okrs/${okrId}/edit`}>Edit OKR</Link>
-      <button onClick={() => setShow(true)}>Delete OKR</button>
-      <Modal
+      <button onClick={() => setShowDeleteModal(true)}>Delete OKR</button>
+      <DeleteModal
         title="Are you sure you want to delete this OKR?"
         description="Deletion of OKRs is permanent and irreversible"
         id={okrId}
-        onClose={() => setShow(false)}
-        show={show}
+        onClose={() => setShowDeleteModal(false)}
+        show={showDeleteModal}
       />
       <div id="details-comments">
         <h2 id="details-comments-header">Comments:</h2>
@@ -77,7 +99,18 @@ export function OkrDetails() {
               <button onClick={() => deleteCommentHandler(comment._id)}>
                 Delete
               </button>
-              <button>Edit</button>
+              <button onClick={(e) => editCommentHandler(e, comment._id)}>
+                Edit
+              </button>
+              <EditCommentModal
+                title="Edit comment"
+                updateParent={() => renderHandler()}
+                id={commentForEditing._id}
+                okrId={okrId}
+                commentContent={commentForEditing.text}
+                onClose={() => setShowEditModal(false)}
+                show={showEditModal}
+              />
             </li>
           ))}
         </ul>

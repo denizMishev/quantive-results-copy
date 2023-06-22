@@ -7,6 +7,11 @@ export const create = (okrId, comment) =>
 
 export const remove = (commentId) => request.del(`${baseUrl}/${commentId}`);
 
+export const getOne = (commentId) => request.get(`${baseUrl}/${commentId}`);
+
+export const updateComment = (commentId, okrId, text) =>
+  request.put(`${baseUrl}/${commentId}`, { okrId, text });
+
 export const getByOkrId = (okrId) => {
   const relations = encodeURIComponent(`user=_ownerId:users`);
   const search = encodeURIComponent(`okrId="${okrId}"`);
