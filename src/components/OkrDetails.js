@@ -9,7 +9,6 @@ import * as okrService from "../services/okrService";
 import * as commentService from "../services/commentService";
 
 export function OkrDetails() {
-  // const [render, setRender] = useState(0);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [commentForEditing, setCommentForEditing] = useState({});
@@ -30,9 +29,11 @@ export function OkrDetails() {
     const comment = formData.get("comment");
 
     commentService.create(okrId, comment);
-    commentService.getByOkrId(okrId).then((result) => {
-      setComments(result);
-    });
+    setTimeout(() => {
+      commentService.getByOkrId(okrId).then((result) => {
+        setComments(result);
+      });
+    }, 1);
   };
 
   useEffect(() => {
@@ -69,7 +70,6 @@ export function OkrDetails() {
     commentService.getByOkrId(okrId).then((result) => {
       setComments(result);
     });
-    // setRender(1);
   };
 
   console.log("rendering");

@@ -1,0 +1,25 @@
+#teams-main {
+    width: 25%;
+    height: 25%;
+    background-color: white;
+    margin: auto;
+    border: 5px solid lightgray;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+#teams-addTeam-btn {
+    border: 5px solid lightgray;
+}
+
+#teams-team-card {
+    padding: 10px;
+    display: block;
+    color: black;
+    text-decoration: none;
+    border: 5px solid lightgray;
+    margin: 15px;
+}
+
+#teams-team-card:hover {
+    background-color: gray;
+}

@@ -39,6 +39,16 @@ export function Navbar() {
           Create OKR
         </Link>
       </li>
+      <li>
+        <Link className="main-nav-links" to="/employees">
+          Employees
+        </Link>
+      </li>
+      <li>
+        <Link className="main-nav-links" to="/teams">
+          Teams
+        </Link>
+      </li>
     </nav>
   );
 }

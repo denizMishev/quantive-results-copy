@@ -1,0 +1,8 @@
+#employees-main {
+    width: 25%;
+    height: 25%;
+    background-color: white;
+    margin: auto;
+    border: 5px solid lightgray;
+    font-family: 'IBM Plex Mono', monospace;
+}
