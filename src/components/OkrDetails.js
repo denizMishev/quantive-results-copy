@@ -16,6 +16,7 @@ export function OkrDetails() {
 
   const [okr, setOkr] = useState({});
   const [comments, setComments] = useState([]);
+
   useEffect(() => {
     okrService.getOne(okrId).then((result) => {
       setOkr(result);

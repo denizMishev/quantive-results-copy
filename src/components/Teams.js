@@ -6,11 +6,19 @@ import * as teamService from "../services/teamsService";
 export function Teams() {
   const [teams, setTeams] = useState([]);
 
+  console.log(teams);
+
   useEffect(() => {
     teamService.getAll().then((result) => {
-      setTeams(result);
+      if (result.code === 404) {
+        return;
+      } else {
+        setTeams(result);
+      }
     });
   }, []);
+
+  console.log(teams);
 
   return (
     <div id="teams-main">

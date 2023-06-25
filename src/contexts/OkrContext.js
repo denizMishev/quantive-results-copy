@@ -27,7 +27,7 @@ export function OkrProvider({ children }) {
 
   useEffect(() => {
     okrService.getAll().then((result) => {
-      if (result.code) {
+      if (result.code === 404) {
         return;
       } else {
         const action = {

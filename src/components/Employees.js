@@ -10,8 +10,6 @@ export function Employees() {
     });
   }, []);
 
-  console.log(employees);
-
   return (
     <div id="employees-main">
       <header id="employees-header">Employees</header>
