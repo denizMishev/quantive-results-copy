@@ -12,19 +12,6 @@ export function CreateOkr() {
   const [dropdownUsers, setDropdownUsers] = useState([]);
   let owners = "";
 
-  // useEffect(() => {
-  //   userService.getAllUsers().then((result) => {
-  //     let arr = [];
-  //     for (const user of result) {
-  //       arr.push({
-  //         value: user.username.toLowerCase(),
-  //         label: user.username,
-  //       });
-  //     }
-  //     setDropdownUsers(arr);
-  //   });
-  // }, []);
-
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
       (result) => {

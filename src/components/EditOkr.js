@@ -5,6 +5,7 @@ import { Dropdown } from "./Dropdown";
 
 import * as okrService from "../services/okrService";
 import * as userService from "../services/userService";
+import * as teamsService from "../services/teamsService";
 import { OkrContext } from "../contexts/OkrContext";
 
 export function EditOkr() {
@@ -15,17 +16,28 @@ export function EditOkr() {
   let owners = "";
 
   useEffect(() => {
-    userService.getAllUsers().then((result) => {
-      let arr = [];
-      for (const user of result) {
-        arr.push({
-          value: user.username.toLowerCase(),
-          label: user.username,
-        });
+    Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
+      (result) => {
+        let arr = [];
+        for (const request of result) {
+          for (const userOrTeam of request) {
+            if (userOrTeam.username) {
+              arr.push({
+                value: userOrTeam.username.toLowerCase(),
+                label: userOrTeam.username,
+              });
+            } else if (userOrTeam.teamName) {
+              arr.push({
+                value: userOrTeam.teamName.toLowerCase(),
+                label: userOrTeam.teamName,
+              });
+            }
+          }
+        }
+        setDropdownUsers(arr);
       }
-      setDropdownUsers(arr);
-    });
-  }, []);
+    );
+  });
 
   const [okr, setOkr] = useState({});
   useEffect(() => {
