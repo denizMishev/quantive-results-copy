@@ -9,7 +9,7 @@ import * as teamService from "../services/teamsService";
 export function CreateTeam() {
   const navigate = useNavigate();
   const [dropdownUsers, setDropdownUsers] = useState([]);
-  let managers = "";
+  let manager = "";
   let members = "";
 
   useEffect(() => {
@@ -29,8 +29,7 @@ export function CreateTeam() {
     e.preventDefault();
 
     const teamData = Object.fromEntries(new FormData(e.target));
-    const managersArray = managers.map((x) => x.label);
-    teamData.teamManager = managersArray;
+    teamData.teamManager = manager.label;
     const membersArray = members.map((x) => x.label);
     teamData.teamMembers = membersArray;
 
@@ -57,10 +56,9 @@ export function CreateTeam() {
           <label htmlFor="teamManager">Team manager</label>
           <Dropdown
             isSearchable
-            isMulti
             placeHolder="Select Team manager for your Team"
             options={dropdownUsers}
-            onChange={(value) => (managers = value)}
+            onChange={(value) => (manager = value)}
           ></Dropdown>
         </div>
         <div>
