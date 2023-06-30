@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import * as okrService from "../services/okrService";
-import * as teamsService from "../services/teamsService";
 
 import { TeamContext } from "../contexts/TeamContext";
 
@@ -16,18 +15,14 @@ export function TeamDetails() {
   const team = selectTeam(teamId);
 
   useEffect(() => {
-    Promise.all([teamsService.getOne(teamId), okrService.getAll()]).then(
-      (currentTeamAndAllOkrs) => {
-        let teamName = currentTeamAndAllOkrs[0].teamName;
-        for (const okr of currentTeamAndAllOkrs[1]) {
-          if (okr.okrOwners.includes(teamName)) {
-            teamOwnedOkrsArray.push(okr);
-          }
+    okrService.getAll().then((allOkrs) => {
+      for (const okr of allOkrs) {
+        if (okr.okrOwnersIds.includes(teamId)) {
+          teamOwnedOkrsArray.push(okr);
         }
-        setTeamOwnedOkrs(teamOwnedOkrsArray);
       }
-    );
-    // eslint-disable-next-line
+      setTeamOwnedOkrs(teamOwnedOkrsArray);
+    });
   }, []);
 
   return (

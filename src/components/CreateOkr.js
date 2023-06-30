@@ -47,7 +47,6 @@ export function CreateOkr() {
 
     okrService.create(okrData).then((result) => {
       okrAdd(result);
-      console.log(result);
     });
   };
 
