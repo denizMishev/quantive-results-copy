@@ -34,7 +34,7 @@ export function CreateOkr() {
         setDropdownUsers(arr);
       }
     );
-  });
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +47,8 @@ export function CreateOkr() {
       okrAdd(result);
     });
   };
+
+  console.log(dropdownUsers);
 
   return (
     <section>

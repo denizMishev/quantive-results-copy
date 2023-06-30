@@ -26,3 +26,7 @@
 #teams-modal-members {
     border: 5px solid lightgray;
 }
+
+#teams-modal-teamOwnedOkrs {
+    border: 5px solid lightgray;
+}

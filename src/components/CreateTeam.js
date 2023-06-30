@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { TeamContext } from "../contexts/TeamContext";
 import { Dropdown } from "./Dropdown";
 
 import * as userService from "../services/userService";
 import * as teamService from "../services/teamsService";
 
 export function CreateTeam() {
+  const { teamAdd } = useContext(TeamContext);
   const navigate = useNavigate();
   const [dropdownUsers, setDropdownUsers] = useState([]);
   let manager = "";
@@ -33,7 +35,9 @@ export function CreateTeam() {
     const membersArray = members.map((x) => x.label);
     teamData.teamMembers = membersArray;
 
-    teamService.create(teamData);
+    teamService.create(teamData).then((result) => {
+      teamAdd(result);
+    });
     navigate("/teams");
   };
 

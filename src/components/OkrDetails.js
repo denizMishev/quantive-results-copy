@@ -73,8 +73,6 @@ export function OkrDetails() {
     });
   };
 
-  console.log("rendering");
-
   return (
     <div id="details-modal" action="">
       <div>OKR Title</div>

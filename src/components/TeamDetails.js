@@ -1,23 +1,34 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import * as okrService from "../services/okrService";
 import * as teamsService from "../services/teamsService";
 
+import { TeamContext } from "../contexts/TeamContext";
+
 export function TeamDetails() {
+  const { selectTeam } = useContext(TeamContext);
   const { teamId } = useParams();
-  const [team, setTeam] = useState({});
-  let members = "";
+  const [teamOwnedOkrs, setTeamOwnedOkrs] = useState([]);
+
+  let teamOwnedOkrsArray = [];
+
+  const team = selectTeam(teamId);
 
   useEffect(() => {
-    teamsService.getOne(teamId).then((result) => {
-      setTeam(result);
-    });
+    Promise.all([teamsService.getOne(teamId), okrService.getAll()]).then(
+      (currentTeamAndAllOkrs) => {
+        let teamName = currentTeamAndAllOkrs[0].teamName;
+        for (const okr of currentTeamAndAllOkrs[1]) {
+          if (okr.okrOwners.includes(teamName)) {
+            teamOwnedOkrsArray.push(okr);
+          }
+        }
+        setTeamOwnedOkrs(teamOwnedOkrsArray);
+      }
+    );
     // eslint-disable-next-line
   }, []);
-
-  if (team.teamMembers) {
-    members = team.teamMembers.join(", ");
-  }
 
   return (
     <>
@@ -41,6 +52,14 @@ export function TeamDetails() {
           </ul>
           {(team.teamMembers === undefined ||
             team.teamMembers[0] === undefined) && <p>No members.</p>}
+        </div>
+        <div id="teams-modal-teamOwnedOkrs">
+          <ul id="teams-modal-teamOwnedOkrs-list">
+            {teamOwnedOkrs?.map((okr) => (
+              <li key={okr._id}>{okr.okrTitle}</li>
+            ))}
+          </ul>
+          {!teamOwnedOkrs[0] && <p>This team doesn't own any OKRs</p>}
         </div>
       </div>
     </>

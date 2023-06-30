@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import { OkrProvider } from "./contexts/OkrContext";
+import { TeamProvider } from "./contexts/TeamContext";
 import { PrivateGuard } from "./components/common/PrivateGuard";
 
 import { Navbar } from "./components/Navbar";
@@ -23,21 +24,23 @@ function App() {
       <div className="App">
         <Navbar></Navbar>
         <OkrProvider>
-          <Routes>
-            <Route element={<PrivateGuard />}>
-              <Route path="/create" element={<CreateOkr />}></Route>
-              <Route path="/okrs/:okrId" element={<OkrDetails />}></Route>
-              <Route path="/okrs/:okrId/edit" element={<EditOkr />}></Route>
-              <Route path="/teams" element={<Teams />}></Route>
-              <Route path="/teams/create" element={<CreateTeam />}></Route>
-              <Route path="/teams/:teamId" element={<TeamDetails />}></Route>
-              <Route path="/employees" element={<Employees />}></Route>
-              <Route path="/logout" element={<Logout />} />
-            </Route>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <TeamProvider>
+            <Routes>
+              <Route element={<PrivateGuard />}>
+                <Route path="/create" element={<CreateOkr />}></Route>
+                <Route path="/okrs/:okrId" element={<OkrDetails />}></Route>
+                <Route path="/okrs/:okrId/edit" element={<EditOkr />}></Route>
+                <Route path="/teams" element={<Teams />}></Route>
+                <Route path="/teams/create" element={<CreateTeam />}></Route>
+                <Route path="/teams/:teamId" element={<TeamDetails />}></Route>
+                <Route path="/employees" element={<Employees />}></Route>
+                <Route path="/logout" element={<Logout />} />
+              </Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </TeamProvider>
         </OkrProvider>
       </div>
     </AuthProvider>
