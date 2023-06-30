@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import * as okrService from "../services/okrService";
 import * as teamsService from "../services/teamsService";
@@ -56,7 +56,13 @@ export function TeamDetails() {
         <div id="teams-modal-teamOwnedOkrs">
           <ul id="teams-modal-teamOwnedOkrs-list">
             {teamOwnedOkrs?.map((okr) => (
-              <li key={okr._id}>{okr.okrTitle}</li>
+              <Link
+                to={`/okrs/${okr._id}`}
+                id="teams-modal-teamOwnedOkrs-list-items"
+                key={okr._id}
+              >
+                {okr.okrTitle}
+              </Link>
             ))}
           </ul>
           {!teamOwnedOkrs[0] && <p>This team doesn't own any OKRs</p>}
