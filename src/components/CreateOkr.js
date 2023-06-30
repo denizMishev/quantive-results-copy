@@ -22,11 +22,13 @@ export function CreateOkr() {
               arr.push({
                 value: userOrTeam.username.toLowerCase(),
                 label: userOrTeam.username,
+                id: userOrTeam._id,
               });
             } else if (userOrTeam.teamName) {
               arr.push({
                 value: userOrTeam.teamName.toLowerCase(),
                 label: userOrTeam.teamName,
+                id: userOrTeam._id,
               });
             }
           }
@@ -40,15 +42,14 @@ export function CreateOkr() {
     e.preventDefault();
 
     const okrData = Object.fromEntries(new FormData(e.target));
-    const ownersArray = owners.map((x) => x.label);
-    okrData.okrOwners = ownersArray;
+    okrData.okrOwners = owners.map((x) => x.label);
+    okrData.okrOwnersIds = owners.map((x) => x.id);
 
     okrService.create(okrData).then((result) => {
       okrAdd(result);
+      console.log(result);
     });
   };
-
-  console.log(dropdownUsers);
 
   return (
     <section>

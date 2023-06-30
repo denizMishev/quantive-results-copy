@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import * as userService from "../services/userService";
 
 export function Employees() {
@@ -16,7 +17,9 @@ export function Employees() {
       <div id="employees-container">
         <ul id="employees-container-list">
           {employees?.map((employee) => (
-            <li key={employee._id}>{employee.username}</li>
+            <Link id="employees-container-list-items" key={employee._id}>
+              {employee.username}
+            </Link>
           ))}
         </ul>
       </div>

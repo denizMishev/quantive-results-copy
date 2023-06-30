@@ -6,3 +6,10 @@
     border: 5px solid lightgray;
     font-family: 'IBM Plex Mono', monospace;
 }
+
+#employees-container-list-items {
+    display: block;
+    border: 5px solid lightgray;
+    margin: 8px;
+    padding: 8px;
+}
