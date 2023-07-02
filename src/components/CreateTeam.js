@@ -21,6 +21,7 @@ export function CreateTeam() {
         arr.push({
           value: user.username.toLowerCase(),
           label: user.username,
+          id: user._id,
         });
       }
       setDropdownUsers(arr);
@@ -31,9 +32,20 @@ export function CreateTeam() {
     e.preventDefault();
 
     const teamData = Object.fromEntries(new FormData(e.target));
-    teamData.teamManager = manager.label;
-    const membersArray = members.map((x) => x.label);
-    teamData.teamMembers = membersArray;
+    const teamMembersArray = [];
+    for (const member of members) {
+      teamMembersArray.push({
+        memberName: member.label,
+        memberId: member.id,
+      });
+    }
+    const teamManagerObject = {
+      managerName: manager.label,
+      managerId: manager.id,
+    };
+
+    teamData.teamMembers = teamMembersArray;
+    teamData.teamManager = teamManagerObject;
 
     teamService.create(teamData).then((result) => {
       teamAdd(result);

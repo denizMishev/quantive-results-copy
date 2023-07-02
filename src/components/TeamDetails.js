@@ -23,6 +23,7 @@ export function TeamDetails() {
       }
       setTeamOwnedOkrs(teamOwnedOkrsArray);
     });
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -36,13 +37,24 @@ export function TeamDetails() {
           <label id="teams-modal-teamManager" htmlFor="teams-modal-teamManager">
             Team Manager
           </label>
-          <h4>{team.teamManager}</h4>
+          <h4>{team.teamManager.managerName}</h4>
         </div>
         <div id="teams-modal-members">
-          <label htmlFor="teams-modal-teamMember"></label>
+          <label
+            id="teams-modal-membersList-label"
+            htmlFor="teams-modal-teamMember"
+          >
+            Team members
+          </label>
           <ul id="teams-modal-membersList">
             {team.teamMembers?.map((member) => (
-              <li key={member}>{member}</li>
+              <Link
+                to={`/employees/${member.memberId}`}
+                id="teams-modal-list-items"
+                key={member.memberId}
+              >
+                {member.memberName}
+              </Link>
             ))}
           </ul>
           {(team.teamMembers === undefined ||
@@ -53,7 +65,7 @@ export function TeamDetails() {
             {teamOwnedOkrs?.map((okr) => (
               <Link
                 to={`/okrs/${okr._id}`}
-                id="teams-modal-teamOwnedOkrs-list-items"
+                id="teams-modal-list-items"
                 key={okr._id}
               >
                 {okr.okrTitle}

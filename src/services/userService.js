@@ -6,3 +6,5 @@ export const addNewUser = (email, username) =>
   request.post(`${baseUrl}`, { email, username, okrs: [] });
 
 export const getAllUsers = () => request.get(baseUrl);
+
+export const getOne = (employeeId) => request.get(`${baseUrl}/${employeeId}`);

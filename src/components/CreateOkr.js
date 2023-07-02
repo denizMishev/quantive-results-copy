@@ -16,20 +16,30 @@ export function CreateOkr() {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
       (result) => {
         let arr = [];
-        for (const request of result) {
-          for (const userOrTeam of request) {
-            if (userOrTeam.username) {
-              arr.push({
-                value: userOrTeam.username.toLowerCase(),
-                label: userOrTeam.username,
-                id: userOrTeam._id,
-              });
-            } else if (userOrTeam.teamName) {
-              arr.push({
-                value: userOrTeam.teamName.toLowerCase(),
-                label: userOrTeam.teamName,
-                id: userOrTeam._id,
-              });
+        if (result[1].code === 404) {
+          for (const user of result[0]) {
+            arr.push({
+              value: user.username.toLowerCase(),
+              label: user.username,
+              id: user._id,
+            });
+          }
+        } else {
+          for (const request of result) {
+            for (const userOrTeam of request) {
+              if (userOrTeam.username) {
+                arr.push({
+                  value: userOrTeam.username.toLowerCase(),
+                  label: userOrTeam.username,
+                  id: userOrTeam._id,
+                });
+              } else if (userOrTeam.teamName) {
+                arr.push({
+                  value: userOrTeam.teamName.toLowerCase(),
+                  label: userOrTeam.teamName,
+                  id: userOrTeam._id,
+                });
+              }
             }
           }
         }

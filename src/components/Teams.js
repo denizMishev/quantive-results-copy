@@ -28,7 +28,7 @@ export function Teams() {
         <ul id="teams-container-list">
           {teams?.map((team) => (
             <Link to={`/teams/${team._id}`} id="teams-team-card" key={team._id}>
-              {team.teamName} - Managed by {team.teamManager}
+              {team.teamName} - Managed by {team.teamManager.managerName}
             </Link>
           ))}
         </ul>

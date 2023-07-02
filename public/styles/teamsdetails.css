@@ -23,6 +23,12 @@
     display: block;
 }
 
+#teams-modal-membersList-label {
+    padding: 5px;
+    margin: 15px;
+    display: block;
+}
+
 #teams-modal-members {
     border: 5px solid lightgray;
 }
@@ -31,7 +37,7 @@
     border: 5px solid lightgray;
 }
 
-#teams-modal-teamOwnedOkrs-list-items {
+#teams-modal-list-items {
     display: block;
     border: 5px solid lightgray;
     margin: 8px;

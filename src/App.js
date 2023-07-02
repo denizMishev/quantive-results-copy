@@ -17,6 +17,7 @@ import { Employees } from "./components/Employees";
 import { CreateTeam } from "./components/CreateTeam";
 import { TeamDetails } from "./components/TeamDetails";
 import Logout from "./components/Logout";
+import { EmployeeDetails } from "./components/EmployeeDetails";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
                 <Route path="/teams/create" element={<CreateTeam />}></Route>
                 <Route path="/teams/:teamId" element={<TeamDetails />}></Route>
                 <Route path="/employees" element={<Employees />}></Route>
+                <Route
+                  path="/employees/:employeeId"
+                  element={<EmployeeDetails />}
+                ></Route>
                 <Route path="/logout" element={<Logout />} />
               </Route>
               <Route path="/" element={<Home />}></Route>

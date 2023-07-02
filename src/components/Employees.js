@@ -17,7 +17,11 @@ export function Employees() {
       <div id="employees-container">
         <ul id="employees-container-list">
           {employees?.map((employee) => (
-            <Link id="employees-container-list-items" key={employee._id}>
+            <Link
+              to={`/employees/${employee._id}`}
+              id="employees-container-list-items"
+              key={employee._id}
+            >
               {employee.username}
             </Link>
           ))}

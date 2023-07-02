@@ -1,0 +1,32 @@
+#employee-details-modal {
+    width: 25%;
+    height: 25%;
+    background-color: white;
+    margin: auto;
+    border: 5px solid lightgray;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+span {
+    display: block;
+    margin: 10px;
+}
+
+#employee-details-name {
+    border: 5px solid lightgray;
+}
+
+#employee-details-about {
+    border: 5px solid lightgray;
+}
+
+#employee-details-okrsOwned {
+    border: 5px solid lightgray;
+}
+
+#employee-modal-employeeOwnedOkrs-list-items {
+    display: block;
+    border: 5px solid lightgray;
+    margin: 8px;
+    padding: 8px;
+}
