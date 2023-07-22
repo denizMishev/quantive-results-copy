@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { OkrContext } from "../contexts/OkrContext";
 
 import * as okrService from "../services/okrService";
+import * as teamsService from "../services/teamsService";
+
+import { TeamContext } from "../contexts/TeamContext";
 
 export function DeleteModal(props) {
-  const okrId = props.id;
+  const targetId = props.id;
   const { okrRemove } = useContext(OkrContext);
+  const { teamRemove } = useContext(TeamContext);
   const navigate = useNavigate();
 
   const closeOnEscapeKeyDown = (e) => {
@@ -28,10 +32,18 @@ export function DeleteModal(props) {
   }
 
   const deleteHandler = () => {
-    okrService.remove(okrId).then(() => {
-      okrRemove(okrId);
-      navigate("/");
-    });
+    if (props.target === "OKR") {
+      okrService.remove(targetId).then(() => {
+        okrRemove(targetId);
+        navigate("/");
+      });
+    }
+    if (props.target === "team") {
+      teamsService.remove(targetId).then(() => {
+        teamRemove(targetId);
+        navigate("/");
+      });
+    }
   };
 
   return (
@@ -43,7 +55,8 @@ export function DeleteModal(props) {
         <div className="modal-body">{props.description}</div>
         <div className="modal-footer">
           <button onClick={deleteHandler} className="modal-button">
-            Delete OKR
+            {props.target === "OKR" && "Delete OKR"}
+            {props.target === "team" && "Delete Team"}
           </button>
           <button onClick={props.onClose} className="modal-button">
             Close

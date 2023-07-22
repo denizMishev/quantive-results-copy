@@ -84,6 +84,7 @@ export function OkrDetails() {
       <DeleteModal
         title="Are you sure you want to delete this OKR?"
         description="Deletion of OKRs is permanent and irreversible"
+        target={"OKR"}
         id={okrId}
         onClose={() => setShowDeleteModal(false)}
         show={showDeleteModal}

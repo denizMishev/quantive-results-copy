@@ -11,6 +11,8 @@ const teamReducer = (state, action) => {
       return [...action.payload];
     case teamStateManagementCommands.add:
       return [...state, action.payload];
+    case teamStateManagementCommands.remove:
+      return state.filter((x) => x._id !== action.teamId);
     default:
       return state;
   }
@@ -45,12 +47,20 @@ export function TeamProvider({ children }) {
     });
   };
 
+  const teamRemove = (teamId) => {
+    dispatch({
+      type: teamStateManagementCommands.remove,
+      teamId,
+    });
+  };
+
   return (
     <TeamContext.Provider
       value={{
         teams,
         selectTeam,
         teamAdd,
+        teamRemove,
       }}
     >
       {children}

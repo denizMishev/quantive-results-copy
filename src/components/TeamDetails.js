@@ -5,7 +5,10 @@ import * as okrService from "../services/okrService";
 
 import { TeamContext } from "../contexts/TeamContext";
 
+import { DeleteModal } from "./DeleteModal";
+
 export function TeamDetails() {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { selectTeam } = useContext(TeamContext);
   const { teamId } = useParams();
   const [teamOwnedOkrs, setTeamOwnedOkrs] = useState([]);
@@ -29,6 +32,16 @@ export function TeamDetails() {
   return (
     <>
       <div id="teams-modal">
+        <button onClick={() => setShowDeleteModal(true)}>Delete team</button>
+        <DeleteModal
+          title="Are you sure you want to delete this team?"
+          description="Deletion of teams is permanent and irreversible"
+          target={"team"}
+          id={teamId}
+          onClose={() => setShowDeleteModal(false)}
+          show={showDeleteModal}
+        />
+        <button>Edit team</button>
         <div id="teams-modal-titles">
           <label id="teams-modal-teamName" htmlFor="teams-modal-teamName">
             Team name
