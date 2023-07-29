@@ -16,8 +16,9 @@ import { Teams } from "./components/Teams";
 import { Employees } from "./components/Employees";
 import { CreateTeam } from "./components/CreateTeam";
 import { TeamDetails } from "./components/TeamDetails";
-import Logout from "./components/Logout";
 import { EmployeeDetails } from "./components/EmployeeDetails";
+import { EditTeam } from "./components/EditTeam";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
                 <Route path="/teams" element={<Teams />}></Route>
                 <Route path="/teams/create" element={<CreateTeam />}></Route>
                 <Route path="/teams/:teamId" element={<TeamDetails />}></Route>
+                <Route
+                  path="/teams/:teamId/edit"
+                  element={<EditTeam />}
+                ></Route>
                 <Route path="/employees" element={<Employees />}></Route>
                 <Route
                   path="/employees/:employeeId"

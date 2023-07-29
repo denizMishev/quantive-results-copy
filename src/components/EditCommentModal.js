@@ -44,7 +44,6 @@ export function EditCommentModal(props) {
         <div className="modal-body">
           <input
             type="text"
-            // defaultValue={props.commentContent}
             value={commentText ? commentText : props.commentContent}
             onChange={(e) => setCommentText(e.target.value)}
           />

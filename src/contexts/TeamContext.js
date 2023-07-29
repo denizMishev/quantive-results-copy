@@ -13,6 +13,8 @@ const teamReducer = (state, action) => {
       return [...state, action.payload];
     case teamStateManagementCommands.remove:
       return state.filter((x) => x._id !== action.teamId);
+    case teamStateManagementCommands.edit:
+      return state.map((x) => (x._id === action.teamId ? action.payload : x));
     default:
       return state;
   }
@@ -47,6 +49,14 @@ export function TeamProvider({ children }) {
     });
   };
 
+  const teamEdit = (teamId, teamData) => {
+    dispatch({
+      type: teamStateManagementCommands.edit,
+      payload: teamData,
+      teamId,
+    });
+  };
+
   const teamRemove = (teamId) => {
     dispatch({
       type: teamStateManagementCommands.remove,
@@ -61,6 +71,7 @@ export function TeamProvider({ children }) {
         selectTeam,
         teamAdd,
         teamRemove,
+        teamEdit,
       }}
     >
       {children}

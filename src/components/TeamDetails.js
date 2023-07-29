@@ -32,6 +32,7 @@ export function TeamDetails() {
   return (
     <>
       <div id="teams-modal">
+        <Link to={`/teams/${teamId}/edit`}>Edit Team</Link>
         <button onClick={() => setShowDeleteModal(true)}>Delete team</button>
         <DeleteModal
           title="Are you sure you want to delete this team?"
@@ -41,7 +42,6 @@ export function TeamDetails() {
           onClose={() => setShowDeleteModal(false)}
           show={showDeleteModal}
         />
-        <button>Edit team</button>
         <div id="teams-modal-titles">
           <label id="teams-modal-teamName" htmlFor="teams-modal-teamName">
             Team name
