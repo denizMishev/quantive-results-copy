@@ -18,26 +18,38 @@ export function EditOkr() {
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
       (usersAndTeamsRequests) => {
-        let usersAndTeamsArray = [];
-        for (const request of usersAndTeamsRequests) {
-          for (const userOrTeam of request) {
-            if (userOrTeam.username) {
-              usersAndTeamsArray.push({
-                value: userOrTeam.username.toLowerCase(),
-                label: userOrTeam.username,
-              });
-            } else if (userOrTeam.teamName) {
-              usersAndTeamsArray.push({
-                value: userOrTeam.teamName.toLowerCase(),
-                label: userOrTeam.teamName,
-              });
+        let usersAndOrTeamsArray = [];
+        if (usersAndTeamsRequests[1].code === 404) {
+          for (const user of usersAndTeamsRequests[0]) {
+            usersAndOrTeamsArray.push({
+              value: user.username.toLowerCase(),
+              label: user.username,
+              id: user._id,
+            });
+          }
+        } else {
+          for (const request of usersAndTeamsRequests) {
+            for (const userOrTeam of request) {
+              if (userOrTeam.username) {
+                usersAndOrTeamsArray.push({
+                  value: userOrTeam.username.toLowerCase(),
+                  label: userOrTeam.username,
+                  id: userOrTeam._id,
+                });
+              } else if (userOrTeam.teamName) {
+                usersAndOrTeamsArray.push({
+                  value: userOrTeam.teamName.toLowerCase(),
+                  label: userOrTeam.teamName,
+                  id: userOrTeam._id,
+                });
+              }
             }
           }
         }
-        setDropdownUsersAndTeams(usersAndTeamsArray);
+        setDropdownUsersAndTeams(usersAndOrTeamsArray);
       }
     );
-  });
+  }, []);
 
   const [okr, setOkr] = useState({});
   useEffect(() => {

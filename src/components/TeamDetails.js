@@ -74,6 +74,7 @@ export function TeamDetails() {
             team.teamMembers[0] === undefined) && <p>No members.</p>}
         </div>
         <div id="teams-modal-teamOwnedOkrs">
+          <label htmlFor="">Team owned OKRs</label>
           <ul id="teams-modal-teamOwnedOkrs-list">
             {teamOwnedOkrs?.map((okr) => (
               <Link

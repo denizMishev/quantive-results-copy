@@ -65,6 +65,7 @@ export function EmployeeDetails() {
           </span>
         </div>
         <div id="employee-details-okrsOwned">
+          <label htmlFor="">Employee's OKRs</label>
           <ul id="employee-modal-ownedOkrs-list">
             {employeeOwnedOkrs?.map((okr) => (
               <Link
@@ -79,6 +80,7 @@ export function EmployeeDetails() {
           {!employeeOwnedOkrs[0] && <p>This employee doesn't own any OKRs</p>}
         </div>
         <div id="employee-details-teams">
+          <label htmlFor="">Employee's teams</label>
           <ul id="employee-modal-teams-list">
             {employeeTeams?.map((team) => (
               <Link
