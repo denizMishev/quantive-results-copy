@@ -15,9 +15,9 @@ export function CreateTeam() {
   let members = "";
 
   useEffect(() => {
-    userService.getAllUsers().then((result) => {
+    userService.getAllUsers().then((users) => {
       let arr = [];
-      for (const user of result) {
+      for (const user of users) {
         arr.push({
           value: user.username.toLowerCase(),
           label: user.username,
@@ -47,8 +47,8 @@ export function CreateTeam() {
     teamData.teamMembers = teamMembersArray;
     teamData.teamManager = teamManagerObject;
 
-    teamService.create(teamData).then((result) => {
-      teamAdd(result);
+    teamService.create(teamData).then((newTeam) => {
+      teamAdd(newTeam);
     });
     navigate("/teams");
   };

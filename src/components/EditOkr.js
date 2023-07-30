@@ -9,7 +9,7 @@ import * as teamsService from "../services/teamsService";
 import { OkrContext } from "../contexts/OkrContext";
 
 export function EditOkr() {
-  const [dropdownUsers, setDropdownUsers] = useState([]);
+  const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
   const { okrEdit } = useContext(OkrContext);
   const { okrId } = useParams();
   const navigate = useNavigate();
@@ -17,24 +17,24 @@ export function EditOkr() {
 
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
-      (result) => {
-        let arr = [];
-        for (const request of result) {
+      (usersAndTeamsRequests) => {
+        let usersAndTeamsArray = [];
+        for (const request of usersAndTeamsRequests) {
           for (const userOrTeam of request) {
             if (userOrTeam.username) {
-              arr.push({
+              usersAndTeamsArray.push({
                 value: userOrTeam.username.toLowerCase(),
                 label: userOrTeam.username,
               });
             } else if (userOrTeam.teamName) {
-              arr.push({
+              usersAndTeamsArray.push({
                 value: userOrTeam.teamName.toLowerCase(),
                 label: userOrTeam.teamName,
               });
             }
           }
         }
-        setDropdownUsers(arr);
+        setDropdownUsersAndTeams(usersAndTeamsArray);
       }
     );
   });
@@ -65,8 +65,8 @@ export function EditOkr() {
       okrData.okrOwners = newOwnersArray;
     }
 
-    okrService.edit(okrId, okrData).then((result) => {
-      okrEdit(okrId, result);
+    okrService.edit(okrId, okrData).then((editedOkr) => {
+      okrEdit(okrId, editedOkr);
       navigate(`/okrs/${okrId}`);
     });
   };
@@ -88,7 +88,7 @@ export function EditOkr() {
             isSearchable
             isMulti
             placeHolder={currentOwners}
-            options={dropdownUsers}
+            options={dropdownUsersAndTeams}
             onChange={(value) => (owners = value)}
           ></Dropdown>
         </div>

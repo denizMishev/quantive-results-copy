@@ -9,32 +9,32 @@ import * as teamsService from "../services/teamsService";
 
 export function CreateOkr() {
   const { okrAdd } = useContext(OkrContext);
-  const [dropdownUsers, setDropdownUsers] = useState([]);
+  const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
   let owners = "";
 
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
-      (result) => {
-        let arr = [];
-        if (result[1].code === 404) {
-          for (const user of result[0]) {
-            arr.push({
+      (usersAndTeamsRequests) => {
+        let usersAndOrTeamsArray = [];
+        if (usersAndTeamsRequests[1].code === 404) {
+          for (const user of usersAndTeamsRequests[0]) {
+            usersAndOrTeamsArray.push({
               value: user.username.toLowerCase(),
               label: user.username,
               id: user._id,
             });
           }
         } else {
-          for (const request of result) {
+          for (const request of usersAndTeamsRequests) {
             for (const userOrTeam of request) {
               if (userOrTeam.username) {
-                arr.push({
+                usersAndOrTeamsArray.push({
                   value: userOrTeam.username.toLowerCase(),
                   label: userOrTeam.username,
                   id: userOrTeam._id,
                 });
               } else if (userOrTeam.teamName) {
-                arr.push({
+                usersAndOrTeamsArray.push({
                   value: userOrTeam.teamName.toLowerCase(),
                   label: userOrTeam.teamName,
                   id: userOrTeam._id,
@@ -43,7 +43,7 @@ export function CreateOkr() {
             }
           }
         }
-        setDropdownUsers(arr);
+        setDropdownUsersAndTeams(usersAndOrTeamsArray);
       }
     );
   }, []);
@@ -55,8 +55,8 @@ export function CreateOkr() {
     okrData.okrOwners = owners.map((x) => x.label);
     okrData.okrOwnersIds = owners.map((x) => x.id);
 
-    okrService.create(okrData).then((result) => {
-      okrAdd(result);
+    okrService.create(okrData).then((newOkr) => {
+      okrAdd(newOkr);
     });
   };
 
@@ -81,7 +81,7 @@ export function CreateOkr() {
             isSearchable
             isMulti
             placeHolder="Select owner/s for your OKR"
-            options={dropdownUsers}
+            options={dropdownUsersAndTeams}
             onChange={(value) => (owners = value)}
           ></Dropdown>
         </div>

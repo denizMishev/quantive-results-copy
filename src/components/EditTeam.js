@@ -16,20 +16,20 @@ export function EditTeam() {
 
   const navigate = useNavigate();
 
-  let manager = "";
+  let newManager = "";
   let newMembers = "";
 
   useEffect(() => {
-    userService.getAllUsers().then((result) => {
-      let arr = [];
-      for (const user of result) {
-        arr.push({
+    userService.getAllUsers().then((users) => {
+      let dropdownUsersArray = [];
+      for (const user of users) {
+        dropdownUsersArray.push({
           value: user.username.toLowerCase(),
           label: user.username,
           id: user._id,
         });
       }
-      setDropdownUsers(arr);
+      setDropdownUsers(dropdownUsersArray);
     });
   }, []);
 
@@ -58,18 +58,17 @@ export function EditTeam() {
     e.preventDefault();
 
     const teamData = Object.fromEntries(new FormData(e.target));
-    const newMembersArray = newMembers.map((x) => x.label);
 
-    if (!manager) {
+    if (!newManager) {
       teamData.teamManager = team.teamManager;
     } else {
       teamData.teamManager = {
-        managerName: manager.label,
-        managerId: manager.id,
+        managerName: newManager.label,
+        managerId: newManager.id,
       };
     }
 
-    if (newMembersArray.length === 0) {
+    if (newMembers.length === 0) {
       teamData.teamMembers = team.teamMembers;
     } else {
       const newTeamMembersArray = [];
@@ -105,7 +104,7 @@ export function EditTeam() {
             isSearchable
             placeHolder={currentManager}
             options={dropdownUsers}
-            onChange={(value) => (manager = value)}
+            onChange={(value) => (newManager = value)}
           ></Dropdown>
         </div>
         <div>
