@@ -1,0 +1,101 @@
+.create-okr-ctr, .modal-ctr{
+  position: fixed;
+  left: 0;
+  top: -21.5rem;
+  right: 0;
+  bottom: 0;
+  background-color: var(--clr-modal-background);
+  align-items: center;
+  justify-content: center;
+}
+
+.create-okr-form {
+  position: relative;
+  width: 37rem;
+  background-color: var(--clr-white);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-okr-form > svg {
+  position: absolute;
+  right: 1rem;
+  top: 0.75rem;
+  font-size: var(--fs-180);
+  color: var(--clr-lightergray-activestate);
+  cursor: pointer;
+}
+
+.create-okr-form > svg:hover {
+  color: var(--clr-lightgray-navigation);
+}   
+
+.create-okr-form-heading-ctr {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  margin-bottom: 2rem;
+}
+
+.create-okr-form-heading-ctr span:nth-of-type(1) {
+  font-size: var(--fs-160);
+  text-transform: capitalize;
+}
+
+.create-okr-form-input-fields-ctr {
+  margin-bottom: 1rem;
+}
+
+.create-okr-form-input-ctr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.create-okr-form-input-ctr label {
+  display: block;
+  width: 6rem;
+  color: var(--clr-txt-accent2);
+  font-size: var(--fs-088);
+}
+
+.create-okr-form-input-ctr input {
+  padding: 0.6rem 0.4rem;
+  border: 1px solid var(--clr-lightgray-navigation);
+  color: var(--clr-txt-accent3);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.create-okr-form-input-ctr input:focus {
+  border: 1px solid var(--clr-linkblue);
+  outline: 0;
+}
+
+.create-okr-form-input-ctr input::placeholder {
+  color: var(--clr-lightgray-navigation);
+}
+
+.create-okr-form-btns-ctr {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.create-okr-form-btns-ctr button {
+  padding: 0.65rem 1.75rem;
+  border-radius: 24px;
+  font-size: var(--fs-085);
+  font-weight: bold;
+}
+
+.create-okr-form-btns-ctr button:nth-of-type(1) {
+  background-color: var(--clr-linkblue);
+  color: var(--clr-white);
+}
+
+.create-okr-form-btns-ctr button:nth-of-type(1):hover {
+  background-color: var(--clr-linkblue-hovered);
+}

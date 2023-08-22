@@ -8,7 +8,7 @@ import { PrivateGuard } from "./components/common/PrivateGuard";
 import { Navbar } from "./components/Navbar";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
-import { CreateOkr } from "./components/CreateOkr";
+// import { CreateOkr } from "./components/CreateOkrModal";
 import { EditOkr } from "./components/EditOkr";
 import { Home } from "./components/Home";
 import { OkrDetails } from "./components/OkrDetails";
@@ -30,7 +30,7 @@ function App() {
           <TeamProvider>
             <Routes>
               <Route element={<PrivateGuard />}>
-                <Route path="/create" element={<CreateOkr />}></Route>
+                {/* <Route path="/create" element={<CreateOkr />}></Route> */}
                 <Route path="/okrs/:okrId" element={<OkrDetails />}></Route>
                 <Route path="/okrs/:okrId/edit" element={<EditOkr />}></Route>
                 <Route path="/teams" element={<Teams />}></Route>

@@ -9,10 +9,14 @@
 // teams
 
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 // import { AuthContext } from "../contexts/AuthContext";
 // import { useContext } from "react";
 
 export function Navbar() {
+  let location = useLocation();
+  console.log(location.pathname);
+
   return (
     // <nav id="main-nav">
     //   <div>
@@ -58,7 +62,11 @@ export function Navbar() {
     //   </li>
     // </nav>
 
-    <nav className="main-navigation">
+    <nav
+      className={`main-navigation ${
+        location.pathname === "/" ? "hide-nav" : ""
+      }`}
+    >
       <header className="main-navigation-header">
         <div className="main-navigation-logo">
           <svg

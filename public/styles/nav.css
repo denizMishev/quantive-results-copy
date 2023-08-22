@@ -38,6 +38,10 @@ body {
     color: black;
 } */
 
+.hide-nav {
+    display: none;
+}
+
 .main-navigation {
     position: fixed;
     width:3rem;

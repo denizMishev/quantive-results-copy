@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Okr } from "./Okr";
+import { CreateOkrModal } from "./CreateOkrModal";
 
 import { OkrContext } from "../contexts/OkrContext";
 
 export function Home() {
+  const [showCreateOkrModal, setShowCreateOkrModal] = useState(false);
   const { okrs } = useContext(OkrContext);
 
   return (
@@ -25,7 +27,16 @@ export function Home() {
           <h2>Dashboard</h2>
           <div className="section-header-buttons-ctr">
             <div>
-              <button className="create-button">Create OKR</button>
+              <button
+                className="create-button"
+                onClick={() => setShowCreateOkrModal(true)}
+              >
+                Create OKR
+              </button>
+              <CreateOkrModal
+                onClose={() => setShowCreateOkrModal(false)}
+                show={showCreateOkrModal}
+              />
             </div>
             <hr className="buttons-ctr-linebreak" />
             <div className="input-search-ctr">
