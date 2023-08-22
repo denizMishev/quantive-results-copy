@@ -1,7 +1,6 @@
-#homeSection {
+/* #homeSection {
     width: auto;
     margin-left: 180px;
-    /* display: inline-block; */
     padding-right: 15px;
     padding-top: 7em;
     justify-content: right;
@@ -19,4 +18,86 @@
     padding: 55px;
     height: auto;
     width: auto;
+} */
+
+/* Welcome banner  Welcome banner Welcome banner Welcome banner Welcome banner */
+
+.home-welcome-banner-ctr {
+    display: flex;
+    padding: 1.85rem 4.5rem;
+    gap: 1rem;
 }
+
+.welcome-banner-img-ctr, .rounded-img-ctr{
+    height: 72px;
+    width: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.welcome-banner-img-ctr > svg, .rounded-img {
+    width: 100%;
+    height: 100%;
+    background-color: var(--clr-navy-navigation);
+    color: var(--clr-white);
+}
+
+.welcome-banner-txt-ctr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.welcome-banner-txt-ctr-teams-ctr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.welcome-banner-txt-ctr-teams-ctr ul {
+    display: flex;
+    /* margin-left: 1rem; */
+}
+
+.welcome-banner-txt-ctr-title-ctr > h3 {
+    font-size: var(--fs-180);
+    color: var(--clr-txt-accent3);
+}
+
+.welcome-banner-txt-ctr-teams-ctr span {
+    display: block;
+    font-size: var(--fs-088);
+    color: var(--clr-txt-accent1);
+    font-weight: bold;
+}
+
+/* Welcome banner  Welcome banner Welcome banner Welcome banner Welcome banner */
+
+/* My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs */
+
+.home-myokrs {
+    padding: 1.85rem 4.5rem;
+}
+
+.myokrs-grid-content li{
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-auto-columns: 1fr;
+}
+
+.myokrs-header {
+    margin-bottom: 1.65rem;
+}
+
+.myokrs-header div span{
+    font-size: var(--fs-115);
+    font-weight: bold;
+    color: var(--clr-txt-accent2);
+}
+
+/* My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs */
+

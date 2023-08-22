@@ -1,0 +1,43 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17.6px;
+}
+
+:root {
+
+    --clr-white: hsla(0, 100%, 100%, 1);
+    --clr-whitesmoke: hsla(0, 0%, 96%, 1);
+    --clr-black:hsla(0, 0%, 0%, 1);
+    --clr-gray: hsla(0, 0%, 50%, 1);
+
+    --clr-navy-navigation: hsla(202, 54%, 12%, 1);
+    --clr-navy-light-navigation: hsla(203, 49%, 16%, 1);
+    --clr-lightgreen-logo: hsla(162, 65%, 44%, 1);
+    --clr-lightgray-navigation: hsla(210, 7%, 71%, 1);
+    --clr-whitesmoke-teamchip: hsla(223, 33%, 96%, 1);
+    --clr-lightergray-activestate: hsla(219, 12%, 90%, 1);
+    --clr-linkblue: hsla(220, 100%, 50%, 1);
+    --clr-linkblue-hovered: hsla(220, 100%, 40%, 1);
+    --clr-junglegreen-hoverbtn: hsla(163, 61%, 42%, 1);
+
+    --clr-txt-accent1: hsla(218, 20%, 55%, 1);
+    --clr-txt-accent2: hsla(209, 18%, 32%, 1);
+    --clr-txt-accent3: hsla(205, 39%, 15%, 1);
+
+    --clr-modal-background: hsla(0, 0%, 0%, 0.1);
+
+    --fs-075: 0.75rem;
+    --fs-077: 0.77rem;
+    --fs-080: 0.80rem;
+    --fs-085: 0.85rem;
+    --fs-088: 0.88rem;
+    --fs-090: 0.90rem;
+    --fs-115: 1.15rem;
+    --fs-125: 1.25rem;
+    --fs-135: 1.35rem;
+    --fs-160: 1.6rem;
+    --fs-180: 1.8rem;
+    --fs-200: 2rem;
+    --fs-315: 3.15rem;
+
+}

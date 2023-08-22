@@ -18,6 +18,7 @@ import { CreateTeam } from "./components/CreateTeam";
 import { TeamDetails } from "./components/TeamDetails";
 import { EmployeeDetails } from "./components/EmployeeDetails";
 import { EditTeam } from "./components/EditTeam";
+import { LandingPage } from "./components/LandingPage";
 import Logout from "./components/Logout";
 
 function App() {
@@ -46,7 +47,8 @@ function App() {
                 ></Route>
                 <Route path="/logout" element={<Logout />} />
               </Route>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/" element={<LandingPage />}></Route>
+              <Route path="/home" element={<Home />}></Route>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
             </Routes>
