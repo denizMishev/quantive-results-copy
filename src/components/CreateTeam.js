@@ -21,7 +21,7 @@ export function CreateTeam() {
         arr.push({
           value: user.username.toLowerCase(),
           label: user.username,
-          id: user._id,
+          id: user._ownerId,
         });
       }
       setDropdownUsers(arr);

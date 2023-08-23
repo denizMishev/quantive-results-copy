@@ -99,5 +99,9 @@
     color: var(--clr-txt-accent2);
 }
 
+.hide-managing {
+    visibility: hidden;
+}
+
 /* My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs */
 

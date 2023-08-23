@@ -21,7 +21,7 @@ export function CreateOkrModal(props) {
             usersAndOrTeamsArray.push({
               value: user.username.toLowerCase(),
               label: user.username,
-              id: user._id,
+              id: user._ownerId,
             });
           }
         } else {
@@ -31,13 +31,13 @@ export function CreateOkrModal(props) {
                 usersAndOrTeamsArray.push({
                   value: userOrTeam.username.toLowerCase(),
                   label: userOrTeam.username,
-                  id: userOrTeam._id,
+                  id: userOrTeam._ownerId,
                 });
               } else if (userOrTeam.teamName) {
                 usersAndOrTeamsArray.push({
                   value: userOrTeam.teamName.toLowerCase(),
                   label: userOrTeam.teamName,
-                  id: userOrTeam._id,
+                  id: userOrTeam._ownerId,
                 });
               }
             }
@@ -109,9 +109,12 @@ export function CreateOkrModal(props) {
     //   </form>
     // </section>
 
-    <section class="create-okr-ctr">
-      <form onSubmit={onSubmit} class="create-okr-form centered-full-screen">
-        <div class="create-okr-form-heading-ctr">
+    <section className="create-okr-ctr">
+      <form
+        onSubmit={onSubmit}
+        className="create-okr-form centered-full-screen"
+      >
+        <div className="create-okr-form-heading-ctr">
           <div onClick={props.onClose}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -127,13 +130,13 @@ export function CreateOkrModal(props) {
           <span>Create objective</span>
           <span>All required fields are marked with an asterisk (*).</span>
         </div>
-        <div class="create-okr-form-input-fields-ctr">
-          <div class="create-okr-form-input-ctr">
-            <label for="">Title*</label>
+        <div className="create-okr-form-input-fields-ctr">
+          <div className="create-okr-form-input-ctr">
+            <label htmlFor="">Title*</label>
             <input name="okrTitle" type="text" />
           </div>
-          <div class="create-okr-form-input-ctr">
-            <label for="">Owner*</label>
+          <div className="create-okr-form-input-ctr">
+            <label htmlFor="">Owner*</label>
             <Dropdown
               isSearchable
               isMulti
@@ -142,12 +145,12 @@ export function CreateOkrModal(props) {
               onChange={(value) => (owners = value)}
             ></Dropdown>
           </div>
-          <div class="create-okr-form-input-ctr">
-            <label for="">Description*</label>
+          <div className="create-okr-form-input-ctr">
+            <label htmlFor="">Description*</label>
             <input name="okrDescription" type="text" />
           </div>
         </div>
-        <div class="create-okr-form-btns-ctr">
+        <div className="create-okr-form-btns-ctr">
           <button type="submit">Create OKR</button>
           <button onClick={props.onClose}>Cancel</button>
         </div>

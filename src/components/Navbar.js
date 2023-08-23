@@ -15,7 +15,6 @@ import { useLocation } from "react-router-dom";
 
 export function Navbar() {
   let location = useLocation();
-  console.log(location.pathname);
 
   return (
     // <nav id="main-nav">
@@ -64,7 +63,11 @@ export function Navbar() {
 
     <nav
       className={`main-navigation ${
-        location.pathname === "/" ? "hide-nav" : ""
+        location.pathname === "/" ||
+        location.pathname === "/register" ||
+        location.pathname === "/login"
+          ? "hide-nav"
+          : ""
       }`}
     >
       <header className="main-navigation-header">
@@ -85,7 +88,7 @@ export function Navbar() {
       <hr className="main-navigation-linebreak" />
       <ul className="main-navigation-list">
         <li>
-          <Link href="#" className="main-navigation-link">
+          <Link to="/home" className="main-navigation-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"
@@ -118,7 +121,7 @@ export function Navbar() {
         <hr className="main-navigation-linebreak" />
 
         <li>
-          <Link href="#" className="main-navigation-link">
+          <Link to="/teams" className="main-navigation-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"

@@ -7,10 +7,7 @@
     font-family: 'IBM Plex Mono', monospace;
 }
 
-span {
-    display: block;
-    margin: 10px;
-}
+
 
 #employee-details-name {
     border: 5px solid lightgray;
