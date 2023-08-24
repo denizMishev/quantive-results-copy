@@ -49,8 +49,6 @@ export function OkrProvider({ children }) {
       type: okrStateManagementCommands.add,
       payload: okrData,
     });
-
-    navigate("/");
   };
 
   const okrEdit = (okrId, okrData) => {

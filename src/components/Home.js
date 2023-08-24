@@ -9,6 +9,7 @@ import { OkrContext } from "../contexts/OkrContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 import * as teamsService from "../services/teamsService";
+import * as okrService from "../services/okrService";
 
 export function Home() {
   const { okrs } = useContext(OkrContext);
@@ -17,9 +18,11 @@ export function Home() {
   const [showCreateOkrModal, setShowCreateOkrModal] = useState(false);
   const [employeeManagedTeams, setEmployeeManagedTeams] = useState({});
   const [employeeTeams, setEmployeeTeams] = useState({});
+  const [employeeOwnedOkrs, setEmployeeOwnedOkrs] = useState([]);
 
   let employeeManagedTeamsArray = [];
   let employeeTeamsArray = [];
+  let employeeOwnedOkrsArray = [];
 
   let hideManagingTeamsStyle = {
     display: "flex",
@@ -29,13 +32,16 @@ export function Home() {
     display: "flex",
   };
 
-  if (employeeManagedTeams.length === 0) {
+  if (
+    employeeManagedTeams.length === 0 ||
+    employeeManagedTeams.length === undefined
+  ) {
     hideManagingTeamsStyle = {
       display: "none",
     };
   }
 
-  if (employeeTeams.length === 0) {
+  if (employeeTeams.length === 0 || employeeTeams.length === undefined) {
     hideMemberTeamsStyle = {
       display: "none",
     };
@@ -56,6 +62,18 @@ export function Home() {
       }
       setEmployeeManagedTeams(employeeManagedTeamsArray);
       setEmployeeTeams(employeeTeamsArray);
+    });
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    okrService.getAll().then((allOkrs) => {
+      for (const okr of allOkrs) {
+        if (okr.okrOwnersIds.includes(user._id)) {
+          employeeOwnedOkrsArray.push(okr);
+        }
+      }
+      setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
     });
     // eslint-disable-next-line
   }, []);
@@ -172,62 +190,11 @@ export function Home() {
                   <span>OKR State</span>
                 </div>
               </li>
-              <li className="myokrs-okr">
-                <div className="myokrs-okr-title-ctr">
-                  <div className="myokrs-svg-ctr">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="1em"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M448 256A192 192 0 1 0 64 256a192 192 0 1 0 384 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 80a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm0-224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zM224 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
-                      />
-                    </svg>
-                  </div>
-                  <Link>
-                    <span>OKR Title</span>
-                  </Link>
-                </div>
-                <div className="myokrs-okr-owner-ctr">
-                  <span>John Doe</span>
-                </div>
-                <div className="myokrs-okr-description-ctr">
-                  <span>Description of an OKRssssssssssssssssssssss</span>
-                </div>
-                <div className="myokrs-okr-activestate">
-                  <div>Active</div>
-                </div>
-              </li>
-              <li className="myokrs-okr">
-                <div className="myokrs-okr-title-ctr">
-                  <div className="myokrs-svg-ctr">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="1em"
-                      viewBox="0 0 512 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M448 256A192 192 0 1 0 64 256a192 192 0 1 0 384 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 80a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm0-224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zM224 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
-                      />
-                    </svg>
-                  </div>
-                  <Link>
-                    <span>OKR Title</span>
-                  </Link>
-                </div>
-                <div className="myokrs-okr-owner-ctr">
-                  <span>John Doe</span>
-                </div>
-                <div className="myokrs-okr-description-ctr">
-                  <span>Description of an OKR</span>
-                </div>
-                <div className="myokrs-okr-activestate">
-                  <div>Active</div>
-                </div>
-              </li>
+              {employeeOwnedOkrs.length > 0 ? (
+                okrs.map((okr) => <Okr key={okr._id} currentOkr={okr} />)
+              ) : (
+                <span>You don't have any OKRs assigned to you yet.</span>
+              )}
             </ul>
           </div>
         </section>

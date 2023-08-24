@@ -75,6 +75,7 @@ export function CreateOkrModal(props) {
 
     okrService.create(okrData).then((newOkr) => {
       okrAdd(newOkr);
+      props.onClose();
     });
   };
 
