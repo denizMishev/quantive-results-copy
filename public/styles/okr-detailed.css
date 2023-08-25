@@ -1,0 +1,172 @@
+/* #details-modal {
+    width: 25%;
+    height: 25%;
+    background-color: white;
+    margin: auto;
+    border: 5px solid lightgray;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+#details-comments {
+    border: 5px solid lightgray;
+}
+
+#details-create-comment {
+    border: 5px solid lightgray;
+} */
+
+.okr-detailed-ctr {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+ }
+ 
+ .okr-detailed-topbar {
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+     padding: 0.8rem 2rem;
+     border-bottom: 1.5px solid var(--clr-lightergray-activestate);
+ }
+ 
+ .okr-detailed-topbar svg {
+     font-size: var(--fs-125);
+     color: var(--clr-txt-accent3);
+     cursor: pointer;
+ }
+ 
+ .okr-detailed-topbar div svg {
+     font-size: unset;
+ }
+ 
+ .okr-detailed-topbar div svg:nth-of-type(1) {
+     padding-right: 1.5rem;
+ }
+ 
+ 
+ .okr-detailed-topbar svg:hover {
+     color: var(--clr-lightgray-navigation);
+ }
+ 
+ .okr-detailed-heading-ctr {
+     display: flex;
+     padding: 2rem 0rem;
+     gap:0.2rem;
+ }
+ 
+ .okr-detailed-heading-ctr > div {
+     width: 20px;
+     height: 20px;
+ }
+ 
+ .okr-detailed-heading-ctr span {
+     font-size: var(--fs-115);
+     font-weight: bold;
+     color: var(--clr-txt-accent3);
+ }
+ 
+ .okr-detailed-main-ctr {
+     width: 70%;
+ }
+ 
+ .okr-detailed-fields {
+     margin-bottom: 2rem;
+     margin-inline: auto;
+     display: flex;
+     flex-wrap: wrap;
+ }
+ 
+ .okr-detailed-field-ctr {
+     display: flex;
+     flex: 0 0 73rem;
+     align-items: center;
+     margin: 0.45rem 0rem;
+ }
+ 
+ .okr-detailed-field-ctr label {
+     font-size: var(--fs-088);
+     color: var(--clr-txt-accent2);
+     flex: 0 0 11rem;
+ 
+ }
+ 
+ .okr-detailed-field-ctr div {
+     outline: none;
+     border: none;
+     padding: 0.61rem 0.5rem;
+     flex: 3;
+ }
+ 
+ .okr-detailed-field-ctr div:hover {
+     border: 1px solid var(--clr-lightgray-navigation);
+     border-radius: 4px;
+ }
+ 
+ .okr-detailed-comment-section-header {
+     padding: 1rem 0rem;
+     padding-bottom: 0.45rem;
+     margin-bottom: 1.5rem;
+     display: flex;
+     gap: 0.5rem;
+     border-bottom: 3px solid var(--clr-whitesmoke);
+ }
+ 
+ .okr-detailed-comment-img-ctr {
+     background-color: var(--clr-lightergray-activestate);
+ }
+ 
+ .comment-svg {
+     color: var(--clr-txt-accent2);
+ }
+ 
+ .okr-detailed-comment-section-header span {
+     font-size: 1.15rem;
+     color: var(--clr-txt-accent3);
+ }
+ 
+ .okr-detailed-comments-ctr {
+     display: flex;
+     flex-direction: column;
+     gap: 2rem;
+     border-bottom: 1px solid var(--clr-lightergray-activestate);
+     padding-bottom: 1.5rem;
+ }
+ 
+ .okr-detailed-comment-input-field {
+     margin-top: 3rem;
+     position: relative;
+ }
+ 
+ .okr-detailed-comment-input-field .okr-detailed-comment-input {
+     display: block;
+     border: 1px solid var(--clr-lightergray-activestate);
+     color: var(--clr-txt-accent3);
+     padding: 0.35rem;
+     border-radius: 4px;
+     height: 4.5rem;
+ }
+ 
+ .okr-detailed-comment-input-placeholder {
+     color: var(--clr-lightgray-navigation);
+     position: absolute;
+     top: 7.5px;
+     left: 7.5px;
+ }
+ 
+ .okr-detailed-comment-input:hover {
+     border: 1px solid var(--clr-gray);
+     border-radius: 4px;
+ }
+ 
+ .okr-detailed-comment-input:focus {
+     border: 1px solid var(--clr-linkblue-hovered);
+     border-radius: 4px;
+ }
+ 
+ .okr-detailed-comment-input-field svg {
+     position: absolute;
+     bottom: 7.5px;
+     right: 7.5px;
+     color: var(--clr-lightgray-navigation);
+ }
+ 

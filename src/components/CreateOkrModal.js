@@ -37,7 +37,7 @@ export function CreateOkrModal(props) {
                 usersAndOrTeamsArray.push({
                   value: userOrTeam.teamName.toLowerCase(),
                   label: userOrTeam.teamName,
-                  id: userOrTeam._ownerId,
+                  id: userOrTeam._id,
                 });
               }
             }

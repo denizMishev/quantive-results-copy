@@ -12,7 +12,7 @@ import * as teamsService from "../services/teamsService";
 import * as okrService from "../services/okrService";
 
 export function Home() {
-  const { okrs } = useContext(OkrContext);
+  // const { okrs } = useContext(OkrContext);
   const { user } = useContext(AuthContext);
 
   const [showCreateOkrModal, setShowCreateOkrModal] = useState(false);
@@ -76,7 +76,7 @@ export function Home() {
       setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
     });
     // eslint-disable-next-line
-  }, []);
+  }, [showCreateOkrModal]);
 
   return (
     // <section id="homeSection">
@@ -147,13 +147,15 @@ export function Home() {
             >
               <span>Managing:</span>
               <ul>
-                <li>
-                  {employeeManagedTeams.length > 0
-                    ? employeeManagedTeams.map((team) => (
-                        <TeamChip key={team._id} currentTeam={team} />
-                      ))
-                    : ""}
-                </li>
+                {employeeManagedTeams.length > 0
+                  ? employeeManagedTeams.map((team) => (
+                      <TeamChip
+                        key={team._id}
+                        currentTeam={team}
+                        title={team.teamName}
+                      />
+                    ))
+                  : ""}
               </ul>
             </div>
             <div
@@ -165,7 +167,11 @@ export function Home() {
                 <li>
                   {employeeTeams.length > 0
                     ? employeeTeams.map((team) => (
-                        <TeamChip key={team._id} currentTeam={team} />
+                        <TeamChip
+                          key={team._id}
+                          currentTeam={team}
+                          title={team.teamName}
+                        />
                       ))
                     : ""}
                 </li>
@@ -191,7 +197,9 @@ export function Home() {
                 </div>
               </li>
               {employeeOwnedOkrs.length > 0 ? (
-                okrs.map((okr) => <Okr key={okr._id} currentOkr={okr} />)
+                employeeOwnedOkrs.map((okr) => (
+                  <Okr key={okr._id} currentOkr={okr} />
+                ))
               ) : (
                 <span>You don't have any OKRs assigned to you yet.</span>
               )}

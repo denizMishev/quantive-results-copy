@@ -16,7 +16,7 @@ export function Okr({ currentOkr }) {
             />
           </svg>
         </div>
-        <Link href="">
+        <Link to={`/okrs/${currentOkr._id}`}>
           <span>{currentOkr.okrTitle}</span>
         </Link>
       </div>
