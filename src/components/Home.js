@@ -201,7 +201,16 @@ export function Home() {
                   <Okr key={okr._id} currentOkr={okr} />
                 ))
               ) : (
-                <span>You don't have any OKRs assigned to you yet.</span>
+                <li id="myokrs-no-content">
+                  <button
+                    onClick={() => setShowCreateOkrModal(true)}
+                    className="create-button"
+                  >
+                    Create OKR
+                  </button>
+                  <h3>Get inspiration from OKR templates</h3>
+                  <h3>Brainstorm your organization's vision and discuss it.</h3>
+                </li>
               )}
             </ul>
           </div>

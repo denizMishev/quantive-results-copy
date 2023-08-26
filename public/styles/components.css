@@ -107,7 +107,7 @@
 /* OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR */
 
 .myokrs-okr {
-    border-top: 4px solid var(--clr-whitesmoke-teamchip);
+    border-top: 3px solid var(--clr-whitesmoke-teamchip);
     padding: 1rem 0;
 }
 

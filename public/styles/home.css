@@ -103,5 +103,34 @@
     visibility: hidden;
 }
 
+#myokrs-no-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid var(--clr-whitesmoke-teamchip);
+    padding: 2rem;
+}
+
+#myokrs-no-content > button {
+    background-color: var(--clr-linkblue);
+    color: var(--clr-white);
+    padding: 0.5rem 1.35rem;
+    border-radius: 32px;
+    font-size: var(--fs-088);
+    font-weight: bold;
+    
+}
+
+#myokrs-no-content > button:hover {
+    background-color: var(--clr-linkblue-hovered);
+}
+
+#myokrs-no-content h3 {
+    margin-top: 1.35rem;
+    font-size: var(--fs-088);
+    color: var(--clr-txt-accent1);
+}
+
+
 /* My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs My OKRs */
 
