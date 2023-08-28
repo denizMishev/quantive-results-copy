@@ -8,7 +8,6 @@ import { PrivateGuard } from "./components/common/PrivateGuard";
 import { Navbar } from "./components/Navbar";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
-// import { CreateOkr } from "./components/CreateOkrModal";
 import { EditOkr } from "./components/EditOkr";
 import { Home } from "./components/Home";
 import { OkrDetails } from "./components/OkrDetails";

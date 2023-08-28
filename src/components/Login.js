@@ -74,11 +74,11 @@ export function Login() {
         </div>
         <div className="login-form-input-fields-ctr">
           <div className="email-ctr">
-            <label for="email">Email*</label>
+            <label htmlFor="email">Email*</label>
             <input name="email" type="email" />
           </div>
           <div className="password-ctr">
-            <label for="password">Password*</label>
+            <label htmlFor="password">Password*</label>
             <input name="password" type="password" />
           </div>
         </div>

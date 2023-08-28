@@ -38,6 +38,7 @@
     overflow: auto;
     max-height: 150px;
     background-color: #fff;
+    z-index: 1;
 }
 
 .dropdown-item {
@@ -84,4 +85,8 @@
 .dropdown-tag-close {
     display: flex;
     align-items: center;
+}
+
+.second-dropdown-menu-corrector {
+    margin-bottom: -0.40rem;
 }

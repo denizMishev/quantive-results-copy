@@ -90,3 +90,36 @@
     color: var(--clr-txt-accent2);
     font-size: var(--fs-088);
 }
+
+.teams-no-content {
+    text-align: center;
+    width: 30rem;
+    margin-inline: auto;
+    margin-top: 3.5rem;
+}
+
+.teams-no-content p:nth-of-type(1) {
+    font-size: var(--fs-135);
+    color: var(--clr-txt-accent3);
+    margin-bottom: 0.25rem;
+}
+
+.teams-no-content p:nth-of-type(2) {
+    color: var(--clr-txt-accent1);
+    margin-bottom: 1.5rem;
+    font-size: var(--fs-088);
+}
+
+.teams-no-content button {
+    background-color: var(--clr-linkblue);
+    color: var(--clr-white);
+    border-radius: 32px;
+    padding: 0.5rem 1.35rem;
+    font-size: var(--fs-088);
+}
+
+.teams-no-content button:hover {
+    background-color: var(--clr-linkblue-hovered);
+}
+
+

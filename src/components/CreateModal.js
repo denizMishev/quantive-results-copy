@@ -1,22 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 
 import { OkrContext } from "../contexts/OkrContext";
+import { TeamContext } from "../contexts/TeamContext";
+
 import { Dropdown } from "./Dropdown";
 
 import * as okrService from "../services/okrService";
 import * as userService from "../services/userService";
 import * as teamsService from "../services/teamsService";
 
-export function CreateOkrModal(props) {
+export function CreateModal(props) {
   const { okrAdd } = useContext(OkrContext);
+  const { teamAdd } = useContext(TeamContext);
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
-  let owners = "";
+  let users = "";
+  let manager = "";
 
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
       (usersAndTeamsRequests) => {
         let usersAndOrTeamsArray = [];
-        if (usersAndTeamsRequests[1].code === 404) {
+        if (usersAndTeamsRequests[1].code === 404 || props.type === "team") {
           for (const user of usersAndTeamsRequests[0]) {
             usersAndOrTeamsArray.push({
               value: user.username.toLowerCase(),
@@ -46,6 +50,7 @@ export function CreateOkrModal(props) {
         setDropdownUsersAndTeams(usersAndOrTeamsArray);
       }
     );
+    // eslint-disable-next-line
   }, []);
 
   const closeOnEscapeKeyDown = (e) => {
@@ -69,48 +74,38 @@ export function CreateOkrModal(props) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const okrData = Object.fromEntries(new FormData(e.target));
-    okrData.okrOwners = owners.map((x) => x.label);
-    okrData.okrOwnersIds = owners.map((x) => x.id);
+    const createFormData = Object.fromEntries(new FormData(e.target));
 
-    okrService.create(okrData).then((newOkr) => {
-      okrAdd(newOkr);
-      props.onClose();
-    });
+    if (props.type === "okr") {
+      createFormData.okrOwners = users.map((x) => x.label);
+      createFormData.okrOwnersIds = users.map((x) => x.id);
+
+      okrService.create(createFormData).then((newOkr) => {
+        okrAdd(newOkr);
+        props.onClose();
+      });
+    } else {
+      createFormData.teamManager = {
+        managerName: manager[0].label,
+        managerId: manager[0].id,
+      };
+      createFormData.teamMembers = users.map((user) => {
+        return { memberName: user.label, memberId: user.id };
+      });
+
+      teamsService.create(createFormData).then((newTeam) => {
+        teamAdd(newTeam);
+        props.onClose();
+      });
+    }
   };
 
   return (
-    // <section>
-    //   <form id="createForm" onSubmit={onSubmit}>
-    //     <div>
-    //       <h1>Create OKR</h1>
-    //     </div>
-    //     <div>
-    //       <i className="fa-solid fa-plus"></i>
-    //       <label htmlFor="okrTitle">OKR Title</label>
-    //       <input
-    //         name="okrTitle"
-    //         type="okrTitle"
-    //         placeholder="Enter your OKR Title here"
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor="okrTitle">Owner</label>
-    //       <Dropdown
-    //         isSearchable
-    //         isMulti
-    //         placeHolder="Select owner/s for your OKR"
-    //         options={dropdownUsersAndTeams}
-    //         onChange={(value) => (owners = value)}
-    //       ></Dropdown>
-    //     </div>
-    //     <div>
-    //       <button className="createBtn">Press Enter to submit</button>
-    //     </div>
-    //   </form>
-    // </section>
     <main id="main" className="main-content">
-      <section className="create-okr-ctr">
+      <section
+        className="create-okr-ctr"
+        style={props.type === "team" ? { top: "-16.5rem" } : {}}
+      >
         <form
           onSubmit={onSubmit}
           className="create-okr-form centered-full-screen"
@@ -128,39 +123,73 @@ export function CreateOkrModal(props) {
                 />
               </svg>
             </div>
-            <span>Create objective</span>
+            <span>Create {props.type === "okr" ? "Objective" : "Team"}</span>
             <span>All required fields are marked with an asterisk (*).</span>
           </div>
           <div className="create-okr-form-input-fields-ctr">
             <div className="create-okr-form-input-ctr">
-              <label htmlFor="">Title*</label>
+              <label htmlFor="">
+                {props.type === "okr" ? "Title*" : "Name"}
+              </label>
               <input
-                name="okrTitle"
+                name={props.type === "okr" ? "okrTitle" : "teamName"}
                 type="text"
-                placeholder="Enter your OKR's title"
+                placeholder={
+                  props.type === "okr"
+                    ? "Enter your OKR's title"
+                    : "Enter your team's name"
+                }
               />
             </div>
+            {props.type === "team" ? (
+              <div className="create-okr-form-input-ctr second-dropdown-menu-corrector">
+                <label htmlFor="">Manager*</label>
+                <Dropdown
+                  isSearchable
+                  isMulti
+                  placeHolder="Select a manager for your team"
+                  options={dropdownUsersAndTeams}
+                  onChange={(value) => (manager = value)}
+                ></Dropdown>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="create-okr-form-input-ctr">
-              <label htmlFor="">Owner*</label>
+              <label htmlFor="">
+                {props.type === "okr" ? "Owner*" : "Members*"}
+              </label>
               <Dropdown
                 isSearchable
                 isMulti
-                placeHolder="Select owner/s for your OKR"
+                placeHolder={
+                  props.type === "okr"
+                    ? "Select owner/s for your OKR"
+                    : "Select members for your team"
+                }
                 options={dropdownUsersAndTeams}
-                onChange={(value) => (owners = value)}
+                onChange={(value) => (users = value)}
               ></Dropdown>
             </div>
             <div className="create-okr-form-input-ctr">
               <label htmlFor="">Description*</label>
               <input
-                name="okrDescription"
+                name={
+                  props.type === "okr" ? "okrDescription" : "teamDescription"
+                }
                 type="text"
-                placeholder="Enter your OKR's description"
+                placeholder={
+                  props.type === "okr"
+                    ? "Enter your OKR's description"
+                    : "Enter your team's description"
+                }
               />
             </div>
           </div>
           <div className="create-okr-form-btns-ctr">
-            <button type="submit">Create OKR</button>
+            <button type="submit">
+              Create {props.type === "okr" ? "OKR" : "Team"}
+            </button>
             <button onClick={props.onClose}>Cancel</button>
           </div>
         </form>

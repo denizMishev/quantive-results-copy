@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Okr } from "./Okr";
 import { TeamChip } from "./team-chip";
-import { CreateOkrModal } from "./CreateOkrModal";
+import { CreateModal } from "./CreateModal";
 
 import { OkrContext } from "../contexts/OkrContext";
 import { AuthContext } from "../contexts/AuthContext";
@@ -103,7 +103,8 @@ export function Home() {
               >
                 Create OKR
               </button>
-              <CreateOkrModal
+              <CreateModal
+                type="okr"
                 onClose={() => setShowCreateOkrModal(false)}
                 show={showCreateOkrModal}
               />
@@ -153,6 +154,7 @@ export function Home() {
                         key={team._id}
                         currentTeam={team}
                         title={team.teamName}
+                        type="team"
                       />
                     ))
                   : ""}
@@ -171,6 +173,7 @@ export function Home() {
                           key={team._id}
                           currentTeam={team}
                           title={team.teamName}
+                          type="team"
                         />
                       ))
                     : ""}
