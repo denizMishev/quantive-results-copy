@@ -194,14 +194,8 @@ export function OkrDetails() {
             <div className="okr-detailed-fields">
               <div className="okr-detailed-field-ctr">
                 <label htmlFor="">Owner</label>
-                {/* <input type="text" placeholder="-" /> */}
-                <div className="welcome-banner-txt-ctr-teams-ctr">
+                <div className="welcome-banner-txt-ctr-teams-ctr okr-detailed-owners-field">
                   <ul>
-                    {/* {okr.okrOwners.length > 0
-                    ? okr.okrOwners.map((okrOwner) => (
-                      <TeamChip key={okrOwner._id} currentTeam={okrOwner} />
-                      ))
-                    : ""} */}
                     {okr.okrOwners?.map((okrOwner, index) => (
                       <TeamChip
                         key={okr.okrOwnersIds[index]}
@@ -363,78 +357,6 @@ export function OkrDetails() {
                   </div>
                 </li>
               </ul>
-              {/* <div className="okr-detailed-comment">
-              <div className="okr-detailed-comment-user-info">
-              <div className="okr-detailed-user-box">
-              <div id="okr-detailed-img-ctr" className="rounded-img-ctr">
-              <svg
-              className="rounded-img"
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              viewBox="0 0 576 512"
-              >
-              <path
-              fill="currentColor"
-              d="M528 160V416c0 8.8-7.2 16-16 16H320c0-44.2-35.8-80-80-80H176c-44.2 0-80 35.8-80 80H64c-8.8 0-16-7.2-16-16V160H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM272 256a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zm104-48c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24H376zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24H376z"
-              />
-              </svg>
-              </div>
-              <div className="okr-detailed-user-and-date">
-              <span>OKR Owner</span>
-              <span>August 12, 2023, 19:31</span>
-              </div>
-                </div>
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
-                >
-                <path
-                fill="currentColor"
-                d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"
-                />
-                </svg>
-                </div>
-                <div className="okr-detailed-comment-content">
-                <p>Some good comment here to be seen ..</p>
-                </div>
-                </div>
-                <div className="okr-detailed-comment">
-                <div className="okr-detailed-comment-user-info">
-                <div className="okr-detailed-user-box">
-                  <div id="okr-detailed-img-ctr" className="rounded-img-ctr">
-                  <svg
-                  className="rounded-img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 576 512"
-                  >
-                  <path
-                  fill="currentColor"
-                  d="M528 160V416c0 8.8-7.2 16-16 16H320c0-44.2-35.8-80-80-80H176c-44.2 0-80 35.8-80 80H64c-8.8 0-16-7.2-16-16V160H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM272 256a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zm104-48c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24H376zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24H376z"
-                  />
-                  </svg>
-                  </div>
-                  <div className="okr-detailed-user-and-date">
-                  <span>OKR Owner</span>
-                  <span>August 12, 2023, 19:31</span>
-                  </div>
-                  </div>
-                  <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                  >
-                  <path
-                  fill="currentColor"
-                  d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"
-                  />
-                  </svg>
-                  </div>
-                  <div className="okr-detailed-comment-content">
-                  <p>Some good comment here to be seen ..</p>
-                  </div>
-                </div> */}
             </div>
             <div className="okr-detailed-comment-input-field">
               <form onSubmit={addCommentHandler}>

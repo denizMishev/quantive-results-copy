@@ -95,7 +95,7 @@ export function Teams() {
                       </div>
                     </div>
                     <div className="myokrs-okr-owner-ctr teams-team-description">
-                      <p>John Doe</p>
+                      <p>{team.teamDescription}</p>
                     </div>
                   </li>
                 ))}
@@ -106,7 +106,12 @@ export function Teams() {
                 <p>
                   When there are teams in your account, they will be shown here.
                 </p>
-                <button className="create-button">Create Team</button>
+                <button
+                  onClick={() => setShowCreateTeamsModal(true)}
+                  className="create-button"
+                >
+                  Create Team
+                </button>
               </div>
             )}
           </div>

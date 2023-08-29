@@ -20,9 +20,10 @@ export function Okr({ currentOkr }) {
           <span>{currentOkr.okrTitle}</span>
         </Link>
       </div>
-      <div className="myokrs-okr-owner-ctr">
+      {/* <div className="myokrs-okr-owner-ctr">
         <span>{currentOkr.okrOwners}</span>
-      </div>
+        <span>2</span>
+      </div> */}
       <div className="myokrs-okr-description-ctr">
         <span>{currentOkr.okrDescription}</span>
       </div>

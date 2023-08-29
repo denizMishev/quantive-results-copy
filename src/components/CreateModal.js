@@ -26,6 +26,7 @@ export function CreateModal(props) {
               value: user.username.toLowerCase(),
               label: user.username,
               id: user._ownerId,
+              type: "employee",
             });
           }
         } else {
@@ -36,12 +37,14 @@ export function CreateModal(props) {
                   value: userOrTeam.username.toLowerCase(),
                   label: userOrTeam.username,
                   id: userOrTeam._ownerId,
+                  type: "employee",
                 });
               } else if (userOrTeam.teamName) {
                 usersAndOrTeamsArray.push({
                   value: userOrTeam.teamName.toLowerCase(),
                   label: userOrTeam.teamName,
                   id: userOrTeam._id,
+                  type: "team",
                 });
               }
             }
@@ -77,8 +80,9 @@ export function CreateModal(props) {
     const createFormData = Object.fromEntries(new FormData(e.target));
 
     if (props.type === "okr") {
-      createFormData.okrOwners = users.map((x) => x.label);
-      createFormData.okrOwnersIds = users.map((x) => x.id);
+      createFormData.okrOwners = users.map((user) => {
+        return { okrOwner: user.label, okrOwnerId: user.id, type: user.type };
+      });
 
       okrService.create(createFormData).then((newOkr) => {
         okrAdd(newOkr);
@@ -88,9 +92,10 @@ export function CreateModal(props) {
       createFormData.teamManager = {
         managerName: manager[0].label,
         managerId: manager[0].id,
+        type: manager[0].type,
       };
       createFormData.teamMembers = users.map((user) => {
-        return { memberName: user.label, memberId: user.id };
+        return { memberName: user.label, memberId: user.id, type: user.type };
       });
 
       teamsService.create(createFormData).then((newTeam) => {

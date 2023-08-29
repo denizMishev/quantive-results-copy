@@ -10,6 +10,10 @@
     padding-right: 6px;
 }
 
+.team-chip:hover {
+    background-color: var(--clr-lightergray-activestate);
+}
+
 .team-chip h6 {
     white-space: nowrap;
     overflow: hidden;
@@ -52,7 +56,7 @@
     border: 1px solid hsla(216, 72%, 52%, 1);
     border-radius: 16px;
     cursor: pointer;
-
+    white-space: nowrap;
 }   
 
 .create-button:hover {

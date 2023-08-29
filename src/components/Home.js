@@ -69,9 +69,14 @@ export function Home() {
   useEffect(() => {
     okrService.getAll().then((allOkrs) => {
       for (const okr of allOkrs) {
-        if (okr.okrOwnersIds.includes(user._id)) {
-          employeeOwnedOkrsArray.push(okr);
+        for (const okrOwner of okr.okrOwners) {
+          if (okrOwner.okrOwnerId === user._id) {
+            employeeOwnedOkrsArray.push(okr);
+          }
         }
+        // if (okr.okrOwnersIds.includes(user._id)) {
+        // employeeOwnedOkrsArray.push(okr);
+        // }
       }
       setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
     });
@@ -166,18 +171,16 @@ export function Home() {
             >
               <span>Member of:</span>
               <ul>
-                <li>
-                  {employeeTeams.length > 0
-                    ? employeeTeams.map((team) => (
-                        <TeamChip
-                          key={team._id}
-                          currentTeam={team}
-                          title={team.teamName}
-                          type="team"
-                        />
-                      ))
-                    : ""}
-                </li>
+                {employeeTeams.length > 0
+                  ? employeeTeams.map((team) => (
+                      <TeamChip
+                        key={team._id}
+                        currentTeam={team}
+                        title={team.teamName}
+                        type="team"
+                      />
+                    ))
+                  : ""}
               </ul>
             </div>
           </div>
@@ -189,9 +192,9 @@ export function Home() {
                 <div className="">
                   <span>My OKRs</span>
                 </div>
-                <div className="">
+                {/* <div className="">
                   <span>Owners</span>
-                </div>
+                </div> */}
                 <div className="">
                   <span>Description</span>
                 </div>
