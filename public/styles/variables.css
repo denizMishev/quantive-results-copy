@@ -19,6 +19,8 @@ html {
     --clr-linkblue: hsla(220, 100%, 50%, 1);
     --clr-linkblue-hovered: hsla(220, 100%, 40%, 1);
     --clr-junglegreen-hoverbtn: hsla(163, 61%, 42%, 1);
+    --clr-red-delete-button: hsla(2, 60%, 55%, 1);
+    --clr-red-delete-button-hovered: hsla(2, 60%, 45%, 1);
 
     --clr-txt-accent1: hsla(218, 20%, 55%, 1);
     --clr-txt-accent2: hsla(209, 18%, 32%, 1);
@@ -32,6 +34,7 @@ html {
     --fs-085: 0.85rem;
     --fs-088: 0.88rem;
     --fs-090: 0.90rem;
+    --fs-105: 1.05rem;
     --fs-115: 1.15rem;
     --fs-125: 1.25rem;
     --fs-135: 1.35rem;

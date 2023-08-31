@@ -28,6 +28,17 @@
      padding: 0.8rem 2rem;
      border-bottom: 1.5px solid var(--clr-lightergray-activestate);
  }
+
+.okr-detailed-topbar-user-action-icons {
+    display: inline-block;
+}
+
+.okr-detailed-topbar-link-home {
+    padding: 0rem;
+    margin: 0rem;
+    width: 0;
+    height: 0;
+}
  
  .okr-detailed-topbar svg {
      font-size: var(--fs-125);
@@ -38,11 +49,10 @@
  .okr-detailed-topbar div svg {
      font-size: unset;
  }
- 
- .okr-detailed-topbar div svg:nth-of-type(1) {
-     padding-right: 1.5rem;
+
+ .okr-detailed-topbar > div > div:nth-of-type(1) {
+    padding-right: 1.5rem;
  }
- 
  
  .okr-detailed-topbar svg:hover {
      color: var(--clr-lightgray-navigation);
@@ -100,7 +110,7 @@
  }
  
  .okr-detailed-field-ctr > div {
-    padding-block: 0.3rem;
+    padding-block: 0.23rem;
  }
  
  .okr-detailed-field-ctr > div:hover, .okr-detailed-field-ctr input:hover {
@@ -135,12 +145,30 @@
      flex-direction: column;
      gap: 2rem;
      border-bottom: 1px solid var(--clr-lightergray-activestate);
-     padding-bottom: 1.5rem;
+     padding-bottom: 0.5rem;
  }
+
+ .okr-detailed-comments-ctr li {
+    margin-bottom: 1rem;
+}
  
  .okr-detailed-comment-input-field {
      margin-top: 3rem;
      position: relative;
+ }
+
+ .okr-detailed-comment-input-text-area {
+    border: 1px solid var(--clr-lightergray-activestate);
+    width: 100%;
+    height: 5rem;
+    padding: 0.5rem 0.65rem;
+    font-size: var(--fs-088);
+    color: var(--clr-txt-accent2);
+    overflow-wrap: break-word;
+ }
+
+ .okr-detailed-comment-input-text-area::-webkit-scrollbar {
+    display: none;
  }
  
  .okr-detailed-comment-input-field .okr-detailed-comment-input {
@@ -171,8 +199,7 @@
  
  .okr-detailed-comment-input-field svg {
      position: absolute;
-     bottom: 7.5px;
+     bottom: 10.5px;
      right: 7.5px;
      color: var(--clr-lightgray-navigation);
  }
- 
