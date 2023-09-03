@@ -33,8 +33,6 @@ export function UpdateOrDeleteModal(props) {
     return null;
   }
 
-  console.log(targetId, "tuk");
-
   const actionHandler = () => {
     if (props.target === "OKR") {
       okrService.remove(targetId).then(() => {

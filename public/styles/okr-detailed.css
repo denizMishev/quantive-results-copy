@@ -25,7 +25,7 @@
      width: 100%;
      display: flex;
      justify-content: space-between;
-     padding: 0.8rem 2rem;
+     padding: 0.55rem 2rem;
      border-bottom: 1.5px solid var(--clr-lightergray-activestate);
  }
 
@@ -65,7 +65,7 @@
      gap:0.2rem;
  }
  
- .okr-detailed-heading-ctr > div {
+ .okr-detailed-heading-ctr > .okr-svg-ctr {
      width: 20px;
      height: 20px;
  }

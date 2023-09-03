@@ -1,0 +1,63 @@
+.teams-detailed-img-ctr {
+    width: 26px;
+    height: 26px;
+    margin-right: 0.3rem;
+}
+
+.teams-detailed-main-ctr {
+    border-bottom: 2px solid var(--clr-lightergray-activestate);
+}
+
+.team-detailed-team-achievements-ctr {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    width: 70%;
+    text-align: left;
+}
+
+.team-achievements-p {
+    color: var(--clr-txt-accent2);
+}
+
+.team-achievements-okrs-owned-ctr {
+    margin-top: 1.25rem;
+    border: 1px solid var(--clr-lightergray-activestate);
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.1);
+    padding: 0.8rem;
+    
+}
+
+.okrs-owned-header {
+    display: flex;
+}
+
+.okrs-owned-header > div {
+    margin-right: 0.3rem;
+}
+
+.okrs-owned-header-title {
+    font-size: var(--fs-088);
+    font-weight: bold;
+    color: var(--clr-txt-accent3);
+}
+
+.okrs-owned-number-ctr {
+    font-size: var(--fs-180);
+    color: var(--clr-txt-accent3);
+    font-weight: bold;
+    margin-top: 0.8rem;
+}
+
+.okrs-owned-percentage-ctr {
+    margin-top: 0.8rem;   
+}
+
+.okrs-owned-percentage-span{
+    color: var(--clr-txt-accent2);
+    font-size: var(--fs-080);
+}
+

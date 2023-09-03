@@ -1,11 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import { Okr } from "./Okr";
 import { TeamChip } from "./team-chip";
 import { CreateModal } from "./CreateModal";
 
-import { OkrContext } from "../contexts/OkrContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 import * as teamsService from "../services/teamsService";
@@ -74,9 +72,6 @@ export function Home() {
             employeeOwnedOkrsArray.push(okr);
           }
         }
-        // if (okr.okrOwnersIds.includes(user._id)) {
-        // employeeOwnedOkrsArray.push(okr);
-        // }
       }
       setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
     });
