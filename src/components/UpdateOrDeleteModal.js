@@ -6,6 +6,9 @@ import * as okrService from "../services/okrService";
 import * as teamsService from "../services/teamsService";
 import * as commentService from "../services/commentService";
 
+import { deletedOwnerOkrCleaner } from "../util/deletedOwnerOkrCleaner";
+import { deleteCommentsOfDeletedOkr } from "../util/deleteCommentsOfDeletedOkr";
+
 import { TeamContext } from "../contexts/TeamContext";
 
 export function UpdateOrDeleteModal(props) {
@@ -38,12 +41,14 @@ export function UpdateOrDeleteModal(props) {
       okrService.remove(targetId).then(() => {
         okrRemove(targetId);
         navigate("/home");
+        deleteCommentsOfDeletedOkr(targetId);
       });
     }
     if (props.target === "team") {
       teamsService.remove(targetId).then(() => {
         teamRemove(targetId);
         navigate("/home");
+        deletedOwnerOkrCleaner(targetId);
       });
     }
     if (props.target === "comment") {

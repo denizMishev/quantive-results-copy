@@ -2,6 +2,8 @@ import * as request from "./requester";
 
 const baseUrl = "http://localhost:3030/data/comments";
 
+export const getAll = () => request.get(baseUrl);
+
 export const create = (okrId, comment) =>
   request.post(baseUrl, { okrId, text: comment });
 
