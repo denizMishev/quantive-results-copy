@@ -1,0 +1,25 @@
+.okrs-page-filter-btn-ctr {
+    margin-right: 72%;
+}
+
+.okrs-page-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: var(--fs-075);
+    border: 1px solid var(--clr-lightergray-activestate);
+    border-radius: 4px;
+    height: 1.6rem;
+    width: 6.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.okrs-page-filter-btn > svg {
+    display: block;
+    margin-left: 0.5rem;
+}
+
+.okrs-page-filter-btn:hover {
+    border: 1px solid var(--clr-lightgray-navigation);
+}

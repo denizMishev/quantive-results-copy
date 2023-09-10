@@ -11,6 +11,6 @@
 @import "okr-detailed.css";
 @import "teams.css";
 @import "teams-detailed.css";
-/* @import "employees.css"; */
-/* @import "employeedetails.css"; */
-/* @import "okr.css"; */
+@import "employees.css";
+@import "okrs-page.css";
+@import "filtering-modal.css"

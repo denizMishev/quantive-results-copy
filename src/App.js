@@ -12,12 +12,13 @@ import { EditOkr } from "./components/EditOkr";
 import { Home } from "./components/Home";
 import { OkrDetails } from "./components/OkrDetails";
 import { Teams } from "./components/Teams";
-import { Employees } from "./components/Employees";
 import { CreateTeam } from "./components/CreateTeam";
 import { TeamDetails } from "./components/TeamDetails";
-import { EmployeeDetails } from "./components/EmployeeDetails";
 import { EditTeam } from "./components/EditTeam";
 import { LandingPage } from "./components/LandingPage";
+import { EmployeeDetails } from "./components/EmployeeDetails";
+import { Employees } from "./components/Employees";
+import { OkrsPage } from "./components/OkrsPage";
 import Logout from "./components/Logout";
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
           <TeamProvider>
             <Routes>
               <Route element={<PrivateGuard />}>
-                {/* <Route path="/create" element={<CreateOkr />}></Route> */}
+                <Route path="/okrsPage" element={<OkrsPage />}></Route>
                 <Route path="/okrs/:okrId" element={<OkrDetails />}></Route>
                 <Route path="/okrs/:okrId/edit" element={<EditOkr />}></Route>
                 <Route path="/teams" element={<Teams />}></Route>

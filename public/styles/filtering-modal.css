@@ -1,0 +1,45 @@
+.okrs-page-filter-modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.okrs-page-filter-modal-form .filter-form-heading-ctr {
+    font-size: var(--fs-125);
+    columns: var(--clr-txt-accent3);
+    font-weight: bold;
+    margin-bottom: 1.25rem;
+}
+
+.filter-modal-filter-ctr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-modal-filter-ctr > .filter-modal-filter-label {
+    width: 6rem;
+    flex-shrink: 0;
+    color: var(--clr-txt-accent1);
+    font-size: var(--fs-080);
+}
+
+.filter-modal-btns-ctr {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.45rem;
+}
+
+.filter-modal-btns-ctr > .filter-modal-show-results-btn {
+    background-color: var(--clr-linkblue);
+    color: white;
+    height: 2.5rem;
+    border-radius: 32px;
+    font-size: var(--fs-088);
+}
+
+.filter-modal-btns-ctr > .filter-modal-cancel-btn {
+    height: 2.5rem;
+    border-radius: 32px;
+    font-size: var(--fs-088);
+}
+

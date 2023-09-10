@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 
-export function Okr({ currentOkr }) {
+export function Okr({ currentOkr, page }) {
   return (
-    <li className="myokrs-okr">
+    <li
+      style={
+        page === "okrsPage" ? { "grid-auto-columns": "1fr 1fr 1fr 0.5fr" } : {}
+      }
+      id="okrs-list-li"
+      className="myokrs-okr"
+    >
       <div className="myokrs-okr-title-ctr">
         <div className="myokrs-svg-ctr">
           <svg
@@ -20,10 +26,15 @@ export function Okr({ currentOkr }) {
           <span>{currentOkr.okrTitle}</span>
         </Link>
       </div>
-      {/* <div className="myokrs-okr-owner-ctr">
-        <span>{currentOkr.okrOwners}</span>
-        <span>2</span>
-      </div> */}
+      {page === "okrsPage" ? (
+        <div className="myokrs-okr-owner-ctr">
+          <span>
+            {currentOkr.okrOwners.map((owner) => owner.okrOwner).join(", ")}
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="myokrs-okr-description-ctr">
         <span>{currentOkr.okrDescription}</span>
       </div>

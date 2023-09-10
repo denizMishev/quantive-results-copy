@@ -1,25 +1,3 @@
-/* #homeSection {
-    width: auto;
-    margin-left: 180px;
-    padding-right: 15px;
-    padding-top: 7em;
-    justify-content: right;
-    padding-left: 15px;
-    position: relative;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-#home-page {
-    background-color: transparent;
-    box-shadow: 0px 0px 40px 0px;
-    overflow: hidden;
-    border-radius: 10px;
-    padding: 55px;
-    height: auto;
-    width: auto;
-} */
-
 /* Welcome banner  Welcome banner Welcome banner Welcome banner Welcome banner */
 
 .home-welcome-banner-ctr {
@@ -52,7 +30,6 @@
 
 .welcome-banner-txt-ctr-teams-ctr {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
 }
@@ -82,14 +59,12 @@
     padding: 1.85rem 4.5rem;
 }
 
-.myokrs-grid-content li{
+#okrs-list-li-header, #okrs-list-li {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
     grid-auto-columns: 1fr 3fr 0.7fr;
 }
-
-
 
 .myokrs-header {
     margin-bottom: 1.65rem;
@@ -120,7 +95,8 @@
     border-radius: 32px;
     font-size: var(--fs-088);
     font-weight: bold;
-    
+    width: 8%;
+    margin-inline: auto;
 }
 
 #myokrs-no-content > button:hover {

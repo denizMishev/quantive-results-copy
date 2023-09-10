@@ -1,15 +1,15 @@
-#employees-main {
-    width: 25%;
-    height: 25%;
-    background-color: white;
-    margin: auto;
-    border: 5px solid lightgray;
-    font-family: 'IBM Plex Mono', monospace;
+.employees-employee-title-ctr {
+    display: flex;
 }
 
-#employees-container-list-items {
-    display: block;
-    border: 5px solid lightgray;
-    margin: 8px;
-    padding: 8px;
+.employees-title-ctr {
+    gap: 0.85rem;
+    flex-shrink: 0;
+}
+
+#employees-list-li-header, #employees-list-li {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-auto-columns: 1fr 3fr 0.7fr;
 }

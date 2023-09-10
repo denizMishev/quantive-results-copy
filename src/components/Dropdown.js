@@ -44,6 +44,7 @@ export function Dropdown({
   const handleInputClick = (e) => {
     e.stopPropagation();
     setShowMenu(!showMenu);
+    console.log(showMenu);
   };
 
   const CloseIcon = () => {

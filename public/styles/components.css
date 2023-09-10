@@ -31,6 +31,30 @@
     margin-right: 4px;
 }
 
+.team-chip-v2 {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--fs-075);
+    color: var(--clr-txt-accent1);
+    border-radius: 16px;
+    padding-right: 6px;
+}
+
+.team-chip-v2:hover {
+    background-color: unset;
+    color: var(--clr-txt-accent3);
+} 
+
+.team-chip-svg-v2{
+    background-color: var(--clr-navy-navigation);
+    color: var(--clr-white);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 4px;
+    margin-right: 4px;
+}
+
 /* Team chip */ /* Team chip */ /* Team chip */ /* Team chip */
 
 /* Section header */ /* Section header */ /* Section header */ /* Section header */

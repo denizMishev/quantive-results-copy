@@ -58,7 +58,10 @@ export function Teams() {
           <div className="teams-ctr ">
             {teams.length > 0 ? (
               <ul className="myokrs-grid-content teams-grid-content">
-                <li className="myokrs-header teams-header">
+                <li
+                  id="teams-list-li-header"
+                  className="myokrs-header teams-header"
+                >
                   <div className="">
                     <span>Name</span>
                   </div>
@@ -67,7 +70,11 @@ export function Teams() {
                   </div>
                 </li>
                 {teams.map((team) => (
-                  <li key={team._id} className="myokrs-okr teams-list-team">
+                  <li
+                    id="teams-list-li"
+                    key={team._id}
+                    className="myokrs-okr teams-list-team"
+                  >
                     <div className="myokrs-okr-title-ctr teams-team-title-members-ctr">
                       <div className="welcome-banner-img-ctr teams-team-img-ctr">
                         <svg

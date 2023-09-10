@@ -7,4 +7,8 @@ export const addNewUser = (email, username) =>
 
 export const getAllUsers = () => request.get(baseUrl);
 
-export const getOne = (employeeId) => request.get(`${baseUrl}/${employeeId}`);
+export const getOne = (employeeId) => {
+  const search = encodeURIComponent(`_ownerId="${employeeId}"`);
+
+  return request.get(`${baseUrl}?where=${search}`);
+};

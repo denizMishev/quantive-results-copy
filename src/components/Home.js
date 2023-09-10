@@ -10,7 +10,6 @@ import * as teamsService from "../services/teamsService";
 import * as okrService from "../services/okrService";
 
 export function Home() {
-  // const { okrs } = useContext(OkrContext);
   const { user } = useContext(AuthContext);
 
   const [showCreateOkrModal, setShowCreateOkrModal] = useState(false);
@@ -79,18 +78,6 @@ export function Home() {
   }, [showCreateOkrModal]);
 
   return (
-    // <section id="homeSection">
-    //   <div id="homePage">
-    //     {okrs.length > 0 ? (
-    //       okrs.map((x) => <Okr key={x._id} okr={x} />)
-    //     ) : (
-    //       <span>You don't have any OKRs assigned to you yet.</span>
-    //     )}
-    //   </div>
-    // </section>
-
-    //welcome-banner-txt-ctr-teams-ctr
-
     <main id="main" className="main-content">
       <section className="home">
         <header className="section-header home-header">
@@ -152,8 +139,8 @@ export function Home() {
                   ? employeeManagedTeams.map((team) => (
                       <TeamChip
                         key={team._id}
-                        currentTeam={team}
                         title={team.teamName}
+                        currentId={team._id}
                         type="team"
                       />
                     ))
@@ -183,13 +170,10 @@ export function Home() {
         <section className="home-myokrs">
           <div className="myokrs-ctr">
             <ul className="myokrs-grid-content">
-              <li className="myokrs-header">
+              <li id="okrs-list-li-header" className="myokrs-header">
                 <div className="">
                   <span>My OKRs</span>
                 </div>
-                {/* <div className="">
-                  <span>Owners</span>
-                </div> */}
                 <div className="">
                   <span>Description</span>
                 </div>

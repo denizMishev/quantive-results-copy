@@ -31,55 +31,6 @@ export function Register() {
   };
 
   return (
-    // <section>
-    //   <form id="registerForm" onSubmit={onSubmit}>
-    //     <div>
-    //       <h1>Sign up</h1>
-    //     </div>
-
-    //     <div>
-    //       <i className="fa-solid fa-user"></i>
-    //       <label htmlFor="username">Username</label>
-    //       <input
-    //         name="username"
-    //         type="text"
-    //         placeholder="Enter your username here"
-    //       />
-    //     </div>
-    //     <div>
-    //       <i className="fa-solid fa-envelope"></i>
-    //       <label htmlFor="email">Email</label>
-    //       <input
-    //         name="email"
-    //         type="email"
-    //         placeholder="Enter your email here"
-    //       />
-    //     </div>
-    //     <div>
-    //       <i className="fa-solid fa-lock"></i>
-    //       <label htmlFor="password">Password</label>
-    //       <input
-    //         name="password"
-    //         type="password"
-    //         placeholder="Enter your password here"
-    //       />
-    //     </div>
-    //     <div>
-    //       <i className="fa-solid fa-lock"></i>
-    //       <label htmlFor="rePassword">Repeat password</label>
-    //       <input
-    //         name="confirm-password"
-    //         type="password"
-    //         placeholder="Repeat your password here"
-    //       />
-    //     </div>
-
-    //     <div>
-    //       <button className="loginRegisterBtn">Press Enter to submit</button>
-    //     </div>
-    //   </form>
-    // </section>
-
     <section className="register-form-ctr">
       <form onSubmit={onSubmit} className="register-form">
         <div className="register-form-title-ctr">

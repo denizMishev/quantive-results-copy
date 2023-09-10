@@ -1,66 +1,10 @@
-// {user.email && <span>{user.email}</span>}
-// const { user } = useContext(AuthContext);
-// /
-// register
-// login
-// logout
-// create
-// employees
-// teams
-
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
-// import { useContext } from "react";
 
 export function Navbar() {
   let location = useLocation();
 
   return (
-    // <nav id="main-nav">
-    //   <div>
-    //     <h1>
-    //       <b>Menu</b>
-    //     </h1>
-    //   </div>
-    //   <li>
-    //     <Link className="main-nav-links" to="/">
-    //       Home page
-    //     </Link>
-    //   </li>
-
-    //   <li>
-    //     <Link className="main-nav-links" to="/register">
-    //       Register
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link className="main-nav-links" to="/login">
-    //       Login
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link className="main-nav-links" to="/logout">
-    //       Logout
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link className="main-nav-links" to="/create">
-    //       Create OKR
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link className="main-nav-links" to="/employees">
-    //       Employees
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <Link className="main-nav-links" to="/teams">
-    //       Teams
-    //     </Link>
-    //   </li>
-    // </nav>
-
     <nav
       className={`main-navigation ${
         location.pathname === "/" ||
@@ -104,7 +48,7 @@ export function Navbar() {
         </li>
         <hr className="main-navigation-linebreak" />
         <li>
-          <Link href="#" className="main-navigation-link">
+          <Link to="/okrsPage" className="main-navigation-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"
@@ -137,7 +81,7 @@ export function Navbar() {
         </li>
         <hr className="main-navigation-linebreak" />
         <li>
-          <Link href="#" className="main-navigation-link">
+          <Link to="/employees" className="main-navigation-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"
