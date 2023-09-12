@@ -52,8 +52,6 @@ export function OkrDetails() {
     });
   };
 
-  console.log(showEditModal);
-
   return (
     <main id="main" className="main-content">
       <section className="okr-detailed">
