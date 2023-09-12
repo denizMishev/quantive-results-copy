@@ -77,6 +77,8 @@ export function Home() {
     // eslint-disable-next-line
   }, [showCreateOkrModal]);
 
+  console.log(showCreateOkrModal);
+
   return (
     <main id="main" className="main-content">
       <section className="home">

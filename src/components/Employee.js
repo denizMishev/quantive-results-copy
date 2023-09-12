@@ -16,7 +16,6 @@ export function Employee({ currentId, username }) {
           employeesTeamsArray.push(team);
         }
         for (const member of team.teamMembers) {
-          console.log(currentId);
           if (member.memberId === currentId) {
             employeesTeamsArray.push(team);
           }

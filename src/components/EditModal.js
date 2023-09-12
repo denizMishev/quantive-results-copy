@@ -4,23 +4,33 @@ import { OkrContext } from "../contexts/OkrContext";
 import { TeamContext } from "../contexts/TeamContext";
 
 import { Dropdown } from "./Dropdown";
+import { TeamChip } from "./team-chip";
 
 import * as okrService from "../services/okrService";
 import * as userService from "../services/userService";
 import * as teamsService from "../services/teamsService";
 
-export function CreateModal(props) {
+export function EditModal({ type, currentTarget, onClose, show }) {
   const { okrAdd } = useContext(OkrContext);
   const { teamAdd } = useContext(TeamContext);
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
-  let users = "";
-  let manager = "";
+  let newUsers = "";
+  let newManager = "";
+
+  let dropdownDefaultValue = currentTarget.okrOwners?.map((okrOwner) => {
+    return {
+      value: okrOwner.okrOwner.toLowerCase(),
+      label: okrOwner.okrOwner,
+      id: okrOwner.okrOwnerId,
+      type: okrOwner.type,
+    };
+  });
 
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
       (usersAndTeamsRequests) => {
         let usersAndOrTeamsArray = [];
-        if (usersAndTeamsRequests[1].code === 404 || props.type === "team") {
+        if (usersAndTeamsRequests[1].code === 404 || type === "team") {
           for (const user of usersAndTeamsRequests[0]) {
             usersAndOrTeamsArray.push({
               value: user.username.toLowerCase(),
@@ -58,7 +68,7 @@ export function CreateModal(props) {
 
   const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
-      props.onClose();
+      onClose();
     }
   };
 
@@ -70,38 +80,21 @@ export function CreateModal(props) {
     // eslint-disable-next-line
   }, []);
 
-  if (!props.show) {
+  if (!show) {
     return null;
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const createFormData = Object.fromEntries(new FormData(e.target));
+    const editFormData = Object.fromEntries(new FormData(e.target));
 
-    if (props.type === "okr") {
-      createFormData.okrOwners = users.map((user) => {
+    if (type === "okr") {
+      editFormData.okrOwners = newUsers.map((user) => {
         return { okrOwner: user.label, okrOwnerId: user.id, type: user.type };
       });
 
-      okrService.create(createFormData).then((newOkr) => {
-        okrAdd(newOkr);
-        props.onClose();
-      });
-    } else {
-      createFormData.teamManager = {
-        managerName: manager[0].label,
-        managerId: manager[0].id,
-        type: manager[0].type,
-      };
-      createFormData.teamMembers = users.map((user) => {
-        return { memberName: user.label, memberId: user.id, type: user.type };
-      });
-
-      teamsService.create(createFormData).then((newTeam) => {
-        teamAdd(newTeam);
-        props.onClose();
-      });
+      okrService.edit(currentTarget._id, editFormData).then(onClose());
     }
   };
 
@@ -109,14 +102,18 @@ export function CreateModal(props) {
     <main id="main" className="main-content">
       <section
         className="create-okr-ctr"
-        style={props.type === "team" ? { top: "-16.5rem" } : {}}
+        style={type === "team" ? { top: "-16.5rem" } : {}}
       >
         <form
           onSubmit={onSubmit}
           className="create-okr-form centered-full-screen"
         >
           <div className="create-okr-form-heading-ctr">
-            <div className="create-okr-form-svg-ctr" onClick={props.onClose}>
+            <div
+              id="special123"
+              className="create-okr-form-svg-ctr"
+              onClick={onClose}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"
@@ -128,76 +125,59 @@ export function CreateModal(props) {
                 />
               </svg>
             </div>
-            <span>Create {props.type === "okr" ? "Objective" : "Team"}</span>
-            <span>All required fields are marked with an asterisk (*).</span>
+            <span>Edit {currentTarget === "okr" ? "Objective" : "Team"}</span>
+            <span>
+              Update the details of this {type === "okr" ? "Objective" : "Team"}
+            </span>
           </div>
           <div className="create-okr-form-input-fields-ctr">
             <div className="create-okr-form-input-ctr">
-              <label htmlFor="">
-                {props.type === "okr" ? "Title*" : "Name*"}
-              </label>
+              <label htmlFor="">{type === "okr" ? "Title" : "Name"}</label>
               <input
-                name={props.type === "okr" ? "okrTitle" : "teamName"}
+                name={type === "okr" ? "okrTitle" : "teamName"}
                 type="text"
-                placeholder={
-                  props.type === "okr"
-                    ? "Enter your OKR's title"
-                    : "Enter your team's name"
-                }
+                defaultValue={currentTarget.okrTitle}
               />
             </div>
-            {props.type === "team" ? (
+            {type === "team" ? (
               <div className="create-okr-form-input-ctr second-dropdown-menu-corrector">
-                <label htmlFor="">Manager*</label>
+                <label htmlFor="">Manager</label>
                 <Dropdown
                   isSearchable
                   isMulti
                   placeHolder="Select a manager for your team"
                   options={dropdownUsersAndTeams}
-                  onChange={(value) => (manager = value)}
-                  currentValue={[]}
+                  onChange={(value) => (newManager = value)}
                 ></Dropdown>
               </div>
             ) : (
               ""
             )}
             <div className="create-okr-form-input-ctr">
-              <label htmlFor="">
-                {props.type === "okr" ? "Owner*" : "Members*"}
-              </label>
+              <label htmlFor="">{type === "okr" ? "Owner" : "Members"}</label>
               <Dropdown
                 isSearchable
                 isMulti
-                placeHolder={
-                  props.type === "okr"
-                    ? "Select owner/s for your OKR"
-                    : "Select members for your team"
-                }
+                placeHolder={"123"}
                 options={dropdownUsersAndTeams}
-                onChange={(value) => (users = value)}
-                currentValue={[]}
+                onChange={(value) => (newUsers = value)}
+                currentValue={dropdownDefaultValue}
               ></Dropdown>
             </div>
             <div className="create-okr-form-input-ctr">
-              <label htmlFor="">Description*</label>
+              <label htmlFor="">Description</label>
               <input
-                name={
-                  props.type === "okr" ? "okrDescription" : "teamDescription"
-                }
+                name={type === "okr" ? "okrDescription" : "teamDescription"}
                 type="text"
-                placeholder={
-                  props.type === "okr"
-                    ? "Enter your OKR's description"
-                    : "Enter your team's description"
-                }
+                defaultValue={currentTarget.okrDescription}
               />
             </div>
           </div>
           <div className="create-okr-form-btns-ctr">
             <button type="submit">
-              Create {props.type === "okr" ? "OKR" : "Team"}
+              Edit {type === "okr" ? "OKR" : "Team"}
             </button>
-            <button onClick={props.onClose}>Cancel</button>
+            <button type="button">Cancel</button>
           </div>
         </form>
       </section>

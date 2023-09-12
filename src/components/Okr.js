@@ -4,7 +4,7 @@ export function Okr({ currentOkr, page }) {
   return (
     <li
       style={
-        page === "okrsPage" ? { "grid-auto-columns": "1fr 1fr 1fr 0.5fr" } : {}
+        page === "okrsPage" ? { gridAutoColumns: "1fr 1fr 1fr 0.5fr" } : {}
       }
       id="okrs-list-li"
       className="myokrs-okr"

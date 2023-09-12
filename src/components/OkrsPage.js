@@ -31,7 +31,6 @@ export function OkrsPage() {
           }
         }
       }
-
       setRenderOkrs([...new Set(renderOkrsArray)]);
     });
     // eslint-disable-next-line
@@ -99,7 +98,7 @@ export function OkrsPage() {
           <div className="myokrs-ctr">
             <ul className="myokrs-grid-content">
               <li
-                style={{ "grid-auto-columns": "1fr 1fr 1fr 0.5fr" }}
+                style={{ gridAutoColumns: "1fr 1fr 1fr 0.5fr" }}
                 id="okrs-list-li-header"
                 className="myokrs-header"
               >

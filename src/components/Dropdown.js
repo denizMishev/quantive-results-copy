@@ -1,15 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 
+import { TeamChip } from "./team-chip";
+
 export function Dropdown({
   placeHolder,
   options,
   isMulti,
   isSearchable,
   onChange,
+  currentValue,
 }) {
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(isMulti ? [] : null);
   const [searchValue, setSearchValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(
+    isMulti ? currentValue : null
+  );
   const searchRef = useRef();
 
   useEffect(() => {
@@ -44,7 +49,6 @@ export function Dropdown({
   const handleInputClick = (e) => {
     e.stopPropagation();
     setShowMenu(!showMenu);
-    console.log(showMenu);
   };
 
   const CloseIcon = () => {
@@ -63,15 +67,22 @@ export function Dropdown({
       return (
         <div className="dropdown-tags">
           {selectedValue.map((option) => (
-            <div key={option.value} className="dropdown-tag-item">
-              {option.label}
-              <span
-                onClick={(e) => onTagRemove(e, option)}
-                className="dropdown-tag-close"
-              >
-                <CloseIcon />
-              </span>
-            </div>
+            // <div key={option.value} className="dropdown-tag-item">
+            //   {option.label}
+            //   <span
+            //     onClick={(e) => onTagRemove(e, option)}
+            //     className="dropdown-tag-close"
+            //   >
+            //     <CloseIcon />
+            //   </span>
+            // </div>
+
+            <TeamChip
+              key={option.value}
+              title={option.label}
+              type={"employee"}
+              removeOption={(e) => onTagRemove(e, option)}
+            ></TeamChip>
           ))}
         </div>
       );
