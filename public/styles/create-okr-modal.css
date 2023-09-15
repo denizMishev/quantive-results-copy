@@ -69,7 +69,8 @@ box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.10);
 }
 
 .create-okr-form-input-ctr input {
-  padding: 0.6rem 0.4rem;
+  padding: 0.1rem 0.4rem;
+  height: 2.45rem;
   border: 1px solid var(--clr-lightgray-navigation);
   color: var(--clr-txt-accent3);
   border-radius: 4px;
@@ -79,6 +80,11 @@ box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.10);
 .create-okr-form-input-ctr input:focus {
   border: 1px solid var(--clr-linkblue);
   outline: 0;
+}
+
+.create-okr-form-input-ctr input:hover {
+  border: 1px solid var(--clr-gray);
+
 }
 
 .create-okr-form-input-ctr input::placeholder {

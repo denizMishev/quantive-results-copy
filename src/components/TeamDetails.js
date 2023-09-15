@@ -58,6 +58,7 @@ export function TeamDetails() {
           <header className="okr-detailed-topbar">
             <Link className="okr-detailed-topbar-link-home" to="/home">
               <svg
+                className="detailed-topbar-svg"
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"
                 viewBox="0 0 384 512"
@@ -74,6 +75,7 @@ export function TeamDetails() {
                 className="okr-detailed-topbar-user-action-icons"
               >
                 <svg
+                  className="detailed-topbar-svg"
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
                   viewBox="0 0 512 512"
@@ -95,6 +97,7 @@ export function TeamDetails() {
                 onClick={() => setShowDeleteModal(true)}
               >
                 <svg
+                  className="detailed-topbar-svg"
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
                   viewBox="0 0 448 512"
@@ -158,11 +161,13 @@ export function TeamDetails() {
                 <div className="welcome-banner-txt-ctr-teams-ctr okr-detailed-owners-field">
                   <ul>
                     {team.teamMembers?.map((teamMember) => (
-                      <TeamChip
-                        key={teamMember.memberId}
-                        title={teamMember.memberName}
-                        type={teamMember.type}
-                      />
+                      <Link to={`/employees/${teamMember.memberId}`}>
+                        <TeamChip
+                          key={teamMember.memberId}
+                          title={teamMember.memberName}
+                          type={teamMember.type}
+                        />
+                      </Link>
                     ))}
                   </ul>
                 </div>

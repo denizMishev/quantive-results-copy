@@ -75,10 +75,12 @@ export function Register() {
           Sign up
         </button>
         <div className="register-form-login-ctr user-form-alternative">
-          <span>Already have an account?</span>
+          <span className="register-form-login-redirect-prompt-span">
+            Already have an account?
+          </span>
           <span>
-            <Link to="/login">
-              Log in
+            <Link className="register-form-login-btn-ctr" to="/login">
+              <span>Log in</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"

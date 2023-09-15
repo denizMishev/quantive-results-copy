@@ -106,6 +106,7 @@ export function FilteringModal(props) {
                 placeHolder="Select a team"
                 options={allTeams}
                 onChange={(value) => (teams = value)}
+                currentValue={[]}
               ></Dropdown>
             </div>
             <div className="filter-modal-filter-ctr">
@@ -116,6 +117,7 @@ export function FilteringModal(props) {
                 placeHolder="Select an employee"
                 options={allUsers}
                 onChange={(value) => (users = value)}
+                currentValue={[]}
               ></Dropdown>
             </div>
             <div className="filter-modal-btns-ctr">

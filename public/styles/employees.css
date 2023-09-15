@@ -1,5 +1,6 @@
 .employees-employee-title-ctr {
     display: flex;
+    min-width: 25.5rem;
 }
 
 .employees-title-ctr {
@@ -12,4 +13,8 @@
     grid-auto-flow: column;
     align-items: center;
     grid-auto-columns: 1fr 3fr 0.7fr;
+}
+
+.employee-table-header-span {
+    white-space: nowrap;
 }

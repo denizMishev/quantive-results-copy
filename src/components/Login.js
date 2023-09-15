@@ -25,35 +25,6 @@ export function Login() {
   };
 
   return (
-    // <section>
-    //   <form id="loginForm" onSubmit={onSubmit}>
-    //     <div>
-    //       <h1>Login</h1>
-    //     </div>
-    //     <div>
-    //       <i className="fa-solid fa-envelope"></i>
-    //       <label htmlFor="email">Email</label>
-    //       <input
-    //         name="email"
-    //         type="email"
-    //         placeholder="Enter your email here"
-    //       />
-    //     </div>
-    //     <div>
-    //       <i className="fa-solid fa-lock"></i>
-    //       <label htmlFor="password">Password</label>
-    //       <input
-    //         name="password"
-    //         type="password"
-    //         placeholder="Enter your password here"
-    //       />
-    //     </div>
-    //     <div>
-    //       <button className="loginRegisterBtn">Press Enter to submit</button>
-    //     </div>
-    //   </form>
-    // </section>
-
     <section className="login-form-ctr">
       <form onSubmit={onSubmit} className="login-form">
         <div className="login-form-title-ctr">
@@ -85,10 +56,12 @@ export function Login() {
 
         <button className="login-form-login-btn user-form-btn">Log in</button>
         <div className="login-form-start-free-trial user-form-alternative">
-          <span>Don't have an account yet?</span>
+          <span className="login-form-start-free-trial-prompt">
+            Don't have an account yet?
+          </span>
           <span>
-            <Link href="">
-              Start a free trial
+            <Link className="register-form-login-btn-ctr" to="/register">
+              <span>Start a free trial</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"

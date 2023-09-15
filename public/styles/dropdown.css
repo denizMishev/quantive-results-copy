@@ -12,7 +12,8 @@
     align-items: center;
     justify-content: space-between;
     user-select: none;
-    padding: 0.6rem 0.4rem;
+    padding: 0.3rem 0.4rem;
+    min-height: 2.35rem;
     border-radius: 4px;
     border: 1px solid var(--clr-lightgray-navigation);
     font-size: var(--fs-080);
@@ -47,17 +48,17 @@
 }
 
 .dropdown-item.selected {
-    background-color: #0d6efd;
-    color: #fff;
+    background-color: var(--clr-whitesmoke-teamchip);
 }
 
 .dropdown-item:hover {
-    background-color: #9fc3f870;
+    background-color: var(--clr-whitesmoke-teamchip);
 }
 
 .dropdown-tags {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 5px;
 }
 
@@ -68,6 +69,7 @@
 
 .search-box input {
     width: 100%;
+    max-height: 2rem;
     box-sizing: border-box;
     padding: 5px;
     border: 1px solid #ccc;

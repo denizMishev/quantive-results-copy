@@ -18,7 +18,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 5.75rem;
+    max-width: 5.75rem;
+    padding-right: 0.55rem;
 }
 
 .team-chip svg {
@@ -40,6 +41,14 @@
     padding-right: 6px;
 }
 
+.team-chip-v2 h6 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 5.75rem;
+    padding-right: 0.55rem;
+}
+
 .team-chip-v2:hover {
     background-color: unset;
     color: var(--clr-txt-accent3);
@@ -53,6 +62,20 @@
     border-radius: 50%;
     padding: 4px;
     margin-right: 4px;
+}
+
+.chip-svg-close-icon-ctr {
+    display: flex;
+    align-items: center;
+    margin-left: 0.1rem;
+}
+
+#chip-svg-close-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: unset;
+    color: var(--clr-gray);
+    cursor: pointer;
 }
 
 /* Team chip */ /* Team chip */ /* Team chip */ /* Team chip */
@@ -70,6 +93,7 @@
 
 .section-header h2 {
     color: hsla(209, 29%, 27%, 1);
+    margin-right: 1rem;
 }
 
 .create-button {
@@ -143,6 +167,8 @@
     display: flex;
     align-items: center;
     gap: 0.35rem;
+    min-width: 27.65rem;
+
 }
 
 .myokrs-svg-ctr, .okr-svg-ctr {
@@ -170,6 +196,16 @@
     color: var(--clr-txt-accent2);
 }
 
+.myokrs-okr-owner-ctr {
+    min-width: 28rem;
+    
+}
+
+.myokrs-okr-description-ctr {
+    min-width: 27.65rem;
+    
+}
+
 .myokrs-okr-owner-ctr > span, .myokrs-okr-description-ctr > span {
     font-size: var(--fs-080);
     color: var(--clr-txt-accent3);
@@ -180,7 +216,7 @@
     display: block;
 }
 
-.myokrs-okr-activestate > div {
+/* .myokrs-okr-activestate > div {
     font-size: var(--fs-075);
     padding: 0.2rem 1.6rem;
     background-color: var(--clr-lightergray-activestate);
@@ -188,7 +224,7 @@
     border-radius: 1.35rem;
     border: 1px solid lightgray;
     font-weight: bold;
-}
+} */
 
 /* OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR */
 
@@ -277,7 +313,7 @@
 }
 
 .login-form-login-btn, .user-form-btn {
-    margin-top: 1.15rem;
+    margin-top: 0.65rem;
     margin-bottom: 1rem;
     padding: 0.8rem 2rem;
     width: 9rem;
@@ -303,7 +339,7 @@
     gap: 0.35rem;
 }
 
-.login-form-start-free-trial span:nth-of-type(1) {
+.login-form-start-free-trial-prompt {
     color: var(--clr-lightgray-navigation);
     font-size: var(--fs-088);
 }
@@ -315,13 +351,6 @@
 /* LOGIN-FORM LOGIN-FORM LOGIN-FORM LOGIN-FORM LOGIN-FORM LOGIN-FORM */
 
 /* REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM */
-
-/* .register-form-ctr {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-} */
 
 /* util util util util util util util util util */
 
@@ -434,15 +463,21 @@
 }
 
 
-.user-form-alternative span:nth-of-type(1) {
+.register-form-login-redirect-prompt-span {
     color: var(--clr-lightgray-navigation);
     font-size: var(--fs-088);
 }
 
-.user-form-alternative span:nth-of-type(2) {
-    color: var(--clr-linkblue);
+.user-form-alternative span:nth-of-type(2) > a > svg {
+    padding-left: 0.3rem;
 }
 
+.register-form-login-btn-ctr {
+    margin-top: 0.4rem;
+ color: var(--clr-linkblue); 
+ display: flex;
+ align-items: center;  
+}
 /* REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM */
 
 /* COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT */

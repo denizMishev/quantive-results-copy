@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 
 import { Okr } from "./Okr";
+import { Link } from "react-router-dom";
 import { TeamChip } from "./team-chip";
 import { CreateModal } from "./CreateModal";
 
@@ -136,15 +137,17 @@ export function Home() {
               style={hideManagingTeamsStyle}
             >
               <span>Managing:</span>
-              <ul>
+              <ul className="welcome-banner-teams-list">
                 {employeeManagedTeams.length > 0
                   ? employeeManagedTeams.map((team) => (
-                      <TeamChip
-                        key={team._id}
-                        title={team.teamName}
-                        currentId={team._id}
-                        type="team"
-                      />
+                      <Link to={`/teams/${team._id}`}>
+                        <TeamChip
+                          key={team._id}
+                          title={team.teamName}
+                          currentId={team._id}
+                          type="team"
+                        />
+                      </Link>
                     ))
                   : ""}
               </ul>
@@ -154,15 +157,17 @@ export function Home() {
               className="welcome-banner-txt-ctr-teams-ctr"
             >
               <span>Member of:</span>
-              <ul>
+              <ul className="welcome-banner-txt-ctr-teams-ctr .welcome-banner-teams-list">
                 {employeeTeams.length > 0
                   ? employeeTeams.map((team) => (
-                      <TeamChip
-                        key={team._id}
-                        currentTeam={team}
-                        title={team.teamName}
-                        type="team"
-                      />
+                      <Link to={`/teams/${team._id}`}>
+                        <TeamChip
+                          key={team._id}
+                          currentTeam={team}
+                          title={team.teamName}
+                          type="team"
+                        />
+                      </Link>
                     ))
                   : ""}
               </ul>
@@ -173,14 +178,14 @@ export function Home() {
           <div className="myokrs-ctr">
             <ul className="myokrs-grid-content">
               <li id="okrs-list-li-header" className="myokrs-header">
-                <div className="">
+                <div
+                  id="home-okrs-list-li-header-title-header"
+                  className="okrs-list-li-header-title-header"
+                >
                   <span>My OKRs</span>
                 </div>
                 <div className="">
                   <span>Description</span>
-                </div>
-                <div>
-                  <span>OKR State</span>
                 </div>
               </li>
               {employeeOwnedOkrs.length > 0 ? (

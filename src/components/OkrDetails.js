@@ -59,6 +59,7 @@ export function OkrDetails() {
           <header className="okr-detailed-topbar">
             <Link className="okr-detailed-topbar-link-home" to="/home">
               <svg
+                className="detailed-topbar-svg"
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"
                 viewBox="0 0 384 512"
@@ -75,6 +76,7 @@ export function OkrDetails() {
                 className="okr-detailed-topbar-user-action-icons"
               >
                 <svg
+                  className="detailed-topbar-svg"
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
                   viewBox="0 0 512 512"
@@ -96,6 +98,7 @@ export function OkrDetails() {
                 onClick={() => setShowDeleteModal(true)}
               >
                 <svg
+                  className="detailed-topbar-svg"
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
                   viewBox="0 0 448 512"

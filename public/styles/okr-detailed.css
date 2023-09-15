@@ -40,7 +40,7 @@
     height: 0;
 }
  
- .okr-detailed-topbar svg {
+ .okr-detailed-topbar .detailed-topbar-svg {
      font-size: var(--fs-125);
      color: var(--clr-txt-accent3);
      cursor: pointer;
@@ -107,6 +107,7 @@
      padding: 0.61rem 0.5rem;
      flex: 3;
      color: var(--clr-txt-accent3);
+     /* pointer-events: none */
  }
  
  .okr-detailed-field-ctr > div {

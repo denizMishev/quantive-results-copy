@@ -34,9 +34,11 @@
     gap: 0.5rem;
 }
 
-.welcome-banner-txt-ctr-teams-ctr ul {
+.welcome-banner-txt-ctr-teams-ctr .welcome-banner-teams-list {
     display: flex;
-    /* margin-left: 1rem; */
+    gap: 0.45rem;
+    max-width: 83.5rem;
+    overflow: hidden;
 }
 
 .welcome-banner-txt-ctr-title-ctr > h3 {
@@ -63,8 +65,13 @@
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    grid-auto-columns: 1fr 3fr 0.7fr;
+    grid-auto-columns: 1fr 3fr;
 }
+
+.okrs-list-li-header-title-header {
+    min-width: 20.65rem;
+}
+
 
 .myokrs-header {
     margin-bottom: 1.65rem;

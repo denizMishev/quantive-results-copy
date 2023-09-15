@@ -1,11 +1,26 @@
-import { Link } from "react-router-dom";
-
-export function TeamChip({ title, currentId, type, removeOption }) {
+export function TeamChip({
+  title,
+  currentId,
+  type,
+  removeOption,
+  renderLocation,
+}) {
   return (
-    <li onClick={removeOption}>
-      <div className={`${type === "team-v2" ? "team-chip-v2" : "team-chip"}`}>
+    <li>
+      <div
+        className={`${
+          renderLocation === "employees" || renderLocation === "dropdown"
+            ? "team-chip-v2"
+            : "team-chip"
+        }`}
+      >
         {type === "employee" && (
           <svg
+            className={`${
+              renderLocation === "employees" || renderLocation === "dropdown"
+                ? "team-chip-svg-v2"
+                : ""
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
             viewBox="0 0 576 512"
@@ -16,9 +31,13 @@ export function TeamChip({ title, currentId, type, removeOption }) {
             />
           </svg>
         )}
-        {(type === "team" || type === "team-v2") && (
+        {type === "team" && (
           <svg
-            className={`${type === "team-v2" ? "team-chip-svg-v2" : ""}`}
+            className={`${
+              renderLocation === "employees" || renderLocation === "dropdown"
+                ? "team-chip-svg-v2"
+                : ""
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
             viewBox="0 0 640 512"
@@ -42,6 +61,21 @@ export function TeamChip({ title, currentId, type, removeOption }) {
           </svg>
         )}
         <h6>{title}</h6>
+        {renderLocation === "dropdownInputField" && (
+          <div onClick={removeOption} className="chip-svg-close-icon-ctr">
+            <svg
+              id="chip-svg-close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 384 512"
+            >
+              <path
+                fill="currentColor"
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+              />
+            </svg>
+          </div>
+        )}
       </div>
     </li>
   );

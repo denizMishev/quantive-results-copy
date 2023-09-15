@@ -53,12 +53,15 @@ export function Employee({ currentId, username }) {
       <div className="myokrs-okr-owner-ctr teams-team-description">
         <ul className="employee-teams">
           {employeeTeams.map((team) => (
-            <TeamChip
-              key={team._id}
-              title={team.teamName}
-              currentId={team._id}
-              type="team-v2"
-            />
+            <Link to={`/teams/${team._id}`}>
+              <TeamChip
+                key={team._id}
+                type={"team"}
+                title={team.teamName}
+                currentId={team._id}
+                renderLocation={"employees"}
+              />
+            </Link>
           ))}
         </ul>
       </div>

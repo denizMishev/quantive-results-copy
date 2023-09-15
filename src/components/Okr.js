@@ -9,7 +9,10 @@ export function Okr({ currentOkr, page }) {
       id="okrs-list-li"
       className="myokrs-okr"
     >
-      <div className="myokrs-okr-title-ctr">
+      <div
+        style={page !== "okrsPage" ? { minWidth: "20.85rem" } : {}}
+        className="myokrs-okr-title-ctr"
+      >
         <div className="myokrs-svg-ctr">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,9 +40,6 @@ export function Okr({ currentOkr, page }) {
       )}
       <div className="myokrs-okr-description-ctr">
         <span>{currentOkr.okrDescription}</span>
-      </div>
-      <div className="myokrs-okr-activestate">
-        <div>Active</div>
       </div>
     </li>
   );

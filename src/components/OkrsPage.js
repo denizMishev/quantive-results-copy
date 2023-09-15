@@ -40,8 +40,8 @@ export function OkrsPage() {
     <main id="main" className="main-content">
       <section className="home">
         <header className="section-header home-header">
-          <h2>OKRs</h2>
           <div className="okrs-page-filter-btn-ctr">
+            <h2>OKRs</h2>
             <button
               onClick={() => setShowFilteringModal(true)}
               className="okrs-page-filter-btn"
@@ -98,22 +98,22 @@ export function OkrsPage() {
           <div className="myokrs-ctr">
             <ul className="myokrs-grid-content">
               <li
-                style={{ gridAutoColumns: "1fr 1fr 1fr 0.5fr" }}
+                style={{ gridAutoColumns: "1fr 1fr 1fr" }}
                 id="okrs-list-li-header"
                 className="myokrs-header"
               >
-                <div className="">
+                <div className="okrs-page-table-titles-ctr">
                   <span>Title</span>
                 </div>
-                <div className="">
+                <div className="okrs-page-table-titles-ctr">
                   <span>Owners</span>
                 </div>
                 <div className="">
                   <span>Description</span>
                 </div>
-                <div>
+                {/* <div>
                   <span>OKR State</span>
-                </div>
+                </div> */}
               </li>
               {renderOkrs.length > 0 ? (
                 renderOkrs.map((okr) => (

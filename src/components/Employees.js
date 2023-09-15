@@ -42,10 +42,12 @@ export function Employees() {
                 className="myokrs-header teams-header"
               >
                 <div className="">
-                  <span>Name</span>
+                  <span className="employee-table-header-span">Name</span>
                 </div>
                 <div className="">
-                  <span>Team membership</span>
+                  <span className="employee-table-header-span">
+                    Team membership
+                  </span>
                 </div>
               </li>
               {employees.map((employee) => (

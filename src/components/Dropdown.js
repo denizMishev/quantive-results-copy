@@ -82,6 +82,7 @@ export function Dropdown({
               title={option.label}
               type={"employee"}
               removeOption={(e) => onTagRemove(e, option)}
+              renderLocation={"dropdownInputField"}
             ></TeamChip>
           ))}
         </div>
@@ -138,7 +139,7 @@ export function Dropdown({
               <input onChange={onSearch} value={searchValue} ref={searchRef} />
             </div>
           )}
-          {getOptions().map((option) => (
+          {/* {getOptions().map((option) => (
             <div
               onClick={() => onItemClick(option)}
               key={option.value}
@@ -146,7 +147,22 @@ export function Dropdown({
             >
               {option.label}{" "}
             </div>
-          ))}
+          ))} */}
+          <ul>
+            {getOptions().map((option) => (
+              <div
+                onClick={() => onItemClick(option)}
+                key={option.value}
+                className={`dropdown-item ${isSelected(option) && "selected"}`}
+              >
+                <TeamChip
+                  title={option.label}
+                  type={option.type}
+                  renderLocation={"dropdown"}
+                />
+              </div>
+            ))}
+          </ul>
         </div>
       )}
     </div>
