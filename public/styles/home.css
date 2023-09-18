@@ -102,18 +102,20 @@
     border-radius: 32px;
     font-size: var(--fs-088);
     font-weight: bold;
-    width: 8%;
     margin-inline: auto;
+
 }
 
 #myokrs-no-content > button:hover {
     background-color: var(--clr-linkblue-hovered);
+
 }
 
 #myokrs-no-content h3 {
     margin-top: 1.35rem;
     font-size: var(--fs-088);
     color: var(--clr-txt-accent1);
+
 }
 
 

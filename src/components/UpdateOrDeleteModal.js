@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useErrorBoundary } from "react-error-boundary";
+
 import { OkrContext } from "../contexts/OkrContext";
 
 import * as okrService from "../services/okrService";
@@ -17,6 +19,8 @@ export function UpdateOrDeleteModal(props) {
   const { teamRemove } = useContext(TeamContext);
   const [commentText, setCommentText] = useState("");
   const navigate = useNavigate();
+
+  const { showBoundary } = useErrorBoundary([]);
 
   const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
@@ -38,28 +42,44 @@ export function UpdateOrDeleteModal(props) {
 
   const actionHandler = () => {
     if (props.target === "OKR") {
-      okrService.remove(targetId).then(() => {
-        okrRemove(targetId);
-        navigate("/home");
-        deleteCommentsOfDeletedOkr(targetId);
-      });
+      okrService
+        .remove(targetId)
+        .then(() => {
+          okrRemove(targetId);
+          navigate("/home");
+          deleteCommentsOfDeletedOkr(targetId);
+        })
+        .catch((err) => {
+          showBoundary(err);
+        });
     }
     if (props.target === "team") {
-      teamsService.remove(targetId).then(() => {
-        teamRemove(targetId);
-        navigate("/home");
-        deletedOwnerOkrCleaner(targetId);
-      });
+      teamsService
+        .remove(targetId)
+        .then(() => {
+          teamRemove(targetId);
+          navigate("/home");
+          deletedOwnerOkrCleaner(targetId);
+        })
+        .catch((err) => {
+          showBoundary(err);
+        });
     }
     if (props.target === "comment") {
-      commentService.remove(targetId);
+      commentService.remove(targetId).catch((err) => {
+        showBoundary(err);
+      });
       setTimeout(() => {
         props.updateParent();
       }, 1);
       props.onClose();
     }
     if (props.target === "editComment") {
-      commentService.updateComment(targetId, props.okrId, commentText);
+      commentService
+        .updateComment(targetId, props.okrId, commentText)
+        .catch((err) => {
+          showBoundary(err);
+        });
       props.updateParent();
       props.onClose();
     }

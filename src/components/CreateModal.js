@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { OkrContext } from "../contexts/OkrContext";
 import { TeamContext } from "../contexts/TeamContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 import { Dropdown } from "./Dropdown";
 
@@ -10,15 +12,19 @@ import * as userService from "../services/userService";
 import * as teamsService from "../services/teamsService";
 
 export function CreateModal(props) {
+  const { user } = useContext(AuthContext);
   const { okrAdd } = useContext(OkrContext);
   const { teamAdd } = useContext(TeamContext);
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
+
+  const { showBoundary } = useErrorBoundary([]);
+
   let users = "";
   let manager = "";
 
   useEffect(() => {
-    Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
-      (usersAndTeamsRequests) => {
+    Promise.all([userService.getAllUsers(), teamsService.getAll()])
+      .then((usersAndTeamsRequests) => {
         let usersAndOrTeamsArray = [];
         if (usersAndTeamsRequests[1].code === 404 || props.type === "team") {
           for (const user of usersAndTeamsRequests[0]) {
@@ -51,8 +57,10 @@ export function CreateModal(props) {
           }
         }
         setDropdownUsersAndTeams(usersAndOrTeamsArray);
-      }
-    );
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -78,16 +86,22 @@ export function CreateModal(props) {
     e.preventDefault();
 
     const createFormData = Object.fromEntries(new FormData(e.target));
+    createFormData.editorUsername = user.username;
 
     if (props.type === "okr") {
       createFormData.okrOwners = users.map((user) => {
         return { okrOwner: user.label, okrOwnerId: user.id, type: user.type };
       });
 
-      okrService.create(createFormData).then((newOkr) => {
-        okrAdd(newOkr);
-        props.onClose();
-      });
+      okrService
+        .create(createFormData)
+        .then((newOkr) => {
+          okrAdd(newOkr);
+          props.onClose();
+        })
+        .catch((err) => {
+          showBoundary(err);
+        });
     } else {
       createFormData.teamManager = {
         managerName: manager[0].label,
@@ -98,10 +112,15 @@ export function CreateModal(props) {
         return { memberName: user.label, memberId: user.id, type: user.type };
       });
 
-      teamsService.create(createFormData).then((newTeam) => {
-        teamAdd(newTeam);
-        props.onClose();
-      });
+      teamsService
+        .create(createFormData)
+        .then((newTeam) => {
+          teamAdd(newTeam);
+          props.onClose();
+        })
+        .catch((err) => {
+          showBoundary(err);
+        });
     }
   };
 

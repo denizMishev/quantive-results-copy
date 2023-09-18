@@ -25,21 +25,6 @@ export function OkrProvider({ children }) {
   const navigate = useNavigate();
   const [okrs, dispatch] = useReducer(okrReducer, []);
 
-  useEffect(() => {
-    okrService.getAll().then((result) => {
-      if (result.code === 404) {
-        return;
-      } else {
-        const action = {
-          type: okrStateManagementCommands.getAll,
-          payload: result,
-        };
-
-        dispatch(action);
-      }
-    });
-  }, []);
-
   const selectOkr = (okrId) => {
     return okrs.find((x) => x._id === okrId) || {};
   };

@@ -528,6 +528,12 @@
     font-size: var(--fs-085);
 }
 
+.comments-comment-editor {
+    padding-top: 0.2rem;
+    font-size: 0.6rem;
+    color: var(--clr-lightgray-navigation);
+}
+
 .okr-detailed-comment-content {
     margin: 1rem 0rem;
     font-size: var(--fs-088);

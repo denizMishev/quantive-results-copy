@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { Okr } from "./Okr";
 import { Link } from "react-router-dom";
@@ -17,6 +18,8 @@ export function Home() {
   const [employeeManagedTeams, setEmployeeManagedTeams] = useState({});
   const [employeeTeams, setEmployeeTeams] = useState({});
   const [employeeOwnedOkrs, setEmployeeOwnedOkrs] = useState([]);
+
+  const { showBoundary } = useErrorBoundary([]);
 
   let employeeManagedTeamsArray = [];
   let employeeTeamsArray = [];
@@ -46,21 +49,27 @@ export function Home() {
   }
 
   useEffect(() => {
-    teamsService.getAll().then((allTeams) => {
-      for (const team of allTeams) {
-        if (team.teamManager.managerId === user._id) {
-          employeeManagedTeamsArray.push(team);
-        } else {
-          for (const membersOfTeam of team.teamMembers) {
-            if (membersOfTeam.memberId === user._id) {
-              employeeTeamsArray.push(team);
+    teamsService
+      .getAll()
+      .then((allTeams) => {
+        for (const team of allTeams) {
+          if (team.teamManager.managerId === user._id) {
+            employeeManagedTeamsArray.push(team);
+          } else {
+            for (const membersOfTeam of team.teamMembers) {
+              if (membersOfTeam.memberId === user._id) {
+                employeeTeamsArray.push(team);
+              }
             }
           }
         }
-      }
-      setEmployeeManagedTeams(employeeManagedTeamsArray);
-      setEmployeeTeams(employeeTeamsArray);
-    });
+        setEmployeeManagedTeams(employeeManagedTeamsArray);
+        setEmployeeTeams(employeeTeamsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
+
     // eslint-disable-next-line
   }, []);
 
@@ -77,8 +86,6 @@ export function Home() {
     });
     // eslint-disable-next-line
   }, [showCreateOkrModal]);
-
-  console.log(showCreateOkrModal);
 
   return (
     <main id="main" className="main-content">

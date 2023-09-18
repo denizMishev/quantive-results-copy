@@ -79,6 +79,11 @@
  .okr-detailed-main-ctr {
      width: 70%;
  }
+
+ .okr-detailed-owner-list {
+    display: flex;
+    gap: 0.3rem;
+ }
  
  .okr-detailed-fields {
      margin-bottom: 2rem;
@@ -107,7 +112,7 @@
      padding: 0.61rem 0.5rem;
      flex: 3;
      color: var(--clr-txt-accent3);
-     /* pointer-events: none */
+     pointer-events: none
  }
  
  .okr-detailed-field-ctr > div {

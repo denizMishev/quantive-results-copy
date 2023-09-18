@@ -144,6 +144,14 @@ export function TeamDetails() {
                 }
               />
             </div>
+            <div className="okr-detailed-field-ctr">
+              <label htmlFor="">Editor</label>
+              <div className="welcome-banner-txt-ctr-teams-ctr okr-detailed-owners-field">
+                <ul>
+                  <TeamChip title={team.editorUsername} type={"employee"} />
+                </ul>
+              </div>
+            </div>
             <div className="okr-detailed-fields">
               <div className="okr-detailed-field-ctr">
                 <label htmlFor="">Manager</label>

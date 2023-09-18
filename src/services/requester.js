@@ -1,4 +1,11 @@
+import { unauthorized } from "../util/errormessages";
+
 const request = async (method, url, data) => {
+  const ignore404Endpoints = [
+    "http://localhost:3030/data/okrs",
+    "http://localhost:3030/data/teams",
+  ];
+
   try {
     const user = localStorage.getItem("auth");
     const auth = JSON.parse(user || "{}");
@@ -23,13 +30,27 @@ const request = async (method, url, data) => {
         body: JSON.stringify(data),
       });
     }
+
     const response = await buildRequest;
+
+    if (response.status === 404 && ignore404Endpoints.includes(url)) {
+      return [];
+    }
+
+    if (!response.ok) {
+      let errorMessage = response.statusText;
+
+      if (response.status === 403) {
+        errorMessage = unauthorized;
+      }
+      throw new Error(errorMessage);
+    }
 
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
