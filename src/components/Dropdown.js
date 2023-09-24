@@ -9,6 +9,8 @@ export function Dropdown({
   isSearchable,
   onChange,
   currentValue,
+  setOkrOwnerValue,
+  createOkrDropdown,
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -16,6 +18,12 @@ export function Dropdown({
     isMulti ? currentValue : null
   );
   const searchRef = useRef();
+
+  useEffect(() => {
+    if (createOkrDropdown) {
+      setOkrOwnerValue(selectedValue);
+    }
+  }, [selectedValue]);
 
   useEffect(() => {
     setSearchValue("");
@@ -51,14 +59,6 @@ export function Dropdown({
     setShowMenu(!showMenu);
   };
 
-  const CloseIcon = () => {
-    return (
-      <svg height="20" width="20" viewBox="0 0 20 20">
-        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
-      </svg>
-    );
-  };
-
   const getDisplay = () => {
     if (!selectedValue || selectedValue.length === 0) {
       return placeHolder;
@@ -67,20 +67,10 @@ export function Dropdown({
       return (
         <div className="dropdown-tags">
           {selectedValue.map((option) => (
-            // <div key={option.value} className="dropdown-tag-item">
-            //   {option.label}
-            //   <span
-            //     onClick={(e) => onTagRemove(e, option)}
-            //     className="dropdown-tag-close"
-            //   >
-            //     <CloseIcon />
-            //   </span>
-            // </div>
-
             <TeamChip
               key={option.value}
               title={option.label}
-              type={"employee"}
+              type={option.type}
               removeOption={(e) => onTagRemove(e, option)}
               renderLocation={"dropdownInputField"}
             ></TeamChip>
@@ -88,7 +78,15 @@ export function Dropdown({
         </div>
       );
     }
-    return selectedValue.label;
+    return (
+      <div className="dropdown-tags">
+        <TeamChip
+          title={selectedValue.label}
+          type={selectedValue.type}
+          renderLocation={"dropdownInputField"}
+        ></TeamChip>
+      </div>
+    );
   };
 
   const removeOption = (option) => {
@@ -139,15 +137,6 @@ export function Dropdown({
               <input onChange={onSearch} value={searchValue} ref={searchRef} />
             </div>
           )}
-          {/* {getOptions().map((option) => (
-            <div
-              onClick={() => onItemClick(option)}
-              key={option.value}
-              className={`dropdown-item ${isSelected(option) && "selected"}`}
-            >
-              {option.label}{" "}
-            </div>
-          ))} */}
           <ul>
             {getOptions().map((option) => (
               <div

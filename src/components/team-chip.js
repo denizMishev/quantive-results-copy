@@ -61,7 +61,7 @@ export function TeamChip({
           </svg>
         )}
         <h6>{title}</h6>
-        {renderLocation === "dropdownInputField" && (
+        {renderLocation === "dropdownInputField" && removeOption && (
           <div onClick={removeOption} className="chip-svg-close-icon-ctr">
             <svg
               id="chip-svg-close-icon"

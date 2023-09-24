@@ -16,11 +16,72 @@ export function CreateModal(props) {
   const { okrAdd } = useContext(OkrContext);
   const { teamAdd } = useContext(TeamContext);
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
-
-  const { showBoundary } = useErrorBoundary([]);
+  const [validateFormStyle, setValidateFormStyle] = useState({
+    backgroundColor: "#FF0000",
+    cursor: "pointer",
+    pointerEvents: "auto",
+  });
 
   let users = "";
   let manager = "";
+
+  const [createOkrFormValues, setCreateOkrFormValues] = useState({
+    okrTitle: "",
+    okrOwner: "",
+    okrDescription: "",
+  });
+  const [createTeamFormValues, setCreateTeamFormValues] = useState({
+    teamName: "",
+    teamDescription: "",
+  });
+
+  useEffect(() => {
+    let createFormValues = undefined;
+
+    if (props.type === "okr") {
+      createFormValues = Object.values(createOkrFormValues);
+    } else {
+      createFormValues = Object.values(createTeamFormValues);
+    }
+
+    let valid = true;
+
+    for (const formValue of createFormValues) {
+      if (formValue.length === 0) {
+        valid = false;
+      }
+    }
+
+    if (valid) {
+      setValidateFormStyle({
+        backgroundColor: "#FF0000",
+        cursor: "pointer",
+        pointerEvents: "auto",
+      });
+    } else {
+      setValidateFormStyle({
+        backgroundColor: "#d3d3d3",
+        cursor: "not-allowed",
+        pointerEvents: "none",
+      });
+    }
+  }, [createOkrFormValues, createTeamFormValues]);
+
+  const onChangeHandler = (e) => {
+    if (props.type === "okr") {
+      setCreateOkrFormValues((state) => ({
+        ...state,
+        [e.target.name]: e.target.value,
+      }));
+    } else {
+      setCreateTeamFormValues((state) => ({
+        ...state,
+        [e.target.name]: e.target.value,
+      }));
+    }
+  };
+
+  const { showBoundary } = useErrorBoundary([]);
 
   useEffect(() => {
     Promise.all([userService.getAllUsers(), teamsService.getAll()])
@@ -98,15 +159,20 @@ export function CreateModal(props) {
         .then((newOkr) => {
           okrAdd(newOkr);
           props.onClose();
+          setCreateOkrFormValues({
+            okrTitle: "",
+            okrOwner: "",
+            okrDescription: "",
+          });
         })
         .catch((err) => {
           showBoundary(err);
         });
     } else {
       createFormData.teamManager = {
-        managerName: manager[0].label,
-        managerId: manager[0].id,
-        type: manager[0].type,
+        managerName: manager.label,
+        managerId: manager.id,
+        type: manager.type,
       };
       createFormData.teamMembers = users.map((user) => {
         return { memberName: user.label, memberId: user.id, type: user.type };
@@ -158,6 +224,12 @@ export function CreateModal(props) {
               <input
                 name={props.type === "okr" ? "okrTitle" : "teamName"}
                 type="text"
+                value={
+                  props.type === "okr"
+                    ? createOkrFormValues.okrTitle
+                    : createTeamFormValues.teamName
+                }
+                onChange={onChangeHandler}
                 placeholder={
                   props.type === "okr"
                     ? "Enter your OKR's title"
@@ -170,7 +242,7 @@ export function CreateModal(props) {
                 <label htmlFor="">Manager*</label>
                 <Dropdown
                   isSearchable
-                  isMulti
+                  // isMulti
                   placeHolder="Select a manager for your team"
                   options={dropdownUsersAndTeams}
                   onChange={(value) => (manager = value)}
@@ -194,6 +266,13 @@ export function CreateModal(props) {
                 }
                 options={dropdownUsersAndTeams}
                 onChange={(value) => (users = value)}
+                createOkrDropdown={true}
+                setOkrOwnerValue={(value) =>
+                  setCreateOkrFormValues((state) => ({
+                    ...state,
+                    okrOwner: value,
+                  }))
+                }
                 currentValue={[]}
               ></Dropdown>
             </div>
@@ -209,11 +288,17 @@ export function CreateModal(props) {
                     ? "Enter your OKR's description"
                     : "Enter your team's description"
                 }
+                value={
+                  props.type === "okr"
+                    ? createOkrFormValues.okrDescription
+                    : createTeamFormValues.teamDescription
+                }
+                onChange={onChangeHandler}
               />
             </div>
           </div>
           <div className="create-okr-form-btns-ctr">
-            <button type="submit">
+            <button style={validateFormStyle} type="submit">
               Create {props.type === "okr" ? "OKR" : "Team"}
             </button>
             <button onClick={props.onClose}>Cancel</button>
