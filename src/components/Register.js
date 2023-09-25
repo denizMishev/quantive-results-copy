@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import * as authService from "../services/authService";
@@ -8,24 +8,32 @@ import { AuthContext } from "../contexts/AuthContext";
 export function Register() {
   const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [registerFormValues, setRegisterFormValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const onChangeHandler = (e) => {
+    setRegisterFormValues((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    const registerFormData = {
+      username: registerFormValues.username,
+      email: registerFormValues.email,
+      password: registerFormValues.password,
+    };
 
-    const email = formData.get("email");
-    const username = formData.get("username");
-    const password = formData.get("password");
-    const confirmPassword = formData.get("confirm-password");
-
-    if (password !== confirmPassword) {
-      return;
-    }
-
-    authService.register(email, username, password).then((authData) => {
+    authService.register(registerFormData).then((authData) => {
       userLogin(authData);
-      addNewUser(email, username);
+      addNewUser(registerFormData.email, registerFormData.username);
       navigate("/home");
     });
   };
@@ -54,21 +62,29 @@ export function Register() {
             name="username"
             placeholder="Enter your username here"
             type="text"
+            onChange={onChangeHandler}
+            value={registerFormValues.username}
           />
           <input
             name="email"
             placeholder="Enter your email address here"
             type="email"
+            onChange={onChangeHandler}
+            value={registerFormValues.email}
           />
           <input
             name="password"
             type="password"
             placeholder="Enter your password here"
+            onChange={onChangeHandler}
+            value={registerFormValues.password}
           />
           <input
-            name="confirm-password"
+            name="confirmPassword"
             type="password"
             placeholder="Repeat password here"
+            onChange={onChangeHandler}
+            value={registerFormValues.confirmPassword}
           />
         </div>
         <button className="register-form-signup-button user-form-btn">

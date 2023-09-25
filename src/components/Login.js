@@ -23,10 +23,8 @@ export function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { email, password } = Object.fromEntries(new FormData(e.target));
-
     authService
-      .login(email, password)
+      .login(loginFormValues)
       .then((authData) => {
         userLogin(authData);
         navigate("/home");
