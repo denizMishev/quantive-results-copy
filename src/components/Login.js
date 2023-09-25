@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import { AuthContext } from "../contexts/AuthContext";
@@ -7,6 +7,18 @@ import * as authService from "../services/authService";
 export function Login() {
   const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [loginFormValues, setLoginFormValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onChangeHandler = (e) => {
+    setLoginFormValues((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -46,11 +58,21 @@ export function Login() {
         <div className="login-form-input-fields-ctr">
           <div className="email-ctr">
             <label htmlFor="email">Email*</label>
-            <input name="email" type="email" />
+            <input
+              name="email"
+              type="email"
+              value={loginFormValues.email}
+              onChange={onChangeHandler}
+            />
           </div>
           <div className="password-ctr">
             <label htmlFor="password">Password*</label>
-            <input name="password" type="password" />
+            <input
+              name="password"
+              type="password"
+              value={loginFormValues.password}
+              onChange={onChangeHandler}
+            />
           </div>
         </div>
 

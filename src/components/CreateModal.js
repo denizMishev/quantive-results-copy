@@ -11,23 +11,32 @@ import * as okrService from "../services/okrService";
 import * as userService from "../services/userService";
 import * as teamsService from "../services/teamsService";
 
+let validatingFormButtonStyles = {
+  buttonUnavailable: {
+    backgroundColor: "#b0b5ba",
+    pointerEvents: "none",
+  },
+  buttonAvailable: {
+    backgroundColor: "#05f",
+    pointerEvents: "auto",
+  },
+};
+
 export function CreateModal(props) {
   const { user } = useContext(AuthContext);
   const { okrAdd } = useContext(OkrContext);
   const { teamAdd } = useContext(TeamContext);
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
-  const [validateFormStyle, setValidateFormStyle] = useState({
-    backgroundColor: "#FF0000",
-    cursor: "pointer",
-    pointerEvents: "auto",
-  });
+  const [validateFormStyle, setValidateFormStyle] = useState(
+    validatingFormButtonStyles.buttonAvailable
+  );
 
-  let users = "";
+  let teamMembers = "";
   let manager = "";
 
   const [createOkrFormValues, setCreateOkrFormValues] = useState({
     okrTitle: "",
-    okrOwner: "",
+    okrOwners: "",
     okrDescription: "",
   });
   const [createTeamFormValues, setCreateTeamFormValues] = useState({
@@ -53,17 +62,9 @@ export function CreateModal(props) {
     }
 
     if (valid) {
-      setValidateFormStyle({
-        backgroundColor: "#FF0000",
-        cursor: "pointer",
-        pointerEvents: "auto",
-      });
+      setValidateFormStyle(validatingFormButtonStyles.buttonAvailable);
     } else {
-      setValidateFormStyle({
-        backgroundColor: "#d3d3d3",
-        cursor: "not-allowed",
-        pointerEvents: "none",
-      });
+      setValidateFormStyle(validatingFormButtonStyles.buttonUnavailable);
     }
   }, [createOkrFormValues, createTeamFormValues]);
 
@@ -146,11 +147,12 @@ export function CreateModal(props) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const createFormData = Object.fromEntries(new FormData(e.target));
+    let createFormData =
+      props.type === "okr" ? createOkrFormValues : createTeamFormValues;
     createFormData.editorUsername = user.username;
 
     if (props.type === "okr") {
-      createFormData.okrOwners = users.map((user) => {
+      createFormData.okrOwners = createFormData.okrOwners.map((user) => {
         return { okrOwner: user.label, okrOwnerId: user.id, type: user.type };
       });
 
@@ -161,7 +163,7 @@ export function CreateModal(props) {
           props.onClose();
           setCreateOkrFormValues({
             okrTitle: "",
-            okrOwner: "",
+            okrOwners: "",
             okrDescription: "",
           });
         })
@@ -169,12 +171,13 @@ export function CreateModal(props) {
           showBoundary(err);
         });
     } else {
+      createFormData = createTeamFormValues;
       createFormData.teamManager = {
         managerName: manager.label,
         managerId: manager.id,
         type: manager.type,
       };
-      createFormData.teamMembers = users.map((user) => {
+      createFormData.teamMembers = teamMembers.map((user) => {
         return { memberName: user.label, memberId: user.id, type: user.type };
       });
 
@@ -183,6 +186,10 @@ export function CreateModal(props) {
         .then((newTeam) => {
           teamAdd(newTeam);
           props.onClose();
+          setCreateOkrFormValues({
+            teamName: "",
+            teamDescription: "",
+          });
         })
         .catch((err) => {
           showBoundary(err);
@@ -265,12 +272,12 @@ export function CreateModal(props) {
                     : "Select members for your team"
                 }
                 options={dropdownUsersAndTeams}
-                onChange={(value) => (users = value)}
+                onChange={(value) => (teamMembers = value)}
                 createOkrDropdown={true}
                 setOkrOwnerValue={(value) =>
                   setCreateOkrFormValues((state) => ({
                     ...state,
-                    okrOwner: value,
+                    okrOwners: value,
                   }))
                 }
                 currentValue={[]}
