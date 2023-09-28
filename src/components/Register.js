@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useErrorBoundary } from "react-error-boundary";
 
+import { userFormErrors } from "../util/errormessages";
 import * as authService from "../services/authService";
 import { addNewUser } from "../services/userService";
 import { AuthContext } from "../contexts/AuthContext";
@@ -14,12 +16,46 @@ export function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [registerFormErrors, setRegisterFormErrors] = useState({
+    emailError: false,
+    passwordError: false,
+  });
+
+  const { showBoundary } = useErrorBoundary([]);
+
+  useEffect(() => {
+    let requiredFieldsFilled = true;
+
+    for (const formValue of Object.values(registerFormValues)) {
+      if (formValue.length === 0) {
+        requiredFieldsFilled = false;
+      }
+    }
+  }, [registerFormValues]);
 
   const onChangeHandler = (e) => {
+    const errors = {};
+    const value = e.target.value;
+    const target = e.target.name;
+    let currentPassword = "";
+
     setRegisterFormValues((state) => ({
       ...state,
-      [e.target.name]: e.target.value,
+      [target]: value,
     }));
+
+    if (target === "email") {
+      if (/^\S+@\S+\.\S+$/.test(value) === false) {
+        errors.emailError = true;
+      }
+    }
+
+    if (target === "password" && value.length <= 4) {
+      errors.passwordError = true;
+      currentPassword = value;
+    }
+
+    setRegisterFormErrors(errors);
   };
 
   const onSubmit = (e) => {
@@ -31,11 +67,16 @@ export function Register() {
       password: registerFormValues.password,
     };
 
-    authService.register(registerFormData).then((authData) => {
-      userLogin(authData);
-      addNewUser(registerFormData.email, registerFormData.username);
-      navigate("/home");
-    });
+    authService
+      .register(registerFormData)
+      .then((authData) => {
+        userLogin(authData);
+        addNewUser(registerFormData.email, registerFormData.username);
+        navigate("/home");
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
   };
 
   return (
@@ -58,6 +99,9 @@ export function Register() {
           <span>Sign up for our FREE plan</span>
         </div>
         <div className="register-form-input-fields-ctr">
+          <span className="user-form-fields-required txt-gray txt-sm">
+            *All fields are required
+          </span>
           <input
             name="username"
             placeholder="Enter your username here"
@@ -65,6 +109,12 @@ export function Register() {
             onChange={onChangeHandler}
             value={registerFormValues.username}
           />
+          <span
+            style={registerFormErrors.emailError ? { visibility: "unset" } : {}}
+            className="user-form-error txt-red txt-sm"
+          >
+            {userFormErrors.emailErrorMsg}
+          </span>
           <input
             name="email"
             placeholder="Enter your email address here"
@@ -72,6 +122,14 @@ export function Register() {
             onChange={onChangeHandler}
             value={registerFormValues.email}
           />
+          <span
+            style={
+              registerFormErrors.passwordError ? { visibility: "unset" } : {}
+            }
+            className="user-form-error txt-red txt-sm"
+          >
+            {userFormErrors.passwordLengthErrorMsg}
+          </span>
           <input
             name="password"
             type="password"
@@ -79,6 +137,16 @@ export function Register() {
             onChange={onChangeHandler}
             value={registerFormValues.password}
           />
+          <span
+            style={
+              registerFormValues.password !== registerFormValues.confirmPassword
+                ? { visibility: "unset" }
+                : {}
+            }
+            className="user-form-error txt-red txt-sm"
+          >
+            {userFormErrors.confirmPasswordErrorMsg}
+          </span>
           <input
             name="confirmPassword"
             type="password"

@@ -350,7 +350,6 @@
 
 /* LOGIN-FORM LOGIN-FORM LOGIN-FORM LOGIN-FORM LOGIN-FORM LOGIN-FORM */
 
-/* REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM */
 
 /* util util util util util util util util util */
 
@@ -406,7 +405,21 @@
     color: var(--clr-lightgray-navigation);
 }
 
+.txt-red {
+    color: var(--clr-red-delete-button);
+}
+
+.txt-gray {
+    color: var(--clr-lightgray-navigation);
+}
+
+.txt-sm {
+    font-size: var(--fs-070);
+}   
+
 /* util util util util util util util util util */
+
+/* REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM */
 
 .register-form {
     position: absolute;
@@ -478,6 +491,20 @@
  display: flex;
  align-items: center;  
 }
+
+.user-form-error {
+    align-self: flex-start;
+    margin-left: 1rem;
+    margin-bottom: 0.25rem;
+    visibility: hidden;
+}
+
+.user-form-fields-required {
+    align-self: flex-start;
+    margin-left: 1rem;
+    margin-bottom: 0.25rem;
+}
+ 
 /* REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM */
 
 /* COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT */
