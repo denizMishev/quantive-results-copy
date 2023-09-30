@@ -249,7 +249,6 @@ export function CreateModal(props) {
                 <label htmlFor="">Manager*</label>
                 <Dropdown
                   isSearchable
-                  // isMulti
                   placeHolder="Select a manager for your team"
                   options={dropdownUsersAndTeams}
                   onChange={(value) => (manager = value)}

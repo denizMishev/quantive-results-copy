@@ -2,23 +2,26 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 
-import { userFormErrors } from "../util/errormessages";
 import * as authService from "../services/authService";
+
+import { userFormErrors } from "../util/errormessages";
 import { addNewUser } from "../services/userService";
 import { AuthContext } from "../contexts/AuthContext";
 
 export function Register() {
-  const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { userLogin } = useContext(AuthContext);
   const [registerFormValues, setRegisterFormValues] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [registerFormErrors, setRegisterFormErrors] = useState({
-    emailError: false,
-    passwordError: false,
+  const [focusedField, setFocusedField] = useState({
+    usernameFocus: false,
+    emailFocus: false,
+    passwordFocus: false,
+    confirmPasswordFocus: false,
   });
 
   const { showBoundary } = useErrorBoundary([]);
@@ -34,28 +37,22 @@ export function Register() {
   }, [registerFormValues]);
 
   const onChangeHandler = (e) => {
-    const errors = {};
     const value = e.target.value;
     const target = e.target.name;
-    let currentPassword = "";
 
     setRegisterFormValues((state) => ({
       ...state,
       [target]: value,
     }));
+  };
 
-    if (target === "email") {
-      if (/^\S+@\S+\.\S+$/.test(value) === false) {
-        errors.emailError = true;
-      }
-    }
+  const onBlurHandler = (e) => {
+    const target = e.target.name + "Focus";
 
-    if (target === "password" && value.length <= 4) {
-      errors.passwordError = true;
-      currentPassword = value;
-    }
-
-    setRegisterFormErrors(errors);
+    setFocusedField((state) => ({
+      ...state,
+      [target]: true,
+    }));
   };
 
   const onSubmit = (e) => {
@@ -99,63 +96,70 @@ export function Register() {
           <span>Sign up for our FREE plan</span>
         </div>
         <div className="register-form-input-fields-ctr">
-          <span className="user-form-fields-required txt-gray txt-sm">
+          <p className="user-form-fields-required txt-gray txt-sm">
             *All fields are required
-          </span>
+          </p>
           <input
+            className="register-form-input-field"
             name="username"
             placeholder="Enter your username here"
             type="text"
+            pattern="^[A-Za-z0-9]{1,30}$"
+            required
             onChange={onChangeHandler}
             value={registerFormValues.username}
+            onBlur={onBlurHandler}
+            focused={focusedField.usernameFocus.toString()}
           />
-          <span
-            style={registerFormErrors.emailError ? { visibility: "unset" } : {}}
-            className="user-form-error txt-red txt-sm"
-          >
-            {userFormErrors.emailErrorMsg}
+          <span className="user-form-error txt-red txt-sm">
+            {userFormErrors.usernameErrMsg}
           </span>
           <input
             name="email"
             placeholder="Enter your email address here"
-            type="email"
+            required
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
             onChange={onChangeHandler}
             value={registerFormValues.email}
+            onBlur={onBlurHandler}
+            focused={focusedField.emailFocus.toString()}
           />
-          <span
-            style={
-              registerFormErrors.passwordError ? { visibility: "unset" } : {}
-            }
-            className="user-form-error txt-red txt-sm"
-          >
-            {userFormErrors.passwordLengthErrorMsg}
+          <span className="user-form-error txt-red txt-sm">
+            {userFormErrors.emailErrMsg}
           </span>
           <input
             name="password"
             type="password"
+            pattern="^[A-Za-z0-9]{8,30}$"
+            required
             placeholder="Enter your password here"
             onChange={onChangeHandler}
             value={registerFormValues.password}
+            onBlur={onBlurHandler}
+            focused={focusedField.passwordFocus.toString()}
           />
-          <span
-            style={
-              registerFormValues.password !== registerFormValues.confirmPassword
-                ? { visibility: "unset" }
-                : {}
-            }
-            className="user-form-error txt-red txt-sm"
-          >
-            {userFormErrors.confirmPasswordErrorMsg}
+          <span className="user-form-error txt-red txt-sm">
+            {userFormErrors.passwordErrMsg}
           </span>
           <input
             name="confirmPassword"
             type="password"
             placeholder="Repeat password here"
+            pattern={registerFormValues.password}
+            required
             onChange={onChangeHandler}
             value={registerFormValues.confirmPassword}
+            onBlur={onBlurHandler}
+            focused={focusedField.confirmPasswordFocus.toString()}
           />
+          <span className="user-form-error txt-red txt-sm">
+            {userFormErrors.confirmPasswordErrMsg}
+          </span>
         </div>
-        <button className="register-form-signup-button user-form-btn">
+        <button
+          id="specialtrickster1"
+          className="register-form-signup-button user-form-btn"
+        >
           Sign up
         </button>
         <div className="register-form-login-ctr user-form-alternative">

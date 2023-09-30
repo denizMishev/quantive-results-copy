@@ -465,6 +465,7 @@
     margin-bottom: 1.5rem;
 } 
 
+
 .register-form-input-fields-ctr input {
     width: 90%;
     padding: 0.5rem 0.75rem;
@@ -487,9 +488,9 @@
 
 .register-form-login-btn-ctr {
     margin-top: 0.4rem;
- color: var(--clr-linkblue); 
- display: flex;
- align-items: center;  
+    color: var(--clr-linkblue); 
+    display: flex;
+    align-items: center;  
 }
 
 .user-form-error {
@@ -499,12 +500,20 @@
     visibility: hidden;
 }
 
+.register-form-input-fields-ctr input:invalid[focused="true"] + span {
+    visibility: unset;
+}
+
+.register-form-input-fields-ctr input:invalid #specialtrickster1 {
+    background-color: red;
+}
+
 .user-form-fields-required {
     align-self: flex-start;
     margin-left: 1rem;
     margin-bottom: 0.25rem;
 }
- 
+
 /* REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM REGISTER-FORM */
 
 /* COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT COMMENT */
