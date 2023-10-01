@@ -216,15 +216,6 @@
     display: block;
 }
 
-/* .myokrs-okr-activestate > div {
-    font-size: var(--fs-075);
-    padding: 0.2rem 1.6rem;
-    background-color: var(--clr-lightergray-activestate);
-    display: inline-block;
-    border-radius: 1.35rem;
-    border: 1px solid lightgray;
-    font-weight: bold;
-} */
 
 /* OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR OKR */
 
@@ -276,6 +267,18 @@
     color: var(--clr-txt-accent3);
 }
 
+.login-form-no-match-ctr {
+    background-color: var(--clr-red-delete-button);
+    text-align: center;
+    width: 60%;
+    margin-inline: auto;
+    color: var(--clr-white);
+    font-size: var(--fs-088);
+    padding-block: 0.55rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
 .login-form-input-fields-ctr {
     display: flex;
     flex-direction: column;
@@ -311,6 +314,11 @@
     flex-direction: column;
     margin-bottom: 2rem;
 }
+
+.login-input-error {
+    visibility: hidden;
+}
+
 
 .login-form-login-btn, .user-form-btn {
     margin-top: 0.65rem;
@@ -502,10 +510,6 @@
 
 .register-form-input-fields-ctr input:invalid[focused="true"] + span {
     visibility: unset;
-}
-
-.register-form-input-fields-ctr input:invalid #specialtrickster1 {
-    background-color: red;
 }
 
 .user-form-fields-required {

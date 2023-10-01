@@ -26,16 +26,6 @@ export function Register() {
 
   const { showBoundary } = useErrorBoundary([]);
 
-  useEffect(() => {
-    let requiredFieldsFilled = true;
-
-    for (const formValue of Object.values(registerFormValues)) {
-      if (formValue.length === 0) {
-        requiredFieldsFilled = false;
-      }
-    }
-  }, [registerFormValues]);
-
   const onChangeHandler = (e) => {
     const value = e.target.value;
     const target = e.target.name;
@@ -104,7 +94,7 @@ export function Register() {
             name="username"
             placeholder="Enter your username here"
             type="text"
-            pattern="^[A-Za-z0-9]{1,30}$"
+            pattern="^[A-Za-z0-9]{1,}$"
             required
             onChange={onChangeHandler}
             value={registerFormValues.username}
@@ -156,10 +146,7 @@ export function Register() {
             {userFormErrors.confirmPasswordErrMsg}
           </span>
         </div>
-        <button
-          id="specialtrickster1"
-          className="register-form-signup-button user-form-btn"
-        >
+        <button className="register-form-signup-button user-form-btn">
           Sign up
         </button>
         <div className="register-form-login-ctr user-form-alternative">

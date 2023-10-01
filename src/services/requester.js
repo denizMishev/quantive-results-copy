@@ -38,12 +38,13 @@ const request = async (method, url, data) => {
     }
 
     if (!response.ok) {
-      let errorMessage = response.statusText;
+      const failedRequestResponse = await response.json();
+      const err = {
+        code: failedRequestResponse.code,
+        message: failedRequestResponse.message,
+      };
 
-      if (response.status === 403) {
-        errorMessage = unauthorized;
-      }
-      throw new Error(errorMessage);
+      throw err;
     }
 
     const result = await response.json();

@@ -26,6 +26,7 @@
      display: flex;
      justify-content: space-between;
      padding: 0.55rem 2rem;
+     height: 2.58rem;
      border-bottom: 1.5px solid var(--clr-lightergray-activestate);
  }
 

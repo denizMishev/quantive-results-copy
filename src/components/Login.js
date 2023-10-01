@@ -13,6 +13,8 @@ export function Login() {
     password: "",
   });
 
+  const [noMatch, setNoMatch] = useState(false);
+
   const onChangeHandler = (e) => {
     setLoginFormValues((state) => ({
       ...state,
@@ -29,8 +31,10 @@ export function Login() {
         userLogin(authData);
         navigate("/home");
       })
-      .catch(() => {
-        navigate("/404");
+      .catch((err) => {
+        if (err.code === 403) {
+          setNoMatch(true);
+        }
       });
   };
 
@@ -53,6 +57,12 @@ export function Login() {
         <div className="login-form-heading-ctr">
           <span>Log in to your account</span>
         </div>
+        {noMatch && (
+          <div className="login-form-no-match-ctr">
+            <p>Wrong email or password</p>
+          </div>
+        )}
+
         <div className="login-form-input-fields-ctr">
           <div className="email-ctr">
             <label htmlFor="email">Email*</label>
@@ -61,6 +71,7 @@ export function Login() {
               type="email"
               value={loginFormValues.email}
               onChange={onChangeHandler}
+              required
             />
           </div>
           <div className="password-ctr">
@@ -70,6 +81,7 @@ export function Login() {
               type="password"
               value={loginFormValues.password}
               onChange={onChangeHandler}
+              required
             />
           </div>
         </div>
