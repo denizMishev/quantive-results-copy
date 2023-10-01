@@ -11,25 +11,12 @@ import * as okrService from "../services/okrService";
 import * as userService from "../services/userService";
 import * as teamsService from "../services/teamsService";
 
-let validatingFormButtonStyles = {
-  buttonUnavailable: {
-    backgroundColor: "#b0b5ba",
-    pointerEvents: "none",
-  },
-  buttonAvailable: {
-    backgroundColor: "#05f",
-    pointerEvents: "auto",
-  },
-};
-
 export function CreateModal(props) {
   const { user } = useContext(AuthContext);
   const { okrAdd } = useContext(OkrContext);
   const { teamAdd } = useContext(TeamContext);
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
-  const [validateFormStyle, setValidateFormStyle] = useState(
-    validatingFormButtonStyles.buttonAvailable
-  );
+  const [requiredFieldsFilled, setRequiredFieldsFilled] = useState(true);
 
   let teamMembers = "";
   let manager = "";
@@ -62,9 +49,9 @@ export function CreateModal(props) {
     }
 
     if (valid) {
-      setValidateFormStyle(validatingFormButtonStyles.buttonAvailable);
+      setRequiredFieldsFilled(true);
     } else {
-      setValidateFormStyle(validatingFormButtonStyles.buttonUnavailable);
+      setRequiredFieldsFilled(false);
     }
   }, [createOkrFormValues, createTeamFormValues]);
 
@@ -304,7 +291,14 @@ export function CreateModal(props) {
             </div>
           </div>
           <div className="create-okr-form-btns-ctr">
-            <button style={validateFormStyle} type="submit">
+            <button
+              style={
+                requiredFieldsFilled
+                  ? {}
+                  : { backgroundColor: "#b0b5ba", pointerEvents: "none" }
+              }
+              type="submit"
+            >
               Create {props.type === "okr" ? "OKR" : "Team"}
             </button>
             <button onClick={props.onClose}>Cancel</button>
