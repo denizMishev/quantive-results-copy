@@ -9,6 +9,7 @@ export function Navbar() {
       className={`main-navigation ${
         location.pathname === "/" ||
         location.pathname === "/register" ||
+        location.pathname === "/404" ||
         location.pathname === "/login"
           ? "hide-nav"
           : ""

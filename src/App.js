@@ -18,6 +18,8 @@ import { Employees } from "./components/Employees";
 import { OkrsPage } from "./components/OkrsPage";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorHandler } from "./components/ErrorHandler";
+import { NotFound } from "./components/NotFound";
+import { PageNotFound } from "./components/PageNotFound";
 import Logout from "./components/Logout";
 
 function App() {
@@ -51,6 +53,8 @@ function App() {
                 <Route path="/" element={<LandingPage />}></Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/404" element={<PageNotFound />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </TeamProvider>
           </OkrProvider>
