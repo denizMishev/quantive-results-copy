@@ -14,7 +14,7 @@
     margin: auto;
 }
 
-.not-found-ctr p {
+.not-found-ctr p, button {
     color: var(--clr-white);
     font-size: var(--fs-275);
     font-weight: bold;
@@ -24,10 +24,11 @@
     margin-bottom: 7.5rem;
 }
 
-.not-found-ctr .not-found-home-link {
+.not-found-ctr .not-found-home-link, .not-found-ctr button {
     color: var(--clr-lightgreen-logo);
 }
 
-.not-found-ctr .not-found-home-link:hover {
+.not-found-ctr .not-found-home-link:hover, .not-found-ctr button:hover {
     color: var(--clr-junglegreen-hoverbtn);
+    cursor: pointer;
 }
