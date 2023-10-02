@@ -66,13 +66,12 @@ export function UpdateOrDeleteModal(props) {
         });
     }
     if (props.target === "comment") {
-      commentService.remove(targetId).catch((err) => {
-        showBoundary(err);
-      });
-      setTimeout(() => {
-        props.updateParent();
-      }, 1);
-      props.onClose();
+      commentService
+        .remove(targetId)
+        .then(props.updateParent(), props.onClose())
+        .catch((err) => {
+          showBoundary(err);
+        });
     }
     if (props.target === "editComment") {
       commentService

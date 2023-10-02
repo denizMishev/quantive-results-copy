@@ -38,12 +38,16 @@ export function OkrDetails() {
 
     const comment = formData.get("comment");
 
-    commentService.create(okrId, comment);
-    setTimeout(() => {
-      commentService.getByOkrId(okrId).then((result) => {
-        setComments(result);
+    commentService
+      .create(okrId, comment)
+      .then(
+        commentService.getByOkrId(okrId).then((result) => {
+          setComments(result);
+        })
+      )
+      .catch((err) => {
+        showBoundary(err);
       });
-    }, 1);
   };
 
   useEffect(() => {
