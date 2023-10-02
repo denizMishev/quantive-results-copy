@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { useErrorBoundary } from "react-error-boundary";
+
 import { Okr } from "./Okr";
 import { CreateModal } from "./CreateModal";
 import { FilteringModal } from "./FilteringModal";
@@ -11,6 +13,7 @@ export function OkrsPage() {
   const [showFilteringModal, setShowFilteringModal] = useState(false);
   const [renderOkrs, setRenderOkrs] = useState([]);
   const [filterFor, setFilterFor] = useState([]);
+  const { showBoundary } = useErrorBoundary([]);
 
   let renderOkrsArray = [];
 
@@ -19,20 +22,25 @@ export function OkrsPage() {
   };
 
   useEffect(() => {
-    okrService.getAll().then((allOkrs) => {
-      for (const okr of allOkrs) {
-        if (filterFor.length === 0) {
-          renderOkrsArray.push(okr);
-        } else {
-          for (const okrOwner of okr.okrOwners) {
-            if (filterFor.includes(okrOwner.okrOwnerId)) {
-              renderOkrsArray.push(okr);
+    okrService
+      .getAll()
+      .then((allOkrs) => {
+        for (const okr of allOkrs) {
+          if (filterFor.length === 0) {
+            renderOkrsArray.push(okr);
+          } else {
+            for (const okrOwner of okr.okrOwners) {
+              if (filterFor.includes(okrOwner.okrOwnerId)) {
+                renderOkrsArray.push(okr);
+              }
             }
           }
         }
-      }
-      setRenderOkrs([...new Set(renderOkrsArray)]);
-    });
+        setRenderOkrs([...new Set(renderOkrsArray)]);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, [filterFor, showCreateOkrModal]);
 
@@ -111,9 +119,6 @@ export function OkrsPage() {
                 <div className="">
                   <span>Description</span>
                 </div>
-                {/* <div>
-                  <span>OKR State</span>
-                </div> */}
               </li>
               {renderOkrs.length > 0 ? (
                 renderOkrs.map((okr) => (

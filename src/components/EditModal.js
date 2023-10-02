@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { Dropdown } from "./Dropdown";
 
@@ -8,6 +9,7 @@ import * as teamsService from "../services/teamsService";
 
 export function EditModal({ type, currentTarget, onClose, show }) {
   const [dropdownUsersAndTeams, setDropdownUsersAndTeams] = useState([]);
+  const { showBoundary } = useErrorBoundary([]);
   let newUsers = "";
   let newManager = "";
 
@@ -39,8 +41,8 @@ export function EditModal({ type, currentTarget, onClose, show }) {
   };
 
   useEffect(() => {
-    Promise.all([userService.getAllUsers(), teamsService.getAll()]).then(
-      (usersAndTeamsRequests) => {
+    Promise.all([userService.getAllUsers(), teamsService.getAll()])
+      .then((usersAndTeamsRequests) => {
         let usersAndOrTeamsArray = [];
         if (usersAndTeamsRequests[1].code === 404 || type === "team") {
           for (const user of usersAndTeamsRequests[0]) {
@@ -73,8 +75,10 @@ export function EditModal({ type, currentTarget, onClose, show }) {
           }
         }
         setDropdownUsersAndTeams(usersAndOrTeamsArray);
-      }
-    );
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -106,7 +110,12 @@ export function EditModal({ type, currentTarget, onClose, show }) {
         return { okrOwner: user.label, okrOwnerId: user.id, type: user.type };
       });
 
-      okrService.edit(currentTarget._id, editFormData).then(onClose());
+      okrService
+        .edit(currentTarget._id, editFormData)
+        .then(onClose())
+        .catch((err) => {
+          showBoundary(err);
+        });
     } else {
       editFormData.teamManager = {
         managerName: newManager[0].label,
@@ -117,12 +126,16 @@ export function EditModal({ type, currentTarget, onClose, show }) {
         return { memberName: user.label, memberId: user.id, type: user.type };
       });
 
-      teamsService.edit(currentTarget._id, editFormData).then(onClose());
+      teamsService
+        .edit(currentTarget._id, editFormData)
+        .then(onClose())
+        .catch((err) => {
+          showBoundary(err);
+        });
     }
   };
 
   return (
-    // <main id="main" className="main-content">
     <section
       className="create-okr-ctr"
       style={type === "team" ? { top: "-16.5rem" } : {}}
@@ -213,6 +226,5 @@ export function EditModal({ type, currentTarget, onClose, show }) {
         </div>
       </form>
     </section>
-    // </main>
   );
 }

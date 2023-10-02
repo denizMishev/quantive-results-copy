@@ -2,18 +2,26 @@ import { useState } from "react";
 
 import { UpdateOrDeleteModal } from "./UpdateOrDeleteModal";
 
+import { useErrorBoundary } from "react-error-boundary";
+
 import * as commentService from "../services/commentService";
 
 export function Comment({ comment, okrId, renderHandler }) {
   const [showEditCommentModal, setShowEditCommentModal] = useState(false);
   const [showDeleteCommentsModal, setShowDeleteCommentsModal] = useState(false);
   const [commentForEditing, setCommentForEditing] = useState({});
+  const { showBoundary } = useErrorBoundary([]);
 
   const editCommentHandler = (e, commentId) => {
     e.stopPropagation();
-    commentService.getOne(commentId).then((result) => {
-      setCommentForEditing(result);
-    });
+    commentService
+      .getOne(commentId)
+      .then((result) => {
+        setCommentForEditing(result);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     setShowEditCommentModal(true);
     setCommentForEditing({});
   };

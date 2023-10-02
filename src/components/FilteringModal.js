@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { Dropdown } from "./Dropdown";
 
@@ -9,6 +10,8 @@ export function FilteringModal(props) {
   const [allUsers, setAllUsers] = useState([]);
   const [allTeams, setAllTeams] = useState([]);
 
+  const { showBoundary } = useErrorBoundary([]);
+
   let allUsersArray = [];
   let allTeamsArray = [];
 
@@ -16,32 +19,42 @@ export function FilteringModal(props) {
   let teams = "";
 
   useEffect(() => {
-    userService.getAllUsers().then((allUsers2) => {
-      for (const user of allUsers2) {
-        allUsersArray.push({
-          value: user.username.toLowerCase(),
-          label: user.username,
-          id: user._ownerId,
-          type: "employee",
-        });
-      }
-      setAllUsers(allUsersArray);
-    });
+    userService
+      .getAllUsers()
+      .then((allUsers2) => {
+        for (const user of allUsers2) {
+          allUsersArray.push({
+            value: user.username.toLowerCase(),
+            label: user.username,
+            id: user._ownerId,
+            type: "employee",
+          });
+        }
+        setAllUsers(allUsersArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    teamsService.getAll().then((allTeams2) => {
-      for (const team of allTeams2) {
-        allTeamsArray.push({
-          value: team.teamName.toLowerCase(),
-          label: team.teamName,
-          id: team._id,
-          type: "team",
-        });
-      }
-      setAllTeams(allTeamsArray);
-    });
+    teamsService
+      .getAll()
+      .then((allTeams2) => {
+        for (const team of allTeams2) {
+          allTeamsArray.push({
+            value: team.teamName.toLowerCase(),
+            label: team.teamName,
+            id: team._id,
+            type: "team",
+          });
+        }
+        setAllTeams(allTeamsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 

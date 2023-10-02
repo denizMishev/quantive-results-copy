@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { Link } from "react-router-dom";
 import { TeamChip } from "./team-chip";
@@ -16,6 +17,8 @@ export function EmployeeDetails() {
   const [employeeManagedTeams, setEmpoyeeManagedTeams] = useState([]);
   const totalOkrs = useRef(0);
 
+  const { showBoundary } = useErrorBoundary([]);
+
   let employeeOwnedOkrsArray = [];
   let employeeManagedTeamsArray = [];
 
@@ -27,29 +30,39 @@ export function EmployeeDetails() {
   }, []);
 
   useEffect(() => {
-    okrService.getAll().then((allOkrs) => {
-      for (const okr of allOkrs) {
-        totalOkrs.current = allOkrs.length;
-        for (const okrOwner of okr.okrOwners) {
-          if (okrOwner.okrOwnerId === employeeId) {
-            employeeOwnedOkrsArray.push(okr);
+    okrService
+      .getAll()
+      .then((allOkrs) => {
+        for (const okr of allOkrs) {
+          totalOkrs.current = allOkrs.length;
+          for (const okrOwner of okr.okrOwners) {
+            if (okrOwner.okrOwnerId === employeeId) {
+              employeeOwnedOkrsArray.push(okr);
+            }
           }
         }
-      }
-      setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
-    });
+        setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    teamsService.getAll().then((allTeams) => {
-      for (const team of allTeams) {
-        if (team.teamManager.managerId === employeeId) {
-          employeeManagedTeamsArray.push(team);
+    teamsService
+      .getAll()
+      .then((allTeams) => {
+        for (const team of allTeams) {
+          if (team.teamManager.managerId === employeeId) {
+            employeeManagedTeamsArray.push(team);
+          }
         }
-      }
-      setEmpoyeeManagedTeams(employeeManagedTeamsArray);
-    });
+        setEmpoyeeManagedTeams(employeeManagedTeamsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 

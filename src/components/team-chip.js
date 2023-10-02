@@ -1,10 +1,4 @@
-export function TeamChip({
-  title,
-  currentId,
-  type,
-  removeOption,
-  renderLocation,
-}) {
+export function TeamChip({ title, type, removeOption, renderLocation }) {
   return (
     <li>
       <div

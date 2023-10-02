@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { Link } from "react-router-dom";
 import { TeamChip } from "./team-chip";
@@ -20,25 +21,37 @@ export function TeamDetails() {
 
   let teamOwnedOkrsArray = [];
 
+  const { showBoundary } = useErrorBoundary([]);
+
   useEffect(() => {
-    teamsService.getOne(teamId).then((result) => {
-      setTeam(result);
-    });
+    teamsService
+      .getOne(teamId)
+      .then((result) => {
+        setTeam(result);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, [showEditModal]);
 
   useEffect(() => {
-    okrService.getAll().then((allOkrs) => {
-      for (const okr of allOkrs) {
-        totalOkrs.current = allOkrs.length;
-        for (const okrOwner of okr.okrOwners) {
-          if (okrOwner.okrOwnerId === teamId) {
-            teamOwnedOkrsArray.push(okr);
+    okrService
+      .getAll()
+      .then((allOkrs) => {
+        for (const okr of allOkrs) {
+          totalOkrs.current = allOkrs.length;
+          for (const okrOwner of okr.okrOwners) {
+            if (okrOwner.okrOwnerId === teamId) {
+              teamOwnedOkrsArray.push(okr);
+            }
           }
         }
-      }
-      setTeamOwnedOkrs(teamOwnedOkrsArray);
-    });
+        setTeamOwnedOkrs(teamOwnedOkrsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 

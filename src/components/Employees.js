@@ -2,15 +2,24 @@ import { useState, useEffect } from "react";
 
 import * as userService from "../services/userService";
 
+import { useErrorBoundary } from "react-error-boundary";
+
 import { Employee } from "./Employee";
 
 export function Employees() {
   const [employees, setEmployees] = useState([]);
 
+  const { showBoundary } = useErrorBoundary([]);
+
   useEffect(() => {
-    userService.getAllUsers().then((result) => {
-      setEmployees(result);
-    });
+    userService
+      .getAllUsers()
+      .then((result) => {
+        setEmployees(result);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
   }, []);
 
   return (

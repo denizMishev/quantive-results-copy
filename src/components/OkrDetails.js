@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -21,6 +22,8 @@ export function OkrDetails() {
 
   const [okr, setOkr] = useState({});
   const [comments, setComments] = useState([]);
+
+  const { showBoundary } = useErrorBoundary([]);
 
   useEffect(() => {
     okrService.getOne(okrId).then((result) => {
@@ -44,16 +47,26 @@ export function OkrDetails() {
   };
 
   useEffect(() => {
-    commentService.getByOkrId(okrId).then((result) => {
-      setComments(result);
-    });
+    commentService
+      .getByOkrId(okrId)
+      .then((result) => {
+        setComments(result);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 
   const renderHandler = () => {
-    commentService.getByOkrId(okrId).then((result) => {
-      setComments(result);
-    });
+    commentService
+      .getByOkrId(okrId)
+      .then((result) => {
+        setComments(result);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
   };
 
   return (

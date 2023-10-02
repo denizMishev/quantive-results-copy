@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as teamService from "../services/teamsService";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { Link } from "react-router-dom";
 import { TeamChip } from "./team-chip";
@@ -9,20 +10,27 @@ export function Employee({ currentId, username }) {
 
   let employeesTeamsArray = [];
 
+  const { showBoundary } = useErrorBoundary([]);
+
   useEffect(() => {
-    teamService.getAll().then((allTeams) => {
-      for (const team of allTeams) {
-        if (team.teamManager.managerId === currentId) {
-          employeesTeamsArray.push(team);
-        }
-        for (const member of team.teamMembers) {
-          if (member.memberId === currentId) {
+    teamService
+      .getAll()
+      .then((allTeams) => {
+        for (const team of allTeams) {
+          if (team.teamManager.managerId === currentId) {
             employeesTeamsArray.push(team);
           }
+          for (const member of team.teamMembers) {
+            if (member.memberId === currentId) {
+              employeesTeamsArray.push(team);
+            }
+          }
         }
-      }
-      setEmployeeTeams(employeesTeamsArray);
-    });
+        setEmployeeTeams(employeesTeamsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, []);
 

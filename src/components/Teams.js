@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 
 import * as teamService from "../services/teamsService";
 
@@ -8,15 +9,21 @@ import { CreateModal } from "./CreateModal";
 export function Teams() {
   const [showCreateTeamsModal, setShowCreateTeamsModal] = useState(false);
   const [teams, setTeams] = useState([]);
+  const { showBoundary } = useErrorBoundary([]);
 
   useEffect(() => {
-    teamService.getAll().then((result) => {
-      if (result.code === 404) {
-        return;
-      } else {
-        setTeams(result);
-      }
-    });
+    teamService
+      .getAll()
+      .then((result) => {
+        if (result.code === 404) {
+          return;
+        } else {
+          setTeams(result);
+        }
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
   }, [showCreateTeamsModal]);
 
   return (

@@ -74,16 +74,21 @@ export function Home() {
   }, []);
 
   useEffect(() => {
-    okrService.getAll().then((allOkrs) => {
-      for (const okr of allOkrs) {
-        for (const okrOwner of okr.okrOwners) {
-          if (okrOwner.okrOwnerId === user._id) {
-            employeeOwnedOkrsArray.push(okr);
+    okrService
+      .getAll()
+      .then((allOkrs) => {
+        for (const okr of allOkrs) {
+          for (const okrOwner of okr.okrOwners) {
+            if (okrOwner.okrOwnerId === user._id) {
+              employeeOwnedOkrsArray.push(okr);
+            }
           }
         }
-      }
-      setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
-    });
+        setEmployeeOwnedOkrs(employeeOwnedOkrsArray);
+      })
+      .catch((err) => {
+        showBoundary(err);
+      });
     // eslint-disable-next-line
   }, [showCreateOkrModal]);
 
