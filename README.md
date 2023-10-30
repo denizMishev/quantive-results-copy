@@ -1,5 +1,4 @@
-Portfolio Project for learning: Copy of some of the core functionality and visual look of the Quantive Results app 
-This repository serves as a portfolio/learning project, being a reduced version of the Quantive Results app. This cut-down version includes some of the core features of the application, such as CRUD operations with objectives, teams and comments
+Portfolio Project for learning: Copy of some of the core functionality and visual look of the Quantive Results app, the repository serves as a portfolio/learning project, being a reduced version of the Quantive Results app. This cut-down version includes some of the core features of the application, such as CRUD operations with objectives, teams and comments
 
 Features
 
