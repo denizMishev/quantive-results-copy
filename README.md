@@ -18,8 +18,8 @@ Page showcasing OKR owners, the OKR's editor (the creator who can do CRUD operat
 6. Teams page, team details page
 7. Employees page, employee details page 
 
-Technologies Used
+Technologies Used: 
 The app uses vanilla HTML&CSS, React and React router dom for the front end, the REST API is SoftUni's practice server - https://github.com/softuni-practice-server/softuni-practice-server/blob/master/JSONSTORE.md
 
-Future Enhancements
+Future Enhancements: 
 I'm planning on refactoring the HTML&CSS utility classes and adding pagination for the Teams, Employees and OKRs page.
