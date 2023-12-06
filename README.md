@@ -22,7 +22,7 @@ A page in which a use can find all the OKRs in the app and filter them by their 
 This page showcases all the details regarding the OKR item and features a commenting functionality as well where users can post comments and edit or delete them
 
 - Teams page and Employees page
-These are pages where all teams and employees are showcased with the teams page featuring a grid of all the employees assigned to this team
+These are pages where all teams and employees are showcased with the Employees page featuring a grid of all the teams the employee is a part of and the Teams page indicating the total amount of members in the team and also the team's manager.
 
 - Team details page and Employee details page
 Pages showcasing details regarding the team and the employee, both of these pages also showcase all OKR items that are owned by the team / employee
