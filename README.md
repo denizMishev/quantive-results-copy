@@ -52,8 +52,26 @@ Only the creator of a specific item (A team or an OKR) can perform CRUD operatio
 
 App will automatically open at a localhost URL.
 
-##Print screens##
+## Print screens ##
 
 ![quantive-results-copy project - Imgur (1)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/fe374de2-4d8e-472a-8479-537f9be9a5ab)
+
+![quantive-results-copy project - Imgur (2)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/ccebc6da-9714-4926-a880-15c6bf27ac1d)
+
+![quantive-results-copy project - Imgur (3)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/d9ee7f35-d7e9-4429-84c4-b6a6b2ccbf12)
+
+![quantive-results-copy project - Imgur (4)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/b0f254d4-4050-4141-86ab-a23ae3bd6075)
+
+![quantive-results-copy project - Imgur (5)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/a6980df1-9376-4565-a3ba-951a92b385ef)
+
+![quantive-results-copy project - Imgur (6)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/a1e8fa19-dd4c-4980-b450-384c61a7f2d2)
+
+![quantive-results-copy project - Imgur (7)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/5263aa07-6610-498d-93cb-2e4c0d02daa3)
+
+![quantive-results-copy project - Imgur (8)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/070258c1-f8dc-4ba6-b85b-61ff1275cc97)
+
+![quantive-results-copy project - Imgur (9)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/4dee34be-28ca-4b91-aaeb-10a9c22af13c)
+
+
 
 
