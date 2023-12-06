@@ -1,26 +1,58 @@
-Portfolio Project for learning: Copy of some of the core functionality and visual look of the Quantive Results app, the repository serves as a portfolio/learning project, being a reduced version of the Quantive Results app. This cut-down version includes some of the core features of the application, such as CRUD operations with objectives, teams and comments.
+# Quantive Results copy - A cut-down version of the Quantive Results webapp
 
-Project design and pictures: https://imgur.com/a/x6aBURK
+## **Project description**
 
-Features
+This project copies the general design and a part of the main functionalities from [Quantive Results](https://quantive.com/). I've used a React & HTML&CSS front-end and [Softuni's Practice Server](https://github.com/softuni-practice-server) for the REST API & authentication functionality.
 
-1. User Authentication
-The project uses secure user authentication with hashed passwords and JWT tokens for user sessions. Registering automatically grants a logged in state.
-2. Access control
-Only the creators of the specific item (Team / OKR / Comment) are able to do CRUD operations on it. 
-2. Landing page
-A landing page where users can either log in or register
-3. Home page 
-The home page the users are redirected to once they login/register serving as a dashboard to showcase OKRs that the currently logged in users owns, and the teams they're a part of, be it ones that they manage or ones they're only a member in.
-4. OKRs Page
-A page in which a user can find all the OKRs in the app and filter them by ownership
-5. OKR Details
-Page showcasing OKR owners, the OKR's editor (the creator who can do CRUD operations on the item), comments on the OKR owner  
-6. Teams page, team details page
-7. Employees page, employee details page 
+## **Key features** ##
 
-Technologies Used: 
-The app uses vanilla HTML&CSS, React and React router dom for the front end, the REST API is SoftUni's practice server - https://github.com/softuni-practice-server/softuni-practice-server/blob/master/JSONSTORE.md
+- Landing page
+The user is first broght to a landing page from where they can either log in or register as the app requires the user to be authenticated in order to proceed further
 
-Future Enhancements: 
-I'm planning on refactoring the HTML&CSS utility classes and adding pagination for the Teams, Employees and OKRs page.
+- Login/Register 
+This project uses a secure user authentication with hashed passwords and JWT tokens for user sessions. Registering automatically grants a logged in state.
+
+- Home page
+Home page displays the user's name, the teams they're a part of, indicating specifically the ones they're a manager of and also a grid of the OKR items that are assigned to them or a team they're a part of
+
+- OKRs page
+A page in which a use can find all the OKRs in the app and filter them by their owner
+
+- OKR details page
+This page showcases all the details regarding the OKR item and features a commenting functionality as well where users can post comments and edit or delete them
+
+- Teams page and Employees page
+These are pages where all teams and employees are showcased with the teams page featuring a grid of all the employees assigned to this team
+
+- Team details page and Employee details page
+Pages showcasing details regarding the team and the employee, both of these pages also showcase all OKR items that are owned by the team / employee
+
+- Access control
+Only the creator of a specific item (A team or an OKR) can perform CRUD operations on the item, the creators are labeled as " Editors " in the app and can be seen in the details pages of the teams and OKRs. 
+
+## **Built with:**
+- React 18.2.0
+- [Softuni's practice server](https://github.com/softuni-practice-server)
+- React error boundary 4.0.11
+- Prettier 2.8.8
+
+## **Local setup**
+
+**Server setup** 
+1. Go to https://github.com/softuni-practice-server/softuni-practice-server
+2. Clone the repository
+3. Build the executable script using the given sequence of commands in the repository's README.md Build section
+4. Run `node server.js`
+
+**Client setup**
+
+1. Clone this repository
+2. Run `npm install`
+3. Run `npm start`
+
+App will automatically open at a localhost URL.
+
+##Print screens##
+![quantive-results-copy project - Imgur (1)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/fe374de2-4d8e-472a-8479-537f9be9a5ab)
+
+
