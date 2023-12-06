@@ -53,6 +53,7 @@ Only the creator of a specific item (A team or an OKR) can perform CRUD operatio
 App will automatically open at a localhost URL.
 
 ##Print screens##
+
 ![quantive-results-copy project - Imgur (1)](https://github.com/denizMishev/quantive-results-copy/assets/115874978/fe374de2-4d8e-472a-8479-537f9be9a5ab)
 
 
